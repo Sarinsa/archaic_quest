@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "archaic_quest:block/ahuehuete_leaves"
+  }
+}

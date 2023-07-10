@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_post",
+  "textures": {
+    "texture": "archaic_quest:block/ahuehuete_planks"
+  }
+}

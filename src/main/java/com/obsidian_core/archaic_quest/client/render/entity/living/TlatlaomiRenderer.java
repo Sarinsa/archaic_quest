@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.client.render.entity.living;
 
-import com.obsidian_core.archaic_quest.client.render.blockentity.AQModelLayers;
+import com.obsidian_core.archaic_quest.client.AQModelLayers;
 import com.obsidian_core.archaic_quest.client.render.entity.model.TlatlaomiModel;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.entity.living.Tlatlaomi;

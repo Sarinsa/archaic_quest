@@ -1,6 +1,7 @@
 package com.obsidian_core.archaic_quest.datagen.lang;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import com.obsidian_core.archaic_quest.common.item.AQCreativeTabs;
 import com.obsidian_core.archaic_quest.common.misc.AQDamageSources;
 import com.obsidian_core.archaic_quest.common.misc.TranslationReferences;
@@ -8,6 +9,10 @@ import com.obsidian_core.archaic_quest.common.core.register.AQBiomes;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WallSignBlock;
+import net.minecraft.world.level.block.state.properties.WallSide;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.text.WordUtils;
 
 public class AQLanguageProvider extends AbstractLanguageProvider {
@@ -35,6 +40,11 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlock(AQBlocks.ANDESITE_TURQUOISE_ORE, "Andesite Turquoise Ore");
         addBlock(AQBlocks.GRANITE_QUARTZ_ORE, "Granite Quartz Ore");
         addBlock(AQBlocks.ONYX, "Onyx");
+
+        addBlockPair(AQBlocks.JAGUAR_SKULL, "Jaguar Skull");
+        addBlockPair(AQBlocks.OLD_SKULL, "Old Skull");
+        addBlockPair(AQBlocks.CRYSTAL_SKULL, "Crystal Skull");
+        addBlockPair(AQBlocks.STONE_SKULL, "Stone Skull");
 
         addBlock(AQBlocks.AZTEC_VASE, "Aztec Vase");
         addBlock(AQBlocks.INFESTED_VASE, "Infested Aztec Vase");
@@ -90,10 +100,6 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addItem(AQItems.OLD_BONE, "Old Bone");
         addItem(AQItems.POISONOUS_FROG_0, "Poisonous Frog 0");
         addItem(AQItems.POISONOUS_FROG_1, "Poisonous Frog 1");
-        addItem(AQItems.SKULL_0, "Skull 0");
-        addItem(AQItems.SKULL_1, "Skull 1");
-        addItem(AQItems.CRYSTAL_SKULL, "Crystal Skull");
-        addItem(AQItems.STONE_SKULL, "Stone Skull");
         addItem(AQItems.MACHETE, "Machete");
         addItem(AQItems.HAMMER_AND_CHISEL, "Hammer and Chisel");
         addItem(AQItems.WHIP, "Whip");
@@ -121,6 +127,16 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         AQItems.SPAWN_EGGS.forEach((egg) -> {
             String translation = egg.getId().getPath().replaceAll("_", " ");
             addItem(egg, WordUtils.capitalizeFully(translation));
+        });
+
+        WoodSetRegObj.WOOD_SETS.forEach((woodSet) -> {
+            for (RegistryObject<? extends Block> regObj : woodSet.allBlocks()) {
+                // Avoid duplicate for signs
+                if (regObj.get() instanceof WallSignBlock) continue;
+
+                String translation = regObj.getId().getPath().replaceAll("_", " ");
+                addBlock(regObj, WordUtils.capitalizeFully(translation));
+            }
         });
     }
 }

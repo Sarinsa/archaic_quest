@@ -3,10 +3,10 @@ package com.obsidian_core.archaic_quest.client.render.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import com.obsidian_core.archaic_quest.client.AQModelLayers;
 import com.obsidian_core.archaic_quest.common.block.AztecDungeonChestBlock;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonChestBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
-import net.minecraft.client.model.SkullModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -14,11 +14,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.client.renderer.blockentity.SkullBlockRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.SkullBlock;
 
 public class AztecDungeonChestRenderer implements BlockEntityRenderer<AztecDungeonChestBlockEntity> {
 

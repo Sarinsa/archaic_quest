@@ -1,6 +1,7 @@
 package com.obsidian_core.archaic_quest.common.core;
 
 import com.obsidian_core.archaic_quest.common.compat.terrablender.AQTerraBlender;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import com.obsidian_core.archaic_quest.common.event.BiomeEvents;
 import com.obsidian_core.archaic_quest.common.item.AdventurersTorchItem;
 import com.obsidian_core.archaic_quest.common.misc.AQDamageSources;
@@ -9,6 +10,9 @@ import com.obsidian_core.archaic_quest.common.core.register.*;
 import com.obsidian_core.archaic_quest.common.worldgen.feature.AQConfiguredFeatures;
 import com.obsidian_core.archaic_quest.common.worldgen.feature.decorators.AQTreeDecoratorType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.AxeItem;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraftforge.client.model.ItemLayerModel;
@@ -66,6 +70,11 @@ public class ArchaicQuest {
                 AQTerraBlender.setup();
             }
         });
+
+        for (WoodSetRegObj woodSet : WoodSetRegObj.WOOD_SETS) {
+            ComposterBlock.COMPOSTABLES.put(woodSet.getLeaves().get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(woodSet.getSapling().get(), 0.3F);
+        }
     }
 
     public static ResourceLocation resourceLoc(String path) {

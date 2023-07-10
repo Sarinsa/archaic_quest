@@ -3,6 +3,7 @@ package com.obsidian_core.archaic_quest.datagen.tag;
 import com.obsidian_core.archaic_quest.common.block.CoolVinesBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import com.obsidian_core.archaic_quest.common.tag.AQBlockTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
@@ -27,9 +28,30 @@ public class AQBlockTagProvider extends BlockTagsProvider {
         tag(AQBlockTags.ORE_SILVER).add(AQBlocks.SILVER_ORE.get());
         tag(AQBlockTags.ORE_QUARTZ).add(AQBlocks.GRANITE_QUARTZ_ORE.get());
 
-        tag(BlockTags.SAPLINGS).add(
-                AQBlocks.AZTEC_JUNGLE_SAPLING.get()
-        );
+        WoodSetRegObj.WOOD_SETS.forEach((woodSet) -> {
+            tag(BlockTags.SAPLINGS).add(woodSet.getSapling().get());
+            tag(BlockTags.LEAVES).add(woodSet.getLeaves().get());
+            //tag(BlockTags.LOGS).add(woodSet.getLog().get(), woodSet.getStrippedLog().get());
+            tag(BlockTags.LOGS_THAT_BURN).add(woodSet.getLog().get(), woodSet.getStrippedLog().get());
+            tag(BlockTags.PLANKS).add(woodSet.getPlanks().get());
+            //tag(BlockTags.SLABS).add(woodSet.getSlab().get());
+            tag(BlockTags.WOODEN_SLABS).add(woodSet.getSlab().get());
+            tag(AQBlockTags.VERT_SLAB).add(woodSet.getVertSlab().get());
+            //tag(BlockTags.STAIRS).add(woodSet.getStairs().get());
+            tag(BlockTags.WOODEN_STAIRS).add(woodSet.getStairs().get());
+            tag(BlockTags.FENCES).add(woodSet.getFence().get());
+            tag(BlockTags.FENCE_GATES).add(woodSet.getFenceGate().get());
+            //tag(BlockTags.PRESSURE_PLATES).add(woodSet.getPressurePlate().get());
+            tag(BlockTags.WOODEN_PRESSURE_PLATES).add(woodSet.getPressurePlate().get());
+            //tag(BlockTags.BUTTONS).add(woodSet.getButton().get());
+            tag(BlockTags.WOODEN_BUTTONS).add(woodSet.getButton().get());
+            //tag(BlockTags.DOORS).add(woodSet.getDoor().get());
+            tag(BlockTags.WOODEN_DOORS).add(woodSet.getDoor().get());
+            //tag(BlockTags.TRAPDOORS).add(woodSet.getTrapDoor().get());
+            tag(BlockTags.WOODEN_TRAPDOORS).add(woodSet.getTrapDoor().get());
+            tag(BlockTags.STANDING_SIGNS).add(woodSet.getSign().get());
+            tag(BlockTags.WALL_SIGNS).add(woodSet.getWallSign().get());
+        });
 
         TagsProvider.TagAppender<Block> CLIMBABLE = tag(BlockTags.CLIMBABLE);
 

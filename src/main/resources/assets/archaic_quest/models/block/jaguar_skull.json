@@ -1,0 +1,7 @@
+{
+  "parent": "archaic_quest:block/template_animal_skull",
+  "textures": {
+    "layer0": "archaic_quest:block/jaguar_skull_0",
+    "layer1": "archaic_quest:block/jaguar_skull_1"
+  }
+}

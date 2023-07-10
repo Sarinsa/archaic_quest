@@ -5,10 +5,12 @@ import com.obsidian_core.archaic_quest.common.item.*;
 import com.obsidian_core.archaic_quest.common.item.data.AQItemTier;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -66,10 +68,6 @@ public class AQItems {
     public static final RegistryObject<Item> OLD_BONE = registerSimpleItem("old_bone", AQCreativeTabs.ITEMS);
     public static final RegistryObject<Item> POISONOUS_FROG_0 = registerSimpleItem("poisonous_frog_0", AQCreativeTabs.ITEMS);
     public static final RegistryObject<Item> POISONOUS_FROG_1 = registerSimpleItem("poisonous_frog_1", AQCreativeTabs.ITEMS);
-    public static final RegistryObject<Item> SKULL_0 = registerSimpleItem("skull_0", AQCreativeTabs.ITEMS);
-    public static final RegistryObject<Item> SKULL_1 = registerSimpleItem("skull_1", AQCreativeTabs.ITEMS);
-    public static final RegistryObject<Item> CRYSTAL_SKULL = registerSimpleItem("crystal_skull", AQCreativeTabs.ITEMS);
-    public static final RegistryObject<Item> STONE_SKULL = registerSimpleItem("stone_skull", AQCreativeTabs.ITEMS);
 
 
     // TOOLS & WEAPONS
@@ -87,9 +85,18 @@ public class AQItems {
     public static final RegistryObject<Item> WOODEN_DART = registerSimpleItem("wooden_dart", AQCreativeTabs.WEAPONS);
     public static final RegistryObject<Item> BONE_DART = registerSimpleItem("bone_dart", AQCreativeTabs.WEAPONS);
 
+    public static final RegistryObject<ArmorItem> ICHCAHUIPILLI_HEADGEAR = registerArmor("ichcahuipilli_headgear", () -> new IchcahuipilliArmorItem(ArmorMaterials.LEATHER, EquipmentSlot.HEAD));
+    public static final RegistryObject<ArmorItem> ICHCAHUIPILLI_SHIRT = registerArmor("ichcahuipilli_shirt", () -> new IchcahuipilliArmorItem(ArmorMaterials.LEATHER, EquipmentSlot.CHEST));
+    public static final RegistryObject<ArmorItem> ICHCAHUIPILLI_SKIRT = registerArmor("ichcahuipilli_skirt", () -> new IchcahuipilliArmorItem(ArmorMaterials.LEATHER, EquipmentSlot.LEGS));
+    public static final RegistryObject<ArmorItem> ICHCAHUIPILLI_BOOTS = registerArmor("ichcahuipilli_boots", () -> new IchcahuipilliArmorItem(ArmorMaterials.LEATHER, EquipmentSlot.FEET));
 
-    private static <T extends Item> RegistryObject<T> registerItem(String name, Supplier<T> itemSupplier) {
+
+    protected static <T extends Item> RegistryObject<T> registerItem(String name, Supplier<T> itemSupplier) {
         return REGISTRY.register(name, itemSupplier);
+    }
+
+    private static RegistryObject<Item> registerItemNameBlock(String name, CreativeModeTab creativeTab, Supplier<? extends Block> supplier) {
+        return REGISTRY.register(name, () -> new ItemNameBlockItem(supplier.get(), new Item.Properties().tab(creativeTab)));
     }
 
     private static RegistryObject<Item> registerSimpleItem(String name, Supplier<Item> itemSupplier) {
@@ -98,14 +105,20 @@ public class AQItems {
         return regObject;
     }
 
-    private static RegistryObject<Item> registerSimpleItem(String name, CreativeModeTab itemGroup, FoodProperties food) {
-        RegistryObject<Item> regObject = REGISTRY.register(name, () -> new Item(new Item.Properties().tab(itemGroup).food(food)));
+    private static RegistryObject<Item> registerSimpleItem(String name, CreativeModeTab creativeTab, FoodProperties food) {
+        RegistryObject<Item> regObject = REGISTRY.register(name, () -> new Item(new Item.Properties().tab(creativeTab).food(food)));
         SIMPLE_ITEMS.add(regObject);
         return regObject;
     }
 
-    private static RegistryObject<Item> registerSimpleItem(String name, CreativeModeTab itemGroup) {
-        RegistryObject<Item> regObject = REGISTRY.register(name, () -> new Item(new Item.Properties().tab(itemGroup)));
+    protected static RegistryObject<Item> registerSimpleItem(String name, CreativeModeTab creativeTab) {
+        RegistryObject<Item> regObject = REGISTRY.register(name, () -> new Item(new Item.Properties().tab(creativeTab)));
+        SIMPLE_ITEMS.add(regObject);
+        return regObject;
+    }
+
+    private static RegistryObject<ArmorItem> registerArmor(String name, Supplier<ArmorItem> armor) {
+        RegistryObject<ArmorItem> regObject = REGISTRY.register(name, armor);
         SIMPLE_ITEMS.add(regObject);
         return regObject;
     }

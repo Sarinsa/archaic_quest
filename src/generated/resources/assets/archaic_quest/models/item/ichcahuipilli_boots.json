@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "archaic_quest:item/stone_skull"
+    "layer0": "archaic_quest:item/ichcahuipilli_boots"
   }
 }

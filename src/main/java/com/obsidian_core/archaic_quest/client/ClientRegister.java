@@ -4,23 +4,25 @@ import com.obsidian_core.archaic_quest.client.particle.PoisonCloudParticle;
 import com.obsidian_core.archaic_quest.client.render.blockentity.*;
 import com.obsidian_core.archaic_quest.client.render.blockentity.bewlr.BEWLRS;
 import com.obsidian_core.archaic_quest.client.render.entity.living.TlatlaomiRenderer;
+import com.obsidian_core.archaic_quest.client.render.entity.model.IchcahuipilliArmorModel;
 import com.obsidian_core.archaic_quest.client.render.entity.model.TlatlaomiModel;
 import com.obsidian_core.archaic_quest.client.screen.KnappingTableScreen;
-import com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonChestBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.texture.AtlasSet;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,6 +30,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = ArchaicQuest.MODID)
 public class ClientRegister {
+
+    public static HumanoidModel<LivingEntity> ICHCAHUIPILLI_ARMOR_MODEL;
+
 
     @SubscribeEvent
     public static void register(FMLClientSetupEvent event) {
@@ -41,6 +46,16 @@ public class ClientRegister {
         event.enqueueWork(() -> {
             AQItemModelProps.register();
         });
+    }
+
+    @SubscribeEvent
+    public static void onAddLayer(EntityRenderersEvent.AddLayers event) {
+        ICHCAHUIPILLI_ARMOR_MODEL = new IchcahuipilliArmorModel<>(event.getEntityModels().bakeLayer(ModelLayers.PLAYER), event.getEntityModels().bakeLayer(AQModelLayers.ICHCAHUIPILLI_ARMOR));
+    }
+
+    @SubscribeEvent
+    public static void onTextureStitch(TextureStitchEvent.Pre event) {
+
     }
 
     @SubscribeEvent
@@ -62,6 +77,8 @@ public class ClientRegister {
         event.registerLayerDefinition(AQModelLayers.AZTEC_DUNGEON_CHEST, AztecDungeonChestRenderer::createBodyLayer);
 
         event.registerLayerDefinition(AQModelLayers.TLATLAOMI, TlatlaomiModel::createBodyLayer);
+
+        event.registerLayerDefinition(AQModelLayers.ICHCAHUIPILLI_ARMOR, IchcahuipilliArmorModel::createBodyLayer);
     }
 
     @SubscribeEvent

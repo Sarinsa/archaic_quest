@@ -1,0 +1,7 @@
+{
+  "parent": "archaic_quest:block/template_relic_skull",
+  "textures": {
+    "layer0": "archaic_quest:block/old_skull_0",
+    "layer1": "archaic_quest:block/old_skull_1"
+  }
+}

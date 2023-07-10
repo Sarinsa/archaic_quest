@@ -1,0 +1,8 @@
+// 1.19.2	2023-07-11T00:24:54.3212406	Tags for minecraft:item
+70316b88b57e330151a3570233748ac9391df895 data/forge/tags/items/gems.json
+c2459a1b5bbe7c8adc9912c8b803ed4d47591d56 data/forge/tags/items/ingots/silver.json
+349fe5ff963dff56686aac626789e4a4ca35cc62 data/forge/tags/items/ingots/tin.json
+0175e405f33a429141df0e1275b18da8bd3a11f6 data/forge/tags/items/ores/quartz.json
+95c10ac9ce3e7af90707575cab899eb013bd91d2 data/forge/tags/items/ores/silver.json
+57a85a74e708d62cfe584833171d50409d0e9538 data/forge/tags/items/ores/tin.json
+321c7cb4e1413300c96676d870065c22beca2ccf data/minecraft/tags/items/saplings.json

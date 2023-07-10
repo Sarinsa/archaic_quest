@@ -106,6 +106,21 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
             }, VerticalSlabBlock.WATERLOGGED);
     }
 
+    public void leaves(Block block) {
+        ModelFile model = models().withExistingParent(name(block), new ResourceLocation("block/leaves"))
+                .texture("all", blockTexture(block));
+
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(model));
+    }
+
+    public void sapling(Block block) {
+        ModelFile model = models().withExistingParent(name(block), new ResourceLocation("block/cross"))
+                .renderType("cutout")
+                .texture("cross", blockTexture(block));
+
+        getVariantBuilder(block).partialState().setModels(new ConfiguredModel(model));
+    }
+
     public void doubleCrop(DoubleCropBlock block) {
         ResourceLocation crossModel = mcLoc("block/cross");
 
@@ -143,10 +158,10 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
     public void spearTrap(SpearTrapBlock trapBlock) {
         getVariantBuilder(trapBlock).forAllStatesExcept((state) -> {
             boolean extended = state.getValue(SpearTrapBlock.EXTENDED);
-            ResourceLocation modelName = resLoc("block/spear_trap");
+            ResourceLocation parentModel = resLoc("block/spear_trap");
 
             return ConfiguredModel.builder()
-                    .modelFile(models().withExistingParent(extended ? name(trapBlock) + "_extended" : name(trapBlock), modelName)
+                    .modelFile(models().withExistingParent(extended ? name(trapBlock) + "_extended" : name(trapBlock), parentModel)
                             .texture("texture", extended ? texture("spear_trap_base") : texture(name(trapBlock))))
                     .build();
         }, SpearTrapBlock.WATERLOGGED);

@@ -83,7 +83,7 @@ public class AdventurersTorchItem extends Item {
 
     public AdventurersTorchItem() {
         super(new Item.Properties()
-                .tab(AQCreativeTabs.ITEMS)
+                .tab(AQCreativeTabs.TOOLS)
                 .stacksTo(1)
                 .rarity(Rarity.UNCOMMON)
         );

@@ -1,5 +1,6 @@
 package com.obsidian_core.archaic_quest.datagen.lang;
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentContents;
@@ -8,6 +9,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -21,6 +23,12 @@ public abstract class AbstractLanguageProvider extends LanguageProvider {
 
     protected void addItemGroup(CreativeModeTab creativeTab, String localized) {
         this.add("itemGroup." + creativeTab.getRecipeFolderName(), "Archaic Quest - " + localized);
+    }
+
+    /** Used for block Pairs where both blocks should use the same localized name. */
+    protected <FIRST extends Block, SECOND extends Block> void addBlockPair(Pair<RegistryObject<FIRST>, RegistryObject<SECOND>> regObjects, String localized) {
+        addBlock(regObjects.getFirst(), localized);
+        addBlock(regObjects.getSecond(), localized);
     }
 
     protected void addBiome(RegistryObject<Biome> biome, String localized) {

@@ -6,13 +6,12 @@ import com.obsidian_core.archaic_quest.common.block.data.DungeonDoorType;
 import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
 import com.obsidian_core.archaic_quest.common.block.tree.AztecJungleTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
-import com.obsidian_core.archaic_quest.common.core.register.util.BlockFamRegObject;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import com.obsidian_core.archaic_quest.common.item.AQCreativeTabs;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecCraftingStationBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecDungeonChestBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecDungeonDoorBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecThroneBlockItem;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.*;
@@ -43,6 +42,7 @@ public class AQBlocks {
     public static final BlockBehaviour.Properties ANDESITE_BRICKS_PROP;
     public static final BlockBehaviour.Properties GOLD_BRICKS_PROP;
 
+
     static {
         ANDESITE_BRICKS_PROP = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.STONE).requiresCorrectToolForDrops().strength(1.5F, 6.0F);
         GOLD_BRICKS_PROP = BlockBehaviour.Properties.of(Material.METAL, MaterialColor.GOLD).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL);
@@ -53,6 +53,8 @@ public class AQBlocks {
     // VEGETATION
     public static final RegistryObject<Block> VINES_1 = registerBlock("vines_1", AQCreativeTabs.DECORATION, () -> new CoolVinesBlock(BlockBehaviour.Properties.copy(Blocks.VINE)));
     public static final RegistryObject<Block> AZTEC_JUNGLE_SAPLING = registerBlock("aztec_jungle_sapling", AQCreativeTabs.DECORATION, () -> new SaplingBlock(new AztecJungleTreeGrower(), BlockBehaviour.Properties.copy(Blocks.JUNGLE_SAPLING)));
+
+    public static final WoodSetRegObj AHUEHUETE_WOOD_SET = new WoodSetRegObj("ahuehuete", BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS), null);
 
     // CROPS
     public static final RegistryObject<Block> CORN_CROP = registerBlockNoBlockItem("corn_crop", CornCropBlock::new);
@@ -209,6 +211,16 @@ public class AQBlocks {
     );
 
 
+    public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
+            JAGUAR_SKULL = registerSkull("jaguar", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.BONE_BLOCK));
+    public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
+            OLD_SKULL = registerSkull("old", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F));
+    public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
+            CRYSTAL_SKULL = registerSkull("crystal", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
+    public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
+            STONE_SKULL = registerSkull("stone", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
+
+
     public static final RegistryObject<Block> GOLD_AZTEC_BRICKS = simpleBlockWithVars("gold_aztec_bricks", AQCreativeTabs.BLOCKS, AQBlocks.GOLD_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> GOLD_AZTEC_BRICKS_0 = simpleBlockWithVars("gold_aztec_bricks_0", AQCreativeTabs.BLOCKS, AQBlocks.GOLD_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
     public static final RegistryObject<Block> GOLD_AZTEC_BRICKS_1 = simpleBlockWithVars("gold_aztec_bricks_1", AQCreativeTabs.BLOCKS, AQBlocks.GOLD_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -332,6 +344,23 @@ public class AQBlocks {
             BLOCK_TAGS.put(registryObject, tags);
         }
         return registryObject;
+    }
+
+    @SafeVarargs
+    private static Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
+    registerSkull(String name, Supplier<BlockBehaviour.Properties> properties, TagKey<Block>... tags) {
+
+        RegistryObject<SimpleSkullBlock> skull = REGISTRY.register(name + "_skull", () -> new SimpleSkullBlock(properties.get()));
+        RegistryObject<SimpleWallSkullBlock> wallSkull = REGISTRY.register(name + "_wall_skull", () -> new SimpleWallSkullBlock(properties.get().dropsLike(skull.get())));
+
+        if (tags != null && tags.length > 0) {
+            BLOCK_TAGS.put(skull, tags);
+            BLOCK_TAGS.put(wallSkull, tags);
+        }
+
+        AQItems.REGISTRY.register(skull.getId().getPath(), () -> new StandingAndWallBlockItem(skull.get(), wallSkull.get(), new Item.Properties().tab(AQCreativeTabs.DECORATION)));
+
+        return Pair.of(skull, wallSkull);
     }
 
     @SafeVarargs

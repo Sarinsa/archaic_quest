@@ -3,6 +3,7 @@ package com.obsidian_core.archaic_quest.common.core.register;
 import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.blockentity.*;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -51,7 +52,20 @@ public class AQBlockEntities {
                     AQBlocks.AZTEC_DUNGEON_CHEST.get()
     };
 
+    private static final Supplier<Block[]> SKULLS = () ->
+            new Block[] {
+                    AQBlocks.CRYSTAL_SKULL.getFirst().get(),
+                    AQBlocks.CRYSTAL_SKULL.getSecond().get(),
+                    AQBlocks.STONE_SKULL.getFirst().get(),
+                    AQBlocks.STONE_SKULL.getSecond().get(),
+                    AQBlocks.JAGUAR_SKULL.getFirst().get(),
+                    AQBlocks.JAGUAR_SKULL.getSecond().get(),
+                    AQBlocks.OLD_SKULL.getFirst().get(),
+                    AQBlocks.OLD_SKULL.getSecond().get()
+    };
 
+
+    public static final RegistryObject<BlockEntityType<SimpleSkullBlockEntity>> SIMPLE_SKULL = register("simple_skull", () -> BlockEntityType.Builder.of(SimpleSkullBlockEntity::new, SKULLS.get()).build(null));
     public static final RegistryObject<BlockEntityType<VaseBlockEntity>> VASE = register("vase", () -> BlockEntityType.Builder.of(VaseBlockEntity::new, VASES.get()).build(null));
     public static final RegistryObject<BlockEntityType<AztecPoisonTrapBlockEntity>> POISON_TRAP = register("aztec_poison_trap", () -> BlockEntityType.Builder.of(AztecPoisonTrapBlockEntity::new, POISON_TRAPS.get()).build(null));
     public static final RegistryObject<BlockEntityType<SpikeTrapBlockEntity>> SPIKE_TRAP = register("spike_trap", () -> BlockEntityType.Builder.of(SpikeTrapBlockEntity::new, SPIKE_TRAPS.get()).build(null));

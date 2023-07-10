@@ -1,0 +1,134 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/cube_all",
+	"elements": [
+		{
+			"from": [4.5, 6.75, 9.25],
+			"to": [11.5, 12.75, 16.25],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 6, 15]},
+			"faces": {
+				"north": {"uv": [7, 7, 14, 13], "texture": "#layer0"},
+				"east": {"uv": [0, 7, 7, 13], "texture": "#layer0"},
+				"south": {"uv": [0, 7, 7, 13], "texture": "#layer1"},
+				"west": {"uv": [7, 7, 0, 13], "texture": "#layer0"},
+				"up": {"uv": [7, 0, 14, 7], "texture": "#layer0"},
+				"down": {"uv": [0, 0, 7, 7], "texture": "#layer0"}
+			}
+		},
+		{
+			"from": [3.99, 6.74, 8.99],
+			"to": [12.01, 10.76, 10.01],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 6, 15]},
+			"faces": {
+				"north": {"uv": [8, 12, 16, 16], "texture": "#layer1"},
+				"east": {"uv": [7, 12, 8, 16], "texture": "#layer1"},
+				"south": {"uv": [8, 8, 16, 12], "texture": "#layer1"},
+				"west": {"uv": [7, 12, 8, 16], "texture": "#layer1"},
+				"up": {"uv": [9, 8, 16, 9], "texture": "#layer1"},
+				"down": {"uv": [9, 8, 16, 9], "texture": "#layer1"}
+			}
+		},
+		{
+			"from": [5.99, 5.74, 9.24],
+			"to": [10.01, 6.76, 12.26],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 6, 15]},
+			"faces": {
+				"north": {"uv": [11, 13, 7, 14], "texture": "#layer0"},
+				"east": {"uv": [7, 13, 10, 14], "texture": "#layer0"},
+				"south": {"uv": [0, 0, 4, 1], "texture": "#layer0"},
+				"west": {"uv": [8, 13, 11, 14], "texture": "#layer0"},
+				"up": {"uv": [0, 0, 4, 3], "texture": "#layer0"},
+				"down": {"uv": [9, 0, 13, 3], "texture": "#layer1"}
+			}
+		},
+		{
+			"from": [5, 5.96405, 9.57896],
+			"to": [11, 6.96405, 15.57896],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [7.49, 5.96405, 15.07896]},
+			"faces": {
+				"north": {"uv": [6, 15, 12, 16], "texture": "#layer0"},
+				"east": {"uv": [0, 15, 6, 16], "texture": "#layer0"},
+				"south": {"uv": [8, 0, 14, 1], "texture": "#layer1"},
+				"west": {"uv": [6, 15, 0, 16], "texture": "#layer0"},
+				"up": {"uv": [8, 0, 14, 6], "texture": "#layer1"},
+				"down": {"uv": [8, 0, 14, 6], "texture": "#layer1"}
+			}
+		},
+		{
+			"from": [5, 6.96405, 11.57896],
+			"to": [11, 7.96405, 15.57896],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [7.49, 5.96405, 15.07896]},
+			"faces": {
+				"north": {"uv": [0, 14, 6, 15], "texture": "#layer1"},
+				"east": {"uv": [0, 0, 4, 1], "texture": "#layer1"},
+				"south": {"uv": [8, 6, 14, 7], "texture": "#layer1"},
+				"west": {"uv": [0, 0, 4, 1], "texture": "#layer1"},
+				"up": {"uv": [0, 16, 6, 12], "texture": "#layer1"},
+				"down": {"uv": [0, 0, 6, 4], "texture": "#layer1"}
+			}
+		},
+		{
+			"from": [6, 6.96405, 9.57896],
+			"to": [10, 7.96405, 11.57896],
+			"rotation": {"angle": -22.5, "axis": "x", "origin": [7.49, 5.96405, 15.07896]},
+			"faces": {
+				"north": {"uv": [11, 14, 7, 15], "texture": "#layer0"},
+				"east": {"uv": [11, 14, 9, 15], "texture": "#layer0"},
+				"south": {"uv": [0, 0, 4, 1], "texture": "#layer0"},
+				"west": {"uv": [9, 14, 7, 15], "texture": "#layer0"},
+				"up": {"uv": [0, 0, 4, 2], "texture": "#layer0"},
+				"down": {"uv": [0, 0, 4, 2], "texture": "#layer0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 2.5, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 2.5, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"ground": {
+			"translation": [0, 2.75, 1.5],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"gui": {
+			"rotation": [15, 150, 0],
+			"translation": [0.25, 6, 0],
+			"scale": [1.25, 1.25, 1.25]
+		},
+		"head": {
+			"rotation": [-22.5, 0, 0],
+			"translation": [0, 9.5, -1.75],
+			"scale": [2.1, 2.1, 2.1]
+		},
+		"fixed": {
+			"rotation": [-22.5, 0, 0],
+			"translation": [0, 7.75, -1.75],
+			"scale": [1.7, 1.7, 1.7]
+		}
+	},
+	"groups": [
+		{
+			"name": "skull",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "chromedome",
+					"origin": [8, 0, 8],
+					"color": 0,
+					"children": [0, 1, 2]
+				},
+				{
+					"name": "lowerJaw",
+					"origin": [8, 0, 8],
+					"color": 0,
+					"children": [3, 4, 5]
+				}
+			]
+		}
+	]
+}
