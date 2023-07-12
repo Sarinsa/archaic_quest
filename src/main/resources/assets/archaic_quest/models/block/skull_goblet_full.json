@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/cube_all",
+	"parent": "minecraft:block/orientable",
 	"textures": {
 		"0": "Archaic Quest:blocks/skull_goblet_1",
 		"1": "Archaic Quest:blocks/skull_goblet_2",

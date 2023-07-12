@@ -1,6 +1,11 @@
 {
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block/cube_all",
+	"parent": "minecraft:block/orientable",
+	"texture_size": [16, 16],
+	"render_type": "cutout",
+	"textures": {
+		"particle": "#texture"
+	},
 	"elements": [
 		{
 			"from": [5.5, 0, 7.75],

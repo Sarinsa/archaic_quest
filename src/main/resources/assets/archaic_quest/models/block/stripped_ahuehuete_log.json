@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "archaic_quest:block/stripped_ahuehuete_log_side",
+    "end": "archaic_quest:block/stripped_ahuehuete_log_top"
+  }
+}
