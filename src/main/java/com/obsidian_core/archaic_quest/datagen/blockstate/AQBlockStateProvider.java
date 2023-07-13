@@ -33,23 +33,7 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
             simpleBlockItem(stairs.get(), model);
         });
 
-        WoodSetRegObj.WOOD_SETS.forEach((woodSet) -> {
-            Block planks = woodSet.getPlanks().get();
-
-            sapling(woodSet.getSapling().get());
-            leaves(woodSet.getLeaves().get());
-            logBlock(woodSet.getLog().get());
-            //logBlock(woodSet.getStrippedLog().get());
-            simpleBlock(planks);
-            slab(woodSet.getSlab().get(), planks);
-            simpleVerticalSlab(woodSet.getVertSlab().get(), planks);
-            stairsBlock(woodSet.getStairs().get(), blockTexture(planks));
-            fenceBlock(woodSet.getFence().get(), blockTexture(planks));
-            fenceGateBlock(woodSet.getFenceGate().get(), blockTexture(planks));
-            pressurePlateBlock(woodSet.getPressurePlate().get(), blockTexture(planks));
-            buttonBlock(woodSet.getButton().get(), blockTexture(planks));
-
-        });
+        WoodSetRegObj.WOOD_SETS.forEach(this::woodSet);
 
         for (RegistryObject<Block> regObject : REGISTRY.getEntries()) {
             Block block = regObject.get();

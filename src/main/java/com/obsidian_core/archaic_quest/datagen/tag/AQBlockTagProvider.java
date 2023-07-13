@@ -32,7 +32,7 @@ public class AQBlockTagProvider extends BlockTagsProvider {
             tag(BlockTags.SAPLINGS).add(woodSet.getSapling().get());
             tag(BlockTags.LEAVES).add(woodSet.getLeaves().get());
             //tag(BlockTags.LOGS).add(woodSet.getLog().get(), woodSet.getStrippedLog().get());
-            tag(BlockTags.LOGS_THAT_BURN).add(woodSet.getLog().get(), woodSet.getStrippedLog().get());
+            tag(BlockTags.LOGS_THAT_BURN).add(woodSet.getLog().get(), woodSet.getStrippedLog().get(), woodSet.getWood().get(), woodSet.getStrippedWood().get());
             tag(BlockTags.PLANKS).add(woodSet.getPlanks().get());
             //tag(BlockTags.SLABS).add(woodSet.getSlab().get());
             tag(BlockTags.WOODEN_SLABS).add(woodSet.getSlab().get());
@@ -48,7 +48,7 @@ public class AQBlockTagProvider extends BlockTagsProvider {
             //tag(BlockTags.DOORS).add(woodSet.getDoor().get());
             tag(BlockTags.WOODEN_DOORS).add(woodSet.getDoor().get());
             //tag(BlockTags.TRAPDOORS).add(woodSet.getTrapDoor().get());
-            tag(BlockTags.WOODEN_TRAPDOORS).add(woodSet.getTrapDoor().get());
+            tag(BlockTags.WOODEN_TRAPDOORS).add(woodSet.getTrapdoor().get());
             tag(BlockTags.STANDING_SIGNS).add(woodSet.getSign().get());
             tag(BlockTags.WALL_SIGNS).add(woodSet.getWallSign().get());
         });

@@ -31,6 +31,8 @@ public class WoodSetRegObj {
 
     private final RegistryObject<SaplingBlock> sapling;
     private final RegistryObject<LeavesBlock> leaves;
+    private final RegistryObject<RotatedPillarBlock> wood;
+    private final RegistryObject<RotatedPillarBlock> strippedWood;
     private final RegistryObject<RotatedPillarBlock> log;
     private final RegistryObject<RotatedPillarBlock> strippedLog;
     private final RegistryObject<Block> planks;
@@ -53,8 +55,10 @@ public class WoodSetRegObj {
 
         sapling = register(name + "_sapling", () -> new SaplingBlock(treeGrower, BlockBehaviour.Properties.of(Material.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS)), true);
         leaves = register(name + "_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.of(Material.LEAVES).strength(0.2F).randomTicks().sound(SoundType.GRASS).noOcclusion().isValidSpawn(Blocks::ocelotOrParrot).isSuffocating(Blocks::never).isViewBlocking(Blocks::never)), true);
+        wood = register(name + "_wood", () -> new RotatedPillarBlock(properties), false);
+        strippedWood = register(name + "_stripped_wood", () -> new RotatedPillarBlock(properties), false);
         log = register(name + "_log", () -> new RotatedPillarBlock(properties), false);
-        strippedLog = register("stripped_" + name + "_log", () -> new RotatedPillarBlock(properties), false);
+        strippedLog = register(name + "_stripped_log", () -> new RotatedPillarBlock(properties), false);
         planks = register(name + "_planks", () -> new Block(properties), false);
         slab = register(name + "_slab", () -> new SlabBlock(properties), false);
         verticalSlab = register(name + "_vertical_slab", () -> new VerticalSlabBlock(properties), false);
@@ -63,7 +67,7 @@ public class WoodSetRegObj {
         fenceGate = register(name + "_fence_gate", () -> new FenceGateBlock(properties), true);
         pressurePlate = register(name + "_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, properties), true);
         button = register(name + "_button", () -> new WoodButtonBlock(properties), true);
-        trapDoor = register(name + "_trap_door", () -> new TrapDoorBlock(properties), true);
+        trapDoor = register(name + "_trapdoor", () -> new TrapDoorBlock(properties), true);
         door = registerDoor(name + "_door", properties);
 
         sign = AQBlocks.REGISTRY.register(name + "_sign", () -> new StandingSignBlock(properties, woodType));
@@ -76,6 +80,8 @@ public class WoodSetRegObj {
         allBlocks = List.of(
             sapling,
             leaves,
+            wood,
+            strippedWood,
             log,
             strippedLog,
             planks,
@@ -107,6 +113,13 @@ public class WoodSetRegObj {
         return regObj;
     }
 
+    public RegistryObject<RotatedPillarBlock> getWood() {
+        return wood;
+    }
+
+    public RegistryObject<RotatedPillarBlock> getStrippedWood() {
+        return strippedWood;
+    }
 
     public RegistryObject<RotatedPillarBlock> getLog() {
         return log;
@@ -156,7 +169,7 @@ public class WoodSetRegObj {
         return wallSign;
     }
 
-    public RegistryObject<TrapDoorBlock> getTrapDoor() {
+    public RegistryObject<TrapDoorBlock> getTrapdoor() {
         return trapDoor;
     }
 

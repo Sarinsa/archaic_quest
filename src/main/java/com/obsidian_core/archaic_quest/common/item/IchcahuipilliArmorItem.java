@@ -38,7 +38,7 @@ public class IchcahuipilliArmorItem extends ArmorItem {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                return equipmentSlot.getType() == EquipmentSlot.Type.ARMOR ? ClientRegister.ICHCAHUIPILLI_ARMOR_MODEL : original;
+                return equipmentSlot.getType() == EquipmentSlot.Type.ARMOR ? ClientRegister.ICHCAHUIPILLI_ARMOR_MODELS.get(equipmentSlot) : original;
             }
         });
     }

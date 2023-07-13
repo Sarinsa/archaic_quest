@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "archaic_quest:block/ahuehuete_stripped_wood_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "archaic_quest:block/ahuehuete_stripped_wood"
+    },
+    "axis=z": {
+      "model": "archaic_quest:block/ahuehuete_stripped_wood_horizontal",
+      "x": 90
+    }
+  }
+}

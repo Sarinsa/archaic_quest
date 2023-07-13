@@ -1,8 +1,19 @@
-// 1.19.2	2023-07-11T00:24:54.3212406	Tags for minecraft:item
+// 1.19.2	2023-07-14T01:07:04.1863267	Tags for minecraft:item
 70316b88b57e330151a3570233748ac9391df895 data/forge/tags/items/gems.json
 c2459a1b5bbe7c8adc9912c8b803ed4d47591d56 data/forge/tags/items/ingots/silver.json
 349fe5ff963dff56686aac626789e4a4ca35cc62 data/forge/tags/items/ingots/tin.json
 0175e405f33a429141df0e1275b18da8bd3a11f6 data/forge/tags/items/ores/quartz.json
 95c10ac9ce3e7af90707575cab899eb013bd91d2 data/forge/tags/items/ores/silver.json
 57a85a74e708d62cfe584833171d50409d0e9538 data/forge/tags/items/ores/tin.json
-321c7cb4e1413300c96676d870065c22beca2ccf data/minecraft/tags/items/saplings.json
+55d3ea2417dfcf92c13156e36bea50cefd0598da data/minecraft/tags/items/fences.json
+bfa9986871544fef565bd6a06e1192b105dff3d3 data/minecraft/tags/items/leaves.json
+b14c16ad1892f905ecbbab174ed4c7b563b775fb data/minecraft/tags/items/logs_that_burn.json
+ed8917999e3d09dc23de41276a697f05690f27da data/minecraft/tags/items/planks.json
+e49db8b3f445697991b5cc4b82e17c8613a570de data/minecraft/tags/items/saplings.json
+f645e3a1f8cd0033421e00628d2e05664da4cbe1 data/minecraft/tags/items/signs.json
+aa541e36351b24f36d6a1ddad995d90251fa5873 data/minecraft/tags/items/wooden_buttons.json
+fee75ec79ed2e6d6e8d5eb3225d9886031e9ef7d data/minecraft/tags/items/wooden_doors.json
+52fa7d20d421471464b8d5063cf44a2e876c2195 data/minecraft/tags/items/wooden_pressure_plates.json
+5c37aaabcfd5a8d0522d8564356b79e6c1afc819 data/minecraft/tags/items/wooden_slabs.json
+9ccadd2cca80654241ce421902121a377cb6181f data/minecraft/tags/items/wooden_stairs.json
+7d8ea1039b0c19b8f2424bb0b6adb9475eb07f81 data/minecraft/tags/items/wooden_trapdoors.json

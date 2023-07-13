@@ -15,8 +15,7 @@ import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.renderer.texture.AtlasSet;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
@@ -28,10 +27,15 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD, modid = ArchaicQuest.MODID)
 public class ClientRegister {
 
-    public static HumanoidModel<LivingEntity> ICHCAHUIPILLI_ARMOR_MODEL;
+    // Armor models
+    public static final Map<EquipmentSlot, HumanoidModel<LivingEntity>> ICHCAHUIPILLI_ARMOR_MODELS = new HashMap<>();
+
 
 
     @SubscribeEvent
@@ -50,7 +54,12 @@ public class ClientRegister {
 
     @SubscribeEvent
     public static void onAddLayer(EntityRenderersEvent.AddLayers event) {
-        ICHCAHUIPILLI_ARMOR_MODEL = new IchcahuipilliArmorModel<>(event.getEntityModels().bakeLayer(ModelLayers.PLAYER), event.getEntityModels().bakeLayer(AQModelLayers.ICHCAHUIPILLI_ARMOR));
+        EquipmentSlot[] armorSlots = new EquipmentSlot[] { EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET };
+
+        for (EquipmentSlot slot : armorSlots) {
+            ICHCAHUIPILLI_ARMOR_MODELS.put(slot,
+                    new IchcahuipilliArmorModel<>(event.getEntityModels().bakeLayer(ModelLayers.PLAYER), event.getEntityModels().bakeLayer(AQModelLayers.ICHCAHUIPILLI_ARMOR), slot));
+        }
     }
 
     @SubscribeEvent

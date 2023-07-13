@@ -2,15 +2,16 @@ package com.obsidian_core.archaic_quest.datagen.blockstate;
 
 import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -106,11 +107,40 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
             }, VerticalSlabBlock.WATERLOGGED);
     }
 
+    public void woodSet(WoodSetRegObj woodSet) {
+        Block planks = woodSet.getPlanks().get();
+
+        sapling(woodSet.getSapling().get());
+        leaves(woodSet.getLeaves().get());
+        wood(woodSet.getWood().get(), woodSet.getLog().get());
+        wood(woodSet.getStrippedWood().get(), woodSet.getStrippedLog().get());
+        logBlock(woodSet.getLog().get());
+        logBlock(woodSet.getStrippedLog().get());
+        simpleBlock(planks);
+        slab(woodSet.getSlab().get(), planks);
+        simpleVerticalSlab(woodSet.getVertSlab().get(), planks);
+        stairsBlock(woodSet.getStairs().get(), blockTexture(planks));
+        fenceBlock(woodSet.getFence().get(), blockTexture(planks));
+        fenceGateBlock(woodSet.getFenceGate().get(), blockTexture(planks));
+        pressurePlateBlock(woodSet.getPressurePlate().get(), blockTexture(planks));
+        buttonBlock(woodSet.getButton().get(), blockTexture(planks));
+        trapDoor(woodSet.getTrapdoor().get(), true, true);
+        door(woodSet.getDoor().get(), true);
+    }
+
     public void leaves(Block block) {
         ModelFile model = models().withExistingParent(name(block), new ResourceLocation("block/leaves"))
                 .texture("all", blockTexture(block));
 
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(model));
+    }
+
+    public void wood(RotatedPillarBlock block, RotatedPillarBlock log) {
+        ResourceLocation texture = blockTexture(log);
+
+        axisBlock(block,
+                models().cubeColumn(name(block), texture, texture),
+                models().cubeColumnHorizontal(name(block) + "_horizontal", texture, texture));
     }
 
     public void sapling(Block block) {
@@ -119,6 +149,29 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                 .texture("cross", blockTexture(block));
 
         getVariantBuilder(block).partialState().setModels(new ConfiguredModel(model));
+    }
+
+    public void door(DoorBlock doorBlock, boolean cutout) {
+        ResourceLocation bottom = blockTextureWith(doorBlock, "bottom");
+        ResourceLocation top = blockTextureWith(doorBlock, "top");
+
+        if (cutout) {
+            doorBlockWithRenderType(doorBlock, bottom, top, "cutout");
+        }
+        else {
+            doorBlock(doorBlock, bottom, top);
+        }
+    }
+
+    public void trapDoor(TrapDoorBlock trapDoorBlock, boolean orientable, boolean cutout) {
+        ResourceLocation texture = blockTexture(trapDoorBlock);
+
+        if (cutout) {
+            trapdoorBlockWithRenderType(trapDoorBlock, texture, orientable, "cutout");
+        }
+        else {
+            trapdoorBlock(trapDoorBlock, texture, orientable);
+        }
     }
 
     public void doubleCrop(DoubleCropBlock block) {
@@ -251,5 +304,14 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
 
     public static ResourceLocation itemTexture(String textureName) {
         return resLoc("item/" + textureName);
+    }
+
+    public static ResourceLocation blockTextureWith(Block block, String suffix) {
+        ResourceLocation name = key(block);
+        return new ResourceLocation(name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath() + "_" + suffix);
+    }
+
+    public static ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
     }
 }

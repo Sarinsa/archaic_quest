@@ -31,8 +31,10 @@ public class AQItemModelProvider extends ItemModelProvider {
         WoodSetRegObj.WOOD_SETS.forEach(woodSet -> {
             simpleItem(woodSet.getSapling().get().asItem(), true);
             existingBlock(woodSet.getLeaves());
+            existingBlock(woodSet.getWood());
+            existingBlock(woodSet.getStrippedWood());
             existingBlock(woodSet.getLog());
-            //existingBlock(woodSet.getStrippedLog());
+            existingBlock(woodSet.getStrippedLog());
             existingBlock(woodSet.getPlanks());
             existingBlock(woodSet.getSlab());
             existingBlock(woodSet.getVertSlab());
@@ -46,7 +48,9 @@ public class AQItemModelProvider extends ItemModelProvider {
             withExistingParent(woodSet.getButton().getId().getPath(), new ResourceLocation("minecraft:block/button_inventory"))
                     .texture("texture", blockTexture(woodSet.getPlanks().get()));
 
-            //simpleItem(woodSet.getDoor().get().asItem(), false);
+            withExistingParent(woodSet.getTrapdoor().getId().getPath(), resLoc("block/" + woodSet.getTrapdoor().getId().getPath() + "_bottom"));
+
+            simpleItem(woodSet.getDoor().get().asItem(), false);
         });
     }
 
@@ -62,6 +66,10 @@ public class AQItemModelProvider extends ItemModelProvider {
     private void spawnEgg(ForgeSpawnEggItem spawnEgg) {
         ResourceLocation regName = Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(spawnEgg));
         withExistingParent(regName.getPath(), mcLoc("item/template_spawn_egg"));
+    }
+
+    private static ResourceLocation resLoc(String path) {
+        return ArchaicQuest.resourceLoc(path);
     }
 
     private ResourceLocation key(Block block) {

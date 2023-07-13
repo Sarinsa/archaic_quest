@@ -6,27 +6,35 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 
 public class IchcahuipilliArmorModel<T extends LivingEntity> extends HumanoidModel<T> {
 
+    private final EquipmentSlot slot;
+
     private final ModelPart headgear;
     private final ModelPart shirt;
+    private final ModelPart armorLeftArm;
+    private final ModelPart armorRightArm;
     private final ModelPart armorLeftLeg;
     private final ModelPart armorRightLeg;
     private final ModelPart leftBoot;
     private final ModelPart rightBoot;
     private final ModelPart loincloth;
 
-    public IchcahuipilliArmorModel(ModelPart playerRoot, ModelPart root) {
+    public IchcahuipilliArmorModel(ModelPart playerRoot, ModelPart root, EquipmentSlot slot) {
         super(playerRoot);
         this.headgear = root.getChild("head");
         this.shirt = root.getChild("body");
+        this.armorLeftArm = root.getChild("left_arm").getChild("armorLeftArm");
+        this.armorRightArm = root.getChild("right_arm").getChild("armorRightArm");
         this.armorLeftLeg = root.getChild("left_leg");
         this.armorRightLeg = root.getChild("right_leg");
         this.leftBoot = root.getChild("left_leg").getChild("armorLeftBoot");
         this.rightBoot = root.getChild("right_leg").getChild("armorRightBoot");
         this.loincloth = root.getChild("loincloth");
+        this.slot = slot;
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -121,10 +129,22 @@ public class IchcahuipilliArmorModel<T extends LivingEntity> extends HumanoidMod
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        headgear.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        shirt.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        leftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        rightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        loincloth.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        switch (slot) {
+            case HEAD -> headgear.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+            case CHEST -> {
+                shirt.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+                armorLeftArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+                armorRightArm.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+                loincloth.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+            }
+            case LEGS -> {
+                armorLeftLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+                armorRightLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+            }
+            case FEET -> {
+                leftBoot.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+                rightBoot.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+            }
+        }
     }
 }

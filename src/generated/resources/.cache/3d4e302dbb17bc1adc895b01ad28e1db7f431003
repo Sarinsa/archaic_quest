@@ -1,10 +1,11 @@
-// 1.19.2	2023-07-11T00:31:39.1622262	Item Models: archaic_quest
+// 1.19.2	2023-07-14T00:35:50.7285296	Item Models: archaic_quest
 296a03bbba321e10e04b0e426c96fc9c12e820c9 assets/archaic_quest/models/item/adventurers_bag.json
 c9e97faf6edb9f73979b51fcebf2911b70c05a5c assets/archaic_quest/models/item/adventurers_globe.json
 57deae69e2bb8932c7dded9b723942495635ef4e assets/archaic_quest/models/item/adventurers_hat.json
 3b26931c4ef3c233cf35ee093e7cd9666c7a92ff assets/archaic_quest/models/item/adventurers_magnifying_glass.json
 4a2d897e0d1aa31f676448df331deeb797bc9608 assets/archaic_quest/models/item/adventurers_spyglass.json
 3e9917e1ea3b11421b1bb67332c22769442ee229 assets/archaic_quest/models/item/ahuehuete_button.json
+a7156c43bea5e0dfb4fdf84fe71febf15ddc8850 assets/archaic_quest/models/item/ahuehuete_door.json
 1545b8c8255c1b5c857d03d2403e5a9825a07fc0 assets/archaic_quest/models/item/ahuehuete_fence.json
 2787b8026bfa5176d4c5d5c63ee0b5a6f30e13de assets/archaic_quest/models/item/ahuehuete_fence_gate.json
 616296b2a7c5f892ef4cb51ef4037292ae62614f assets/archaic_quest/models/item/ahuehuete_leaves.json
@@ -14,7 +15,11 @@ bb1c154d795865320e9f7db13e4c82dbd6499b04 assets/archaic_quest/models/item/ahuehu
 806aa84e9905823ea2229e131b60f19f272c70c4 assets/archaic_quest/models/item/ahuehuete_sapling.json
 60c082051b700dbea2ec7f220549f5b25b21c7ca assets/archaic_quest/models/item/ahuehuete_slab.json
 ffe6b1bfa9f425fd607dbf75584fcb7f7e36ab43 assets/archaic_quest/models/item/ahuehuete_stairs.json
+555c2b2dfc4983b38a6b16a25f45580727e7b24c assets/archaic_quest/models/item/ahuehuete_stripped_log.json
+19f7ccb5a80c540721a794304345748493961bcd assets/archaic_quest/models/item/ahuehuete_stripped_wood.json
+e5f6d67952202de2b66c6d5e1d9c569c60008221 assets/archaic_quest/models/item/ahuehuete_trapdoor.json
 e5a424822464cfa3227d22c299b82e70ff444933 assets/archaic_quest/models/item/ahuehuete_vertical_slab.json
+f966f04b733b2c5c51990117b564c49a390e9665 assets/archaic_quest/models/item/ahuehuete_wood.json
 f5a08e03b0b06553cf631fcee1bb94d5c42673db assets/archaic_quest/models/item/amber.json
 31fb2e7bc9ec6dcdf8e07582a89c150360937293 assets/archaic_quest/models/item/amber_fossil_0.json
 67ee978a2318414b860b3fa827f58906781fde38 assets/archaic_quest/models/item/amber_fossil_1.json

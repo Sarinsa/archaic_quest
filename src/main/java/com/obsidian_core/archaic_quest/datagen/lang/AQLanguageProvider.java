@@ -134,6 +134,15 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
                 // Avoid duplicate for signs
                 if (regObj.get() instanceof WallSignBlock) continue;
 
+                if (regObj.get() == woodSet.getStrippedWood().get() || regObj.get() == woodSet.getStrippedLog().get()) {
+                    String translation = regObj.getId().getPath();
+                    translation = translation.replaceAll("stripped", "");
+                    translation = "stripped_" + translation;
+                    translation = translation.replaceAll("_", " ");
+                    addBlock(regObj, WordUtils.capitalizeFully(translation));
+                    continue;
+                }
+
                 String translation = regObj.getId().getPath().replaceAll("_", " ");
                 addBlock(regObj, WordUtils.capitalizeFully(translation));
             }
