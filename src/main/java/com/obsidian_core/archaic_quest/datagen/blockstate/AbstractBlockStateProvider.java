@@ -8,10 +8,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.SlabType;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.ModelProvider;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,6 +22,18 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
 
     protected String name(Block block) {
         return Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath();
+    }
+
+    /**
+     * Intended for blocks with block entity renderers;
+     * no model but with break particles.
+     */
+    public void blockNoModel(Block block, ResourceLocation blockForParticle) {
+        ModelFile model = models().getBuilder(name(block)).texture("particle", blockForParticle);
+
+        getVariantBuilder(block)
+                .partialState()
+                .setModels(new ConfiguredModel(model));
     }
 
     public void simpleBlockAndItem(Block block) {
@@ -126,6 +135,8 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         buttonBlock(woodSet.getButton().get(), blockTexture(planks));
         trapDoor(woodSet.getTrapdoor().get(), true, true);
         door(woodSet.getDoor().get(), true);
+        blockNoModel(woodSet.getSign().get(), blockTexture(woodSet.getPlanks().get()));
+        blockNoModel(woodSet.getWallSign().get(), blockTexture(woodSet.getPlanks().get()));
     }
 
     public void leaves(Block block) {

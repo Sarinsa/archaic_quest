@@ -1,6 +1,8 @@
 package com.obsidian_core.archaic_quest.common.core.register;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.entity.AQBoat;
+import com.obsidian_core.archaic_quest.common.entity.AQChestBoat;
 import com.obsidian_core.archaic_quest.common.entity.living.Tlatlaomi;
 import com.obsidian_core.archaic_quest.common.entity.projectile.DartEntity;
 import net.minecraft.world.entity.Entity;
@@ -12,11 +14,14 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class AQEntities {
 
     public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, ArchaicQuest.MODID);
+    private static final Map<String, AQBoat.BoatType> BOAT_TYPES = new HashMap<>();
 
 
     // LIVING
@@ -34,6 +39,15 @@ public class AQEntities {
             .noSummon());
 
 
+
+    // MISC
+    public static final RegistryObject<EntityType<AQBoat>> AQ_BOAT = register("boat", () -> EntityType.Builder.<AQBoat>of(AQBoat::new, MobCategory.MISC)
+            .sized(1.375F, 0.5625F)
+            .clientTrackingRange(10));
+
+    public static final RegistryObject<EntityType<AQChestBoat>> AQ_CHEST_BOAT = register("chest_boat", () -> EntityType.Builder.<AQChestBoat>of(AQChestBoat::new, MobCategory.MISC)
+            .sized(1.375F, 0.5625F)
+            .clientTrackingRange(10));
 
 
     private static <T extends Entity> RegistryObject<EntityType<T>> register(String name, Supplier<EntityType.Builder<T>> builderSupplier) {

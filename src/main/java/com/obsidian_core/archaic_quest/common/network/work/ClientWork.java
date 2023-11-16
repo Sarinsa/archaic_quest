@@ -16,7 +16,7 @@ import static com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonDoo
 public class ClientWork {
 
     public static void handleUpdateDoorState(S2CUpdateDoorState message) {
-        BlockPos pos = message.doorPos;
+        BlockPos pos = message.pos;
         DoorState doorState = DoorState.byId(message.doorState);
         ClientLevel level = Minecraft.getInstance().level;
 
@@ -31,7 +31,7 @@ public class ClientWork {
     }
 
     public static void handleUpdateSpikeTrap(S2CUpdateSpikeTrap message) {
-        BlockPos pos = message.doorPos;
+        BlockPos pos = message.pos;
         boolean active = message.active;
         ClientLevel level = Minecraft.getInstance().level;
 
@@ -45,7 +45,7 @@ public class ClientWork {
     }
 
     public static void handleUpdateSpikeTrap(S2CUpdateSpikeTrapMode message) {
-        BlockPos pos = message.doorPos;
+        BlockPos pos = message.pos;
         int mode = message.mode;
         ClientLevel level = Minecraft.getInstance().level;
 

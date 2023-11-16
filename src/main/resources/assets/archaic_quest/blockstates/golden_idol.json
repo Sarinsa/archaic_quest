@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "archaic_quest:block/golden_idol",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "archaic_quest:block/golden_idol"
+    },
+    "facing=south": {
+      "model": "archaic_quest:block/golden_idol",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "archaic_quest:block/golden_idol",
+      "y": 270
+    }
+  }
+}

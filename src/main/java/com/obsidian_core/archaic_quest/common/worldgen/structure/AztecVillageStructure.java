@@ -14,7 +14,9 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
+import javax.annotation.Nonnull;
 import java.util.Optional;
+
 
 public class AztecVillageStructure extends Structure {
 
@@ -48,6 +50,7 @@ public class AztecVillageStructure extends Structure {
 
 
     @Override
+    @Nonnull
     public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
         int startY = 0;
 
@@ -71,6 +74,7 @@ public class AztecVillageStructure extends Structure {
     }
 
     @Override
+    @Nonnull
     public StructureType<?> type() {
         return AQStructures.AZTEC_VILLAGE.get();
     }

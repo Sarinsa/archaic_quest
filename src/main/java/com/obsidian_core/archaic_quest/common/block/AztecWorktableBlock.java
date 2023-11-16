@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.blockentity.AztecCraftingStationBlockEntity;
+import com.obsidian_core.archaic_quest.common.blockentity.AztecWorktableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -27,7 +27,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class AztecCraftingStationBlock extends Block implements EntityBlock {
+public class AztecWorktableBlock extends Block implements EntityBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     // Whether this block state is the "master" block or a sub-block for collision purposes.
@@ -45,7 +45,7 @@ public class AztecCraftingStationBlock extends Block implements EntityBlock {
     };
 
 
-    public AztecCraftingStationBlock(Properties properties) {
+    public AztecWorktableBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(BLOCK_TYPE, BlockType.MASTER));
     }
@@ -79,7 +79,7 @@ public class AztecCraftingStationBlock extends Block implements EntityBlock {
     protected void openContainer(Level level, BlockPos pos, Player player) {
         BlockEntity blockEntity = level.getExistingBlockEntity(pos);
 
-        if (blockEntity instanceof AztecCraftingStationBlockEntity) {
+        if (blockEntity instanceof AztecWorktableBlockEntity) {
             player.openMenu((MenuProvider) blockEntity);
         }
     }
@@ -98,7 +98,7 @@ public class AztecCraftingStationBlock extends Block implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return state.getValue(BLOCK_TYPE) == BlockType.MASTER
-                ? new AztecCraftingStationBlockEntity(pos, state)
+                ? new AztecWorktableBlockEntity(pos, state)
                 : null;
     }
 

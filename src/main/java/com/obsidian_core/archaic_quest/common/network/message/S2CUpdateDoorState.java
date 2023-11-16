@@ -9,11 +9,11 @@ import java.util.function.Supplier;
 
 public class S2CUpdateDoorState {
 
-    public BlockPos doorPos;
+    public BlockPos pos;
     public int doorState;
 
     public S2CUpdateDoorState(BlockPos doorPos, int doorState) {
-        this.doorPos = doorPos;
+        this.pos = doorPos;
         this.doorState = doorState;
     }
 
@@ -27,7 +27,7 @@ public class S2CUpdateDoorState {
     }
 
     public static void encode(S2CUpdateDoorState message, FriendlyByteBuf byteBuf) {
-        byteBuf.writeBlockPos(message.doorPos);
+        byteBuf.writeBlockPos(message.pos);
         byteBuf.writeInt(message.doorState);
     }
 

@@ -9,14 +9,19 @@ import net.minecraft.world.level.block.state.StateDefinition;
 
 public class SimpleHorizontalBlock extends HorizontalDirectionalBlock {
 
-    public SimpleHorizontalBlock(Properties properties) {
+    private final boolean opposite;
+
+    public SimpleHorizontalBlock(Properties properties, boolean opposite) {
         super(properties);
+        this.opposite = opposite;
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext useContext) {
-        return this.defaultBlockState().setValue(FACING, useContext.getHorizontalDirection());
+        return opposite
+                ? this.defaultBlockState().setValue(FACING, useContext.getHorizontalDirection().getOpposite())
+                : this.defaultBlockState().setValue(FACING, useContext.getHorizontalDirection());
     }
 
     @Override

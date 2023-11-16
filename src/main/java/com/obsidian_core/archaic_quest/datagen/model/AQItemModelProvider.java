@@ -51,6 +51,9 @@ public class AQItemModelProvider extends ItemModelProvider {
             withExistingParent(woodSet.getTrapdoor().getId().getPath(), resLoc("block/" + woodSet.getTrapdoor().getId().getPath() + "_bottom"));
 
             simpleItem(woodSet.getDoor().get().asItem(), false);
+            simpleItem(woodSet.getSign().get().asItem(), false);
+            simpleItem(woodSet.getBoat().get(), false);
+            simpleItem(woodSet.getChestBoat().get(), false);
         });
     }
 

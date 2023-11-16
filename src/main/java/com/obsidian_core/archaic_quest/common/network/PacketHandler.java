@@ -39,6 +39,7 @@ public class PacketHandler {
         registerMessage(S2CUpdateDoorState.class, S2CUpdateDoorState::encode, S2CUpdateDoorState::decode, S2CUpdateDoorState::handle);
         registerMessage(S2CUpdateSpikeTrap.class, S2CUpdateSpikeTrap::encode, S2CUpdateSpikeTrap::decode, S2CUpdateSpikeTrap::handle);
         registerMessage(S2CUpdateSpikeTrapMode.class, S2CUpdateSpikeTrapMode::encode, S2CUpdateSpikeTrapMode::decode, S2CUpdateSpikeTrapMode::handle);
+
         // Client -> Server
     }
 

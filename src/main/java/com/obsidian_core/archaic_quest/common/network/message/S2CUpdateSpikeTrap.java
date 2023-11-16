@@ -9,11 +9,11 @@ import java.util.function.Supplier;
 
 public class S2CUpdateSpikeTrap {
 
-    public BlockPos doorPos;
+    public BlockPos pos;
     public boolean active;
 
-    public S2CUpdateSpikeTrap(BlockPos doorPos, boolean active) {
-        this.doorPos = doorPos;
+    public S2CUpdateSpikeTrap(BlockPos trapPos, boolean active) {
+        this.pos = trapPos;
         this.active = active;
     }
 
@@ -27,7 +27,7 @@ public class S2CUpdateSpikeTrap {
     }
 
     public static void encode(S2CUpdateSpikeTrap message, FriendlyByteBuf byteBuf) {
-        byteBuf.writeBlockPos(message.doorPos);
+        byteBuf.writeBlockPos(message.pos);
         byteBuf.writeBoolean(message.active);
     }
 

@@ -31,6 +31,7 @@ public class ChiselPillarBlock extends Block implements SimpleWaterloggedBlock {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
+
     private static final VoxelShape[] SHAPES = new VoxelShape[] {
             Block.box(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 16.0D),
             Block.box(0.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),

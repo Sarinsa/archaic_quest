@@ -1,7 +1,6 @@
 {
-  "parent": "archaic_quest:block/template_relic_skull",
+  "parent": "archaic_quest:block/invis_model",
   "textures": {
-    "layer0": "archaic_quest:block/old_skull_0",
-    "layer1": "archaic_quest:block/old_skull_1"
+    "particle": "minecraft:block/bone_block"
   }
 }

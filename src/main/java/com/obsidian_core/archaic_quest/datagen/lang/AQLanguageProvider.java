@@ -1,6 +1,7 @@
 package com.obsidian_core.archaic_quest.datagen.lang;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.AQEntities;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import com.obsidian_core.archaic_quest.common.item.AQCreativeTabs;
 import com.obsidian_core.archaic_quest.common.misc.AQDamageSources;
@@ -64,7 +65,7 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlock(AQBlocks.AZTEC_ANDESITE_SPIKE_TRAP, "Andesite Aztec Spike Trap");
 
         addBlock(AQBlocks.KNAPPING_TABLE, "Knapping Table");
-        addBlock(AQBlocks.AZTEC_CRAFTING_STATION, "Aztec Crafting Station");
+        addBlock(AQBlocks.AZTEC_WORKTABLE, "Aztec Worktable");
 
         addItem(AQItems.CORN, "Corn Cob");
 
@@ -110,6 +111,10 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addItem(AQItems.BONE_DART, "Bone Dart");
         addItem(AQItems.BONE_CLUB, "Bone Club");
 
+        addEntityType(AQEntities.TLATLAOMI, "Tlatlaomi");
+        addEntityType(AQEntities.AQ_BOAT, "Boat");
+        addEntityType(AQEntities.AQ_CHEST_BOAT, "Boat with Chest");
+
         addBiome(AQBiomes.AZTEC_JUNGLE, "Aztec Jungle");
 
         addTranslationComponent(TranslationReferences.KNAPPING_TABLE_CONTAINER_NAME, "Knapping Table");
@@ -142,10 +147,16 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
                     addBlock(regObj, WordUtils.capitalizeFully(translation));
                     continue;
                 }
-
-                String translation = regObj.getId().getPath().replaceAll("_", " ");
-                addBlock(regObj, WordUtils.capitalizeFully(translation));
+                addBlock(regObj, regNameToName(regObj));
             }
+            addItem(woodSet.getBoat(), regNameToName(woodSet.getBoat()));
+            addItem(woodSet.getChestBoat(), regNameToName(woodSet.getChestBoat()));
         });
+    }
+
+    @SuppressWarnings("deprecation")
+    private static String regNameToName(RegistryObject<?> registryObject) {
+        String translation = registryObject.getId().getPath().replaceAll("_", " ");
+        return WordUtils.capitalizeFully(translation);
     }
 }

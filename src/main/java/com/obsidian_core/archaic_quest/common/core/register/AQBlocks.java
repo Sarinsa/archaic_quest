@@ -104,21 +104,21 @@ public class AQBlocks {
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_25 = simpleBlockWithVars("andesite_aztec_bricks_25", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_26 = registerBlock("andesite_aztec_bricks_26", AQCreativeTabs.BLOCKS, () -> new Block(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_26_VERT_SLAB = registerBlock("andesite_aztec_bricks_26_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_27 = registerBlock("andesite_aztec_bricks_27", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_27 = registerBlock("andesite_aztec_bricks_27", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_27_VERT_SLAB = registerBlock("andesite_aztec_bricks_27_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_28 = simpleBlockWithVars("andesite_aztec_bricks_28", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_29 = registerBlock("andesite_aztec_bricks_29", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_29 = registerBlock("andesite_aztec_bricks_29", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_29_VERT_SLAB = registerBlock("andesite_aztec_bricks_29_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_30 = simpleBlockWithVars("andesite_aztec_bricks_30", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_31 = simpleBlockWithVars("andesite_aztec_bricks_31", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_32 = registerBlock("andesite_aztec_bricks_32", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_32 = registerBlock("andesite_aztec_bricks_32", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_32_VERT_SLAB = registerBlock("andesite_aztec_bricks_32_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_33 = registerBlock("andesite_aztec_bricks_33", AQCreativeTabs.BLOCKS, () -> new Block(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_33_VERT_SLAB = registerBlock("andesite_aztec_bricks_33_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_34 = registerBlock("andesite_aztec_bricks_34", AQCreativeTabs.BLOCKS, () -> new Block(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_34_VERT_SLAB = registerBlock("andesite_aztec_bricks_34_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_35 = simpleBlockWithVars("andesite_aztec_bricks_35", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_36 = registerBlock("andesite_aztec_bricks_36", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_36 = registerBlock("andesite_aztec_bricks_36", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_36_VERT_SLAB = registerBlock("andesite_aztec_bricks_36_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_37 = simpleBlockWithVars("andesite_aztec_bricks_37", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_38 = simpleBlockWithVars("andesite_aztec_bricks_38", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
@@ -161,13 +161,13 @@ public class AQBlocks {
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_74 = simpleBlockWithVars("andesite_aztec_bricks_74", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_75 = simpleBlockWithVars("andesite_aztec_bricks_75", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_76 = simpleBlockWithVars("andesite_aztec_bricks_76", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_77 = registerBlock("andesite_aztec_bricks_77", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_77 = registerBlock("andesite_aztec_bricks_77", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_77_VERT_SLAB = registerBlock("andesite_aztec_bricks_77_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_78 = registerBlock("andesite_aztec_bricks_78", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_78 = registerBlock("andesite_aztec_bricks_78", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_78_VERT_SLAB = registerBlock("andesite_aztec_bricks_78_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_79 = registerBlock("andesite_aztec_bricks_79", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_79 = registerBlock("andesite_aztec_bricks_79", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_79_VERT_SLAB = registerBlock("andesite_aztec_bricks_79_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_80 = registerBlock("andesite_aztec_bricks_80", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
+    public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_80 = registerBlock("andesite_aztec_bricks_80", AQCreativeTabs.BLOCKS, () -> new SimpleHorizontalBlock(AQBlocks.ANDESITE_BRICKS_PROP, false), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<VerticalSlabBlock> ANDESITE_AZTEC_BRICKS_80_VERT_SLAB = registerBlock("andesite_aztec_bricks_80_vertical_slab", AQCreativeTabs.BLOCKS, () -> new VerticalSlabBlock(ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_81 = simpleBlockWithVars("andesite_aztec_bricks_81", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_BRICKS_82 = simpleBlockWithVars("andesite_aztec_bricks_82", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
@@ -190,6 +190,7 @@ public class AQBlocks {
             BlockTags.MINEABLE_WITH_PICKAXE
     );
 
+    public static final RegistryObject<Block> STONE_AZTEC_BRICKS_0 = simpleBlockWithVars("stone_aztec_bricks_0", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
 
     public static final RegistryObject<Block> BRONZE_SPEAR_TRAP = registerBlock("bronze_spear_trap", AQCreativeTabs.DECORATION, () -> new SpearTrapBlock(2.0F, BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_BROWN).strength(1.0F).sound(SoundType.WOOD)), BlockTags.MINEABLE_WITH_AXE);
     public static final RegistryObject<Block> GOLD_SPEAR_TRAP = registerBlock("gold_spear_trap", AQCreativeTabs.DECORATION, () -> new SpearTrapBlock(1.75F, BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.GOLD).strength(0.9F).sound(SoundType.WOOD)), BlockTags.MINEABLE_WITH_AXE);
@@ -197,7 +198,6 @@ public class AQBlocks {
     public static final RegistryObject<SpikeTrapBlock> AZTEC_ANDESITE_SPIKE_TRAP = registerBlock("aztec_andesite_spike_trap", AQCreativeTabs.DECORATION, () -> new SpikeTrapBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_TRAP_0 = registerBlock("andesite_aztec_trap_0", AQCreativeTabs.BLOCKS, () -> new AztecTrapBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> ANDESITE_AZTEC_TRAP_1 = registerBlock("andesite_aztec_trap_1", AQCreativeTabs.BLOCKS, () -> new AztecTrapBlock(AQBlocks.ANDESITE_BRICKS_PROP), BlockTags.MINEABLE_WITH_PICKAXE);
-    public static final RegistryObject<Block> STONE_AZTEC_BRICKS_0 = simpleBlockWithVars("stone_aztec_bricks_0", AQCreativeTabs.BLOCKS, AQBlocks.ANDESITE_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE);
 
     public static final RegistryObject<Block> AZTEC_SPRUCE_WOOD_PILLAR = registerBlock("aztec_spruce_wood_pillar", AQCreativeTabs.DECORATION, () -> new AztecWoodPillarBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_WOOD)), BlockTags.MINEABLE_WITH_AXE);
     public static final RegistryObject<Block> AZTEC_SPRUCE_WOOD_PILLAR_ANDESITE_BASE = registerBlock("aztec_spruce_wood_pillar_andesite_base", AQCreativeTabs.DECORATION, () -> new AztecWoodPillarBaseBlock(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)), BlockTags.MINEABLE_WITH_PICKAXE);
@@ -205,21 +205,25 @@ public class AQBlocks {
     public static final RegistryObject<CeramicVaseBlock> AZTEC_VASE = registerBlock("aztec_vase", AQCreativeTabs.DECORATION, () -> new CeramicVaseBlock(BlockBehaviour.Properties.of(Material.STONE).sound(AQSoundTypes.CERAMIC_VASE).strength(0.7F)), BlockTags.MINEABLE_WITH_PICKAXE);
     public static final RegistryObject<Block> INFESTED_VASE = registerBlock("aztec_infested_vase", AQCreativeTabs.DECORATION, () -> new InfestedVaseBlock(BlockBehaviour.Properties.of(Material.STONE).sound(AQSoundTypes.CERAMIC_VASE).strength(0.35F)), BlockTags.MINEABLE_WITH_PICKAXE);
 
-    public static final RegistryObject<Block> AZTEC_CRAFTING_STATION = registerBlock("aztec_crafting_station",
-            () -> new AztecCraftingStationBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().strength(1.5F, 4.0F).sound(SoundType.STONE)),
-            () -> new AztecCraftingStationBlockItem(AQBlocks.AZTEC_CRAFTING_STATION.get(), new Item.Properties().tab(AQCreativeTabs.DECORATION)),
+    public static final RegistryObject<Block> AZTEC_WORKTABLE = registerBlock("aztec_crafting_station",
+            () -> new AztecWorktableBlock(BlockBehaviour.Properties.of(Material.STONE).noOcclusion().strength(1.5F, 4.0F).sound(SoundType.STONE)),
+            () -> new AztecCraftingStationBlockItem(AQBlocks.AZTEC_WORKTABLE.get(), new Item.Properties().tab(AQCreativeTabs.DECORATION)),
                     BlockTags.MINEABLE_WITH_PICKAXE
     );
 
+    public static final RegistryObject<Block> SKULL_GOBLET = registerBlock("skull_goblet", AQCreativeTabs.DECORATION, SkullGobletBlock::new);
 
     public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
-            JAGUAR_SKULL = registerSkull("jaguar", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.BONE_BLOCK));
+            JAGUAR_SKULL = registerSkull("jaguar", true, () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.BONE_BLOCK));
     public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
-            OLD_SKULL = registerSkull("old", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F));
+            OLD_SKULL = registerSkull("old", false, () -> BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.BONE_BLOCK).strength(1.0F));
     public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
-            CRYSTAL_SKULL = registerSkull("crystal", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
+            CRYSTAL_SKULL = registerSkull("crystal", false, () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
     public static final Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
-            STONE_SKULL = registerSkull("stone", () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
+            STONE_SKULL = registerSkull("stone", false, () -> BlockBehaviour.Properties.of(Material.DECORATION).strength(1.0F).sound(SoundType.STONE));
+
+
+    public static final RegistryObject<Block> GOLDEN_IDOL = registerBlock("golden_idol", AQCreativeTabs.DECORATION, GoldenIdolBlock::new);
 
 
     public static final RegistryObject<Block> GOLD_AZTEC_BRICKS = simpleBlockWithVars("gold_aztec_bricks", AQCreativeTabs.BLOCKS, AQBlocks.GOLD_BRICKS_PROP, BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL);
@@ -349,17 +353,18 @@ public class AQBlocks {
 
     @SafeVarargs
     private static Pair<RegistryObject<SimpleSkullBlock>, RegistryObject<SimpleWallSkullBlock>>
-    registerSkull(String name, Supplier<BlockBehaviour.Properties> properties, TagKey<Block>... tags) {
+    registerSkull(String name, boolean animal, Supplier<BlockBehaviour.Properties> properties, TagKey<Block>... tags) {
 
-        RegistryObject<SimpleSkullBlock> skull = REGISTRY.register(name + "_skull", () -> new SimpleSkullBlock(properties.get()));
-        RegistryObject<SimpleWallSkullBlock> wallSkull = REGISTRY.register(name + "_wall_skull", () -> new SimpleWallSkullBlock(properties.get().dropsLike(skull.get())));
+        RegistryObject<SimpleSkullBlock> skull = REGISTRY.register(name + "_skull", () -> new SimpleSkullBlock(properties.get(), animal, name));
+        RegistryObject<SimpleWallSkullBlock> wallSkull = REGISTRY.register(name + "_wall_skull", () -> new SimpleWallSkullBlock(properties.get().dropsLike(skull.get()), animal, name));
 
         if (tags != null && tags.length > 0) {
             BLOCK_TAGS.put(skull, tags);
             BLOCK_TAGS.put(wallSkull, tags);
         }
 
-        AQItems.REGISTRY.register(skull.getId().getPath(), () -> new StandingAndWallBlockItem(skull.get(), wallSkull.get(), new Item.Properties().tab(AQCreativeTabs.DECORATION)));
+        RegistryObject<Item> skullItem = AQItems.REGISTRY.register(skull.getId().getPath(), () -> new StandingAndWallBlockItem(skull.get(), wallSkull.get(), new Item.Properties().tab(AQCreativeTabs.DECORATION)));
+        AQItems.SIMPLE_ITEMS.add(skullItem);
 
         return Pair.of(skull, wallSkull);
     }
@@ -372,7 +377,6 @@ public class AQBlocks {
         if (tags != null && tags.length > 0) {
             BLOCK_TAGS.put(registryObject, tags);
         }
-
         return registryObject;
     }
 

@@ -1,19 +1,24 @@
 package com.obsidian_core.archaic_quest.common.core.register.util;
 
+import com.obsidian_core.archaic_quest.common.block.AQStandingSignBlock;
+import com.obsidian_core.archaic_quest.common.block.AQWallSignBlock;
 import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
+import com.obsidian_core.archaic_quest.common.entity.AQBoat;
+import com.obsidian_core.archaic_quest.common.item.AQBoatItem;
 import com.obsidian_core.archaic_quest.common.item.AQCreativeTabs;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DoubleHighBlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.StandingAndWallBlockItem;
+import net.minecraft.advancements.critereon.BlockPredicate;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
+import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.extensions.IForgeBoat;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.ArrayList;
@@ -23,6 +28,7 @@ import java.util.function.Supplier;
 public class WoodSetRegObj {
 
     public static final List<WoodSetRegObj> WOOD_SETS = new ArrayList<>();
+    public static final List<RegistryObject<? extends SignBlock>> SIGNS = new ArrayList<>();
 
 
     private final List<RegistryObject<? extends Block>> allBlocks;
@@ -48,6 +54,10 @@ public class WoodSetRegObj {
     private final RegistryObject<TrapDoorBlock> trapDoor;
     private final RegistryObject<DoorBlock> door;
 
+    private final RegistryObject<AQBoatItem> boat;
+    private final RegistryObject<AQBoatItem> chestBoat;
+
+
 
     public WoodSetRegObj(String name, BlockBehaviour.Properties properties, AbstractTreeGrower treeGrower) {
         woodType = WoodType.create(ArchaicQuest.MODID + ":" + name);
@@ -67,14 +77,15 @@ public class WoodSetRegObj {
         fenceGate = register(name + "_fence_gate", () -> new FenceGateBlock(properties), true);
         pressurePlate = register(name + "_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.MOBS, properties), true);
         button = register(name + "_button", () -> new WoodButtonBlock(properties), true);
-        trapDoor = register(name + "_trapdoor", () -> new TrapDoorBlock(properties), true);
+        trapDoor = register(name + "_trapdoor", () -> new TrapDoorBlock(BlockBehaviour.Properties.copy(planks.get()).noCollission()), true);
         door = registerDoor(name + "_door", properties);
 
-        sign = AQBlocks.REGISTRY.register(name + "_sign", () -> new StandingSignBlock(properties, woodType));
-        wallSign = AQBlocks.REGISTRY.register(name + "_wall_sign", () -> new WallSignBlock(properties, woodType));
+        sign = AQBlocks.REGISTRY.register(name + "_sign", () -> new AQStandingSignBlock(properties, woodType));
+        wallSign = AQBlocks.REGISTRY.register(name + "_wall_sign", () -> new AQWallSignBlock(properties, woodType));
 
-        AQItems.REGISTRY.register(name + "_sign", () -> new StandingAndWallBlockItem(sign.get(), wallSign.get(), new Item.Properties().stacksTo(16)));
-
+        AQItems.REGISTRY.register(name + "_sign", () -> new SignItem(new Item.Properties().stacksTo(16).tab(AQCreativeTabs.DECORATION), sign.get(), wallSign.get()));
+        boat = AQItems.REGISTRY.register(name + "_boat", () -> new AQBoatItem(false, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo(16).tab(AQCreativeTabs.ITEMS)));
+        chestBoat = AQItems.REGISTRY.register(name + "_chest_boat", () -> new AQBoatItem(true, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo(16).tab(AQCreativeTabs.ITEMS)));
 
 
         allBlocks = List.of(
@@ -99,6 +110,8 @@ public class WoodSetRegObj {
         );
 
         WOOD_SETS.add(this);
+        SIGNS.add(sign);
+        SIGNS.add(wallSign);
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, boolean decorative) {
@@ -184,6 +197,10 @@ public class WoodSetRegObj {
     public RegistryObject<LeavesBlock> getLeaves() {
         return leaves;
     }
+
+    public RegistryObject<AQBoatItem> getBoat() { return boat; }
+
+    public RegistryObject<AQBoatItem> getChestBoat() { return chestBoat; }
 
     public Iterable<RegistryObject<? extends Block>> allBlocks() {
         return allBlocks;

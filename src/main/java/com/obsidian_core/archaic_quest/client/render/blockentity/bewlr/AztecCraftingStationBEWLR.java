@@ -2,7 +2,7 @@ package com.obsidian_core.archaic_quest.client.render.blockentity.bewlr;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
-import com.obsidian_core.archaic_quest.common.blockentity.AztecCraftingStationBlockEntity;
+import com.obsidian_core.archaic_quest.common.blockentity.AztecWorktableBlockEntity;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AztecCraftingStationBEWLR extends BlockEntityWithoutLevelRenderer {
 
-    private final AztecCraftingStationBlockEntity blockEntity = new AztecCraftingStationBlockEntity(BlockPos.ZERO, AQBlocks.AZTEC_CRAFTING_STATION.get().defaultBlockState());
+    private final AztecWorktableBlockEntity blockEntity = new AztecWorktableBlockEntity(BlockPos.ZERO, AQBlocks.AZTEC_WORKTABLE.get().defaultBlockState());
 
     public AztecCraftingStationBEWLR(BlockEntityRenderDispatcher renderDispatcher, EntityModelSet modelSet) {
         super(renderDispatcher, modelSet);
@@ -31,7 +31,7 @@ public class AztecCraftingStationBEWLR extends BlockEntityWithoutLevelRenderer {
             Block block = ((BlockItem)item).getBlock();
             BlockState state = block.defaultBlockState();
 
-            if (state.is(AQBlocks.AZTEC_CRAFTING_STATION.get())) {
+            if (state.is(AQBlocks.AZTEC_WORKTABLE.get())) {
                 blockEntityRenderDispatcher.renderItem(blockEntity, poseStack, bufferSource, packedLight, overlayTexture);
             }
         }

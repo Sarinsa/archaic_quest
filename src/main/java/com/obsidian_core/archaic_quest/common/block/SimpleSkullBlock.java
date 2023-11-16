@@ -1,7 +1,9 @@
 package com.obsidian_core.archaic_quest.common.block;
 
 import com.obsidian_core.archaic_quest.common.blockentity.SimpleSkullBlockEntity;
+import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.Wearable;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -23,26 +25,21 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 @SuppressWarnings("deprecation")
-public class SimpleSkullBlock extends Block implements Wearable, EntityBlock {
+public class SimpleSkullBlock extends SimpleAbstractSkullBlock {
 
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 
     protected static final VoxelShape shape = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
 
 
-    public SimpleSkullBlock(Properties properties) {
-        super(properties);
+    public SimpleSkullBlock(Properties properties, boolean animal, String textureName) {
+        super(properties, animal, textureName);
         registerDefaultState(stateDefinition.any().setValue(ROTATION, 0));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return shape;
-    }
-
-
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
-        return Shapes.empty();
     }
 
     @Override
@@ -58,17 +55,6 @@ public class SimpleSkullBlock extends Block implements Wearable, EntityBlock {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.setValue(ROTATION, mirror.mirror(state.getValue(ROTATION), 16));
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType pathType) {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SimpleSkullBlockEntity(pos, state);
     }
 
     @Override

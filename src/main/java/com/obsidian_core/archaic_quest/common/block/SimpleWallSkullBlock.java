@@ -3,8 +3,10 @@ package com.obsidian_core.archaic_quest.common.block;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.obsidian_core.archaic_quest.common.blockentity.SimpleSkullBlockEntity;
+import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Wearable;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -22,26 +24,21 @@ import javax.annotation.Nullable;
 import java.util.Map;
 
 @SuppressWarnings("deprecation")
-public class SimpleWallSkullBlock extends Block implements Wearable, EntityBlock {
+public class SimpleWallSkullBlock extends SimpleAbstractSkullBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     private static final Map<Direction, VoxelShape> shapes = Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, Block.box(4.0D, 4.0D, 8.0D, 12.0D, 12.0D, 16.0D), Direction.SOUTH, Block.box(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 8.0D), Direction.EAST, Block.box(0.0D, 4.0D, 4.0D, 8.0D, 12.0D, 12.0D), Direction.WEST, Block.box(8.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D)));
 
 
-    public SimpleWallSkullBlock(Properties properties) {
-        super(properties);
+    public SimpleWallSkullBlock(Properties properties, boolean animal, String textureName) {
+        super(properties, animal, textureName);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return shapes.get(state.getValue(FACING));
-    }
-
-    @Override
-    public VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
-        return Shapes.empty();
     }
 
     @Override
@@ -74,17 +71,6 @@ public class SimpleWallSkullBlock extends Block implements Wearable, EntityBlock
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
-    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType p_48753_) {
-        return false;
-    }
-
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SimpleSkullBlockEntity(pos, state);
     }
 
     @Override

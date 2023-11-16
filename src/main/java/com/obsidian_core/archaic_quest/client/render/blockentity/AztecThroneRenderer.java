@@ -50,11 +50,10 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
 
     @Override
     public void render(AztecThroneBlockEntity throne, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay) {
-        BlockState state = throne.getLevel() == null ? AQBlocks.AZTEC_CRAFTING_STATION.get().defaultBlockState() : throne.getBlockState();
+        BlockState state = throne.getLevel() == null ? AQBlocks.AZTEC_THRONE.get().defaultBlockState() : throne.getBlockState();
         Direction direction = state.getValue(BlockStateProperties.HORIZONTAL_FACING);
         float rotation = direction.toYRot();
 
-        poseStack.pushPose();
         poseStack.mulPose(Vector3f.YP.rotationDegrees(-rotation));
         poseStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
 
@@ -84,8 +83,6 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
         ThroneType type = throne.getThroneType() == null ? ThroneType.THRONE : throne.getThroneType();
         VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityCutout(type.getTextureLocation()));
         throneModel.render(poseStack, vertexConsumer, packedLight, textureOverlay);
-
-        poseStack.popPose();
     }
 
     @Override

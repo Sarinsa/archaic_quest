@@ -3,13 +3,18 @@ package com.obsidian_core.archaic_quest.common.core.register;
 import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.blockentity.*;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSetRegObj;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 @SuppressWarnings("ConstantConditions")
@@ -64,16 +69,25 @@ public class AQBlockEntities {
                     AQBlocks.OLD_SKULL.getSecond().get()
     };
 
+    private static final Supplier<Block[]> SIGNS = () -> {
+            List<Block> blocks = new ArrayList<>();
+            WoodSetRegObj.SIGNS.forEach((blockRegObj) -> blocks.add(blockRegObj.get()));
+
+            return blocks.toArray(new Block[]{});
+    };
 
     public static final RegistryObject<BlockEntityType<SimpleSkullBlockEntity>> SIMPLE_SKULL = register("simple_skull", () -> BlockEntityType.Builder.of(SimpleSkullBlockEntity::new, SKULLS.get()).build(null));
     public static final RegistryObject<BlockEntityType<VaseBlockEntity>> VASE = register("vase", () -> BlockEntityType.Builder.of(VaseBlockEntity::new, VASES.get()).build(null));
     public static final RegistryObject<BlockEntityType<AztecPoisonTrapBlockEntity>> POISON_TRAP = register("aztec_poison_trap", () -> BlockEntityType.Builder.of(AztecPoisonTrapBlockEntity::new, POISON_TRAPS.get()).build(null));
     public static final RegistryObject<BlockEntityType<SpikeTrapBlockEntity>> SPIKE_TRAP = register("spike_trap", () -> BlockEntityType.Builder.of(SpikeTrapBlockEntity::new, SPIKE_TRAPS.get()).build(null));
-    public static final RegistryObject<BlockEntityType<AztecCraftingStationBlockEntity>> AZTEC_CRAFTING_STATION = register("aztec_crafting_station", () -> BlockEntityType.Builder.of(AztecCraftingStationBlockEntity::new, AQBlocks.AZTEC_CRAFTING_STATION.get()).build(null));
+    public static final RegistryObject<BlockEntityType<AztecWorktableBlockEntity>> AZTEC_CRAFTING_STATION = register("aztec_crafting_station", () -> BlockEntityType.Builder.of(AztecWorktableBlockEntity::new, AQBlocks.AZTEC_WORKTABLE.get()).build(null));
     public static final RegistryObject<BlockEntityType<AztecDungeonDoorBlockEntity>> AZTEC_DUNGEON_DOOR = register("aztec_dungeon_door", () -> BlockEntityType.Builder.of(AztecDungeonDoorBlockEntity::new, DUNGEON_DOORS.get()).build(null));
     public static final RegistryObject<BlockEntityType<AztecThroneBlockEntity>> AZTEC_THRONE = register("aztec_throne", () -> BlockEntityType.Builder.of(AztecThroneBlockEntity::new, AZTEC_THRONES.get()).build(null));
     public static final RegistryObject<BlockEntityType<AztecDungeonChestBlockEntity>> AZTEC_DUNGEON_CHEST = register("aztec_dungeon_chest", () -> BlockEntityType.Builder.of(AztecDungeonChestBlockEntity::new, DUNGEON_CHESTS.get()).build(null));
     public static final RegistryObject<BlockEntityType<FoundryBlockEntity>> FOUNDRY = register("foundry", () -> BlockEntityType.Builder.of(FoundryBlockEntity::new, AQBlocks.FOUNDRY.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<AQSignBlockEntity>> AQ_SIGN = register("sign", () -> BlockEntityType.Builder.of(AQSignBlockEntity::new, SIGNS.get()).build(null));
+
 
 
     private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, Supplier<BlockEntityType<T>> tileEntityType) {
