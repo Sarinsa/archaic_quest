@@ -36,7 +36,7 @@ public class LeafVineVarDecorator extends TreeDecorator {
                     
                     BlockPos offsetPos = pos.relative( dir );
                     if( context.isAir( offsetPos ) ) {
-                        addHangingVine( offsetPos, Direction.WEST, context );
+                        addHangingVine( offsetPos, dir, context );
                     }
                 }
             }
@@ -45,9 +45,9 @@ public class LeafVineVarDecorator extends TreeDecorator {
     
     private static void addHangingVine( BlockPos pos, Direction direction, TreeDecorator.Context context ) {
         DecoratorUtil.placeVineVar( context, pos, direction );
-        int i = 4;
+        int length = 4;
         
-        for( BlockPos blockpos = pos.below(); context.isAir( blockpos ) && i > 0; --i ) {
+        for( BlockPos blockpos = pos.below(); context.isAir( blockpos ) && length > 0; --length ) {
             DecoratorUtil.placeVineVar( context, blockpos, direction );
             blockpos = blockpos.below();
         }

@@ -24,14 +24,15 @@ public class TrunkVineVarDecorator extends TreeDecorator {
     
     @Override
     public void place( TreeDecorator.Context context ) {
-        RandomSource randomsource = context.random();
+        RandomSource random = context.random();
         
         context.logs().forEach( ( pos ) -> {
             for( Direction dir : Direction.Plane.HORIZONTAL ) {
-                if( randomsource.nextInt( 3 ) > 0 ) {
+                if( random.nextInt( 3 ) > 0 ) {
                     BlockPos offsetPos = pos.relative( dir );
+                    
                     if( context.isAir( offsetPos ) ) {
-                        placeVineVar( context, offsetPos, Direction.WEST );
+                        placeVineVar( context, offsetPos, dir );
                     }
                 }
             }
