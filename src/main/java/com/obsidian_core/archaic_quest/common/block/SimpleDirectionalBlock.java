@@ -9,19 +9,19 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 public class SimpleDirectionalBlock extends DirectionalBlock {
-
-    public SimpleDirectionalBlock(Properties properties) {
-        super(properties);
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+    
+    public SimpleDirectionalBlock( Properties properties ) {
+        super( properties );
+        registerDefaultState( stateDefinition.any().setValue( FACING, Direction.NORTH ) );
     }
-
+    
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext useContext) {
-        return this.defaultBlockState().setValue(FACING, useContext.getNearestLookingDirection().getOpposite());
+    public BlockState getStateForPlacement( BlockPlaceContext useContext ) {
+        return this.defaultBlockState().setValue( FACING, useContext.getNearestLookingDirection().getOpposite() );
     }
-
+    
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(FACING);
+    protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
+        stateBuilder.add( FACING );
     }
 }

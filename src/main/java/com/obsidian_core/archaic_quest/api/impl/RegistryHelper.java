@@ -9,14 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.function.Predicate;
 
 public class RegistryHelper implements IRegistryHelper {
-
+    
     @Override
-    public void registerTorchLightable(Block block, Predicate<BlockState> predicate, boolean soulfire) {
-        AdventurersTorchItem.registerTorchLightable(block, predicate, soulfire);
+    public void registerTorchLightable( Block block, Predicate<BlockState> predicate, boolean soulfire ) {
+        AdventurersTorchItem.registerTorchLightable( block, predicate, soulfire );
     }
-
+    
     @Override
-    public void registerTorchInteraction(Block block, TorchInteraction torchInteraction) {
-        AdventurersTorchItem.registerTorchInteraction(block, torchInteraction);
+    public void registerTorchInteraction( Block block, TorchInteraction torchInteraction ) {
+        AdventurersTorchItem.registerTorchInteraction( block, torchInteraction );
     }
 }

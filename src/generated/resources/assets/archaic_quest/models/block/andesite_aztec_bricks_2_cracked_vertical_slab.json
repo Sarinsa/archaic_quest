@@ -1,8 +1,0 @@
-{
-  "parent": "archaic_quest:block/vertical_slab",
-  "textures": {
-    "bottom": "archaic_quest:block/andesite_aztec_bricks_2_cracked",
-    "side": "archaic_quest:block/andesite_aztec_bricks_2_cracked",
-    "top": "archaic_quest:block/andesite_aztec_bricks_2_cracked"
-  }
-}

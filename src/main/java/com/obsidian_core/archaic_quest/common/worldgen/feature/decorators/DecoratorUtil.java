@@ -7,8 +7,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 
 public final class DecoratorUtil {
-
-    protected static void placeVineVar(TreeDecorator.Context context, BlockPos pos, Direction facing) {
-        context.setBlock(pos, AQBlocks.VINES_1.get().defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, facing));
+    
+    public static void placeVineVar( TreeDecorator.Context context, BlockPos pos, Direction facing ) {
+        context.setBlock( pos, AQBlocks.VINES_1.get().defaultBlockState().setValue( BlockStateProperties.HORIZONTAL_FACING, facing ) );
     }
 }

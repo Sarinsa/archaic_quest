@@ -17,29 +17,28 @@ import javax.annotation.Nullable;
 import java.util.function.Consumer;
 
 public class IchcahuipilliArmorItem extends ArmorItem {
-
-    private static final String ARMOR_TEXTURE = ArchaicQuest.resourceLoc("textures/model/armor/ichcahuipilli_armor.png").toString();
-
-
-    public IchcahuipilliArmorItem(ArmorMaterial armorMaterial, EquipmentSlot equipmentSlot) {
-        super(armorMaterial, equipmentSlot, new Item.Properties()
-                .stacksTo(1)
-                .tab(AQCreativeTabs.ARMOR));
+    
+    private static final String ARMOR_TEXTURE = ArchaicQuest.rl( "textures/model/armor/ichcahuipilli_armor.png" ).toString();
+    
+    
+    public IchcahuipilliArmorItem( ArmorMaterial armorMaterial, ArmorItem.Type type ) {
+        super( armorMaterial, type, new Item.Properties()
+                .stacksTo( 1 ) );
     }
-
+    
     @Override
     @Nullable
-    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+    public String getArmorTexture( ItemStack stack, Entity entity, EquipmentSlot slot, String type ) {
         return ARMOR_TEXTURE;
     }
-
+    
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
+    public void initializeClient( Consumer<IClientItemExtensions> consumer ) {
+        consumer.accept( new IClientItemExtensions() {
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original) {
-                return equipmentSlot.getType() == EquipmentSlot.Type.ARMOR ? ClientRegister.ICHCAHUIPILLI_ARMOR_MODELS.get(equipmentSlot) : original;
+            public @NotNull HumanoidModel<?> getHumanoidArmorModel( LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original ) {
+                return equipmentSlot.getType() == EquipmentSlot.Type.ARMOR ? ClientRegister.ICHCAHUIPILLI_ARMOR_MODELS.get( equipmentSlot ) : original;
             }
-        });
+        } );
     }
 }

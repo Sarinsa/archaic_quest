@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/button_inventory",
-  "textures": {
-    "texture": "archaic_quest:block/ahuehuete_planks"
-  }
-}

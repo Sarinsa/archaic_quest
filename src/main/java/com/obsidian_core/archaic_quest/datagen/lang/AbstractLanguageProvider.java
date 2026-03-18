@@ -1,11 +1,12 @@
 package com.obsidian_core.archaic_quest.datagen.lang;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.data.DataGenerator;
+import com.obsidian_core.archaic_quest.datagen.damage.AQDamageTypes;
+import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
@@ -13,42 +14,46 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
-
 public abstract class AbstractLanguageProvider extends LanguageProvider {
-
-    public AbstractLanguageProvider(DataGenerator gen, String modid, String locale) {
-        super(gen, modid, locale);
+    
+    public AbstractLanguageProvider( PackOutput packOutput, String modid, String locale ) {
+        super( packOutput, modid, locale );
     }
-
-    protected void addItemGroup(CreativeModeTab creativeTab, String localized) {
-        this.add("itemGroup." + creativeTab.getRecipeFolderName(), "Archaic Quest - " + localized);
+    
+    protected void addItemGroup( RegistryObject<CreativeModeTab> creativeTab, String localized ) {
+        Component component = creativeTab.get().getDisplayName();
+        
+        if( component.getContents() instanceof TranslatableContents translatableContents )
+            add( translatableContents.getKey(), "Archaic Quest - " + localized );
+        else
+            throw new IllegalArgumentException( "Attempted to add translation for creative tab with non-translatable contents." );
     }
-
+    
     /** Used for block Pairs where both blocks should use the same localized name. */
-    protected <FIRST extends Block, SECOND extends Block> void addBlockPair(Pair<RegistryObject<FIRST>, RegistryObject<SECOND>> regObjects, String localized) {
-        addBlock(regObjects.getFirst(), localized);
-        addBlock(regObjects.getSecond(), localized);
+    protected <FIRST extends Block, SECOND extends Block> void addBlockPair( Pair<RegistryObject<FIRST>, RegistryObject<SECOND>> regObjects, String localized ) {
+        addBlock( regObjects.getFirst(), localized );
+        addBlock( regObjects.getSecond(), localized );
     }
-
-    protected void addBiome(RegistryObject<Biome> biome, String localized) {
-        this.add("biome.archaic_quest." + biome.getId().getPath(), localized);
+    
+    protected void addBiome( ResourceKey<Biome> biomeKey, String localized ) {
+        this.add( "biome.archaic_quest." + biomeKey.location().getPath(), localized );
     }
-
-    protected void addJeiInfo(Item item, String localized) {
-        this.add(item.getDescriptionId() + ".jei_desc", localized);
+    
+    protected void addJeiInfo( Item item, String localized ) {
+        this.add( item.getDescriptionId() + ".jei_desc", localized );
     }
-
-    protected void addDamageSource(DamageSource damageSource, String death, String combatloggedDath) {
-        String deathString = "death.attack." + damageSource.getMsgId();
-        String combatloggedDeathString = deathString + ".player";
-        this.add(deathString, death);
-        this.add(combatloggedDeathString, combatloggedDath);
+    
+    protected void addDamageType( ResourceKey<DamageType> typeKey, String death, String combatLoggedDeath ) {
+        String deathString = "death.attack." + AQDamageTypes.msg( typeKey.location().getPath() );
+        String combatLoggedDeathString = deathString + ".player";
+        
+        add( deathString, death );
+        add( combatLoggedDeathString, combatLoggedDeath );
     }
-
-    protected void addTranslationComponent(Component component, String localized) {
-        if (component.getContents() instanceof TranslatableContents translatableContents) {
-            add(translatableContents.getKey(), localized);
+    
+    protected void addTranslationComponent( Component component, String localized ) {
+        if( component.getContents() instanceof TranslatableContents translatableContents ) {
+            add( translatableContents.getKey(), localized );
         }
     }
 }

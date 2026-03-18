@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "archaic_quest:tin_ore",
+    "archaic_quest:silver_ore",
+    "archaic_quest:granite_quartz_ore"
+  ],
+  "step": "underground_ores"
+}

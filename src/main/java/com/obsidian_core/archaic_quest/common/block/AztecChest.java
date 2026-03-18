@@ -9,14 +9,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 
 public class AztecChest extends Block implements EntityBlock {
-
-    public AztecChest(Properties properties) {
-        super(properties);
+    
+    public AztecChest( Properties properties ) {
+        super( properties );
     }
-
+    
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
+    public BlockEntity newBlockEntity( BlockPos p_153215_, BlockState p_153216_ ) {
         return null;
     }
 }

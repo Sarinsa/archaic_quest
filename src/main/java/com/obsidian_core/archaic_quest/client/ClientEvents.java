@@ -12,21 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientEvents {
-
+    
     private static final List<Block> HIGHLIGHT_SKIPPED_BLOCKS = new ArrayList<>();
-
+    
     @SubscribeEvent
-    @SuppressWarnings("ConstantConditions")
-    public void onDrawBlockHighlight(RenderHighlightEvent.Block event) {
+    @SuppressWarnings( "ConstantConditions" )
+    public void onDrawBlockHighlight( RenderHighlightEvent.Block event ) {
         BlockHitResult result = event.getTarget();
         ClientLevel world = Minecraft.getInstance().level;
-
-        if (HIGHLIGHT_SKIPPED_BLOCKS.contains(world.getBlockState(result.getBlockPos()).getBlock())) {
-            event.setCanceled(true);
+        
+        if( HIGHLIGHT_SKIPPED_BLOCKS.contains( world.getBlockState( result.getBlockPos() ).getBlock() ) ) {
+            event.setCanceled( true );
         }
     }
-
-    protected static void skipHighlight(RegistryObject<? extends Block> regObj) {
-        HIGHLIGHT_SKIPPED_BLOCKS.add(regObj.get());
+    
+    protected static void skipHighlight( RegistryObject<? extends Block> regObj ) {
+        HIGHLIGHT_SKIPPED_BLOCKS.add( regObj.get() );
     }
 }

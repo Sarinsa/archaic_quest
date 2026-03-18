@@ -9,18 +9,18 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import java.util.function.Consumer;
 
 public class AztecDungeonChestBlockItem extends BlockItem {
-
-    public AztecDungeonChestBlockItem(Block block, Properties properties) {
-        super(block, properties);
+    
+    public AztecDungeonChestBlockItem( Block block, Properties properties ) {
+        super( block, properties );
     }
-
+    
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
+    public void initializeClient( Consumer<IClientItemExtensions> consumer ) {
+        consumer.accept( new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return BEWLRS.AZTEC_DUNGEON_CHEST.getInstance();
             }
-        });
+        } );
     }
 }

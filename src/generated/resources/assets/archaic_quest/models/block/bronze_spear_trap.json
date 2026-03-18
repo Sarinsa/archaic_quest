@@ -1,6 +1,0 @@
-{
-  "parent": "archaic_quest:block/spear_trap",
-  "textures": {
-    "texture": "archaic_quest:block/bronze_spear_trap"
-  }
-}

@@ -8,30 +8,30 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.function.Supplier;
 
 public class S2CUpdateSpikeTrap {
-
+    
     public BlockPos pos;
     public boolean active;
-
-    public S2CUpdateSpikeTrap(BlockPos trapPos, boolean active) {
+    
+    public S2CUpdateSpikeTrap( BlockPos trapPos, boolean active ) {
         this.pos = trapPos;
         this.active = active;
     }
-
-    public static void handle(S2CUpdateSpikeTrap message, Supplier<NetworkEvent.Context> contextSupplier) {
+    
+    public static void handle( S2CUpdateSpikeTrap message, Supplier<NetworkEvent.Context> contextSupplier ) {
         NetworkEvent.Context context = contextSupplier.get();
-
-        if (context.getDirection().getReceptionSide().isClient()) {
-            context.enqueueWork(() -> ClientWork.handleUpdateSpikeTrap(message));
+        
+        if( context.getDirection().getReceptionSide().isClient() ) {
+            context.enqueueWork( () -> ClientWork.handleUpdateSpikeTrap( message ) );
         }
-        context.setPacketHandled(true);
+        context.setPacketHandled( true );
     }
-
-    public static void encode(S2CUpdateSpikeTrap message, FriendlyByteBuf byteBuf) {
-        byteBuf.writeBlockPos(message.pos);
-        byteBuf.writeBoolean(message.active);
+    
+    public static void encode( S2CUpdateSpikeTrap message, FriendlyByteBuf byteBuf ) {
+        byteBuf.writeBlockPos( message.pos );
+        byteBuf.writeBoolean( message.active );
     }
-
-    public static S2CUpdateSpikeTrap decode(FriendlyByteBuf byteBuf) {
-        return new S2CUpdateSpikeTrap(byteBuf.readBlockPos(), byteBuf.readBoolean());
+    
+    public static S2CUpdateSpikeTrap decode( FriendlyByteBuf byteBuf ) {
+        return new S2CUpdateSpikeTrap( byteBuf.readBlockPos(), byteBuf.readBoolean() );
     }
 }

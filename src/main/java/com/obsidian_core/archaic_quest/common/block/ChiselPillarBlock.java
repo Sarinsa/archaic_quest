@@ -26,130 +26,131 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 
 public class ChiselPillarBlock extends Block implements SimpleWaterloggedBlock {
-
-    public static final EnumProperty<Type> PILLAR_TYPE = EnumProperty.create("pillar_type", Type.class);
+    
+    public static final EnumProperty<Type> PILLAR_TYPE = EnumProperty.create( "pillar_type", Type.class );
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
-
+    
+    
     private static final VoxelShape[] SHAPES = new VoxelShape[] {
-            Block.box(2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 16.0D),
-            Block.box(0.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D),
-            Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D)
+            Block.box( 2.0D, 2.0D, 0.0D, 14.0D, 14.0D, 16.0D ),
+            Block.box( 0.0D, 2.0D, 2.0D, 16.0D, 14.0D, 14.0D ),
+            Block.box( 2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D )
     };
-
-
-    public ChiselPillarBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(stateDefinition.any().setValue(PILLAR_TYPE, Type.BOTTOM).setValue(WATERLOGGED, false).setValue(FACING, Direction.NORTH));
+    
+    
+    public ChiselPillarBlock( Properties properties ) {
+        super( properties );
+        this.registerDefaultState( stateDefinition.any().setValue( PILLAR_TYPE, Type.BOTTOM ).setValue( WATERLOGGED, false ).setValue( FACING, Direction.NORTH ) );
     }
-
+    
     @Override
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(FACING)) {
+    @SuppressWarnings( "deprecation" )
+    public VoxelShape getShape( BlockState state, BlockGetter level, BlockPos pos, CollisionContext context ) {
+        return switch( state.getValue( FACING ) ) {
             case NORTH, SOUTH -> SHAPES[0];
             case EAST, WEST -> SHAPES[1];
             default -> SHAPES[2];
         };
     }
-
+    
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement( BlockPlaceContext context ) {
         Type type = Type.BOTTOM;
         Direction clickedFace = context.getClickedFace();
         BlockPos clickedPos = context.getClickedPos();
         Level level = context.getLevel();
-        boolean waterlogged = level.getBlockState(clickedPos).getFluidState().is(FluidTags.WATER);
-
-        if (context.getPlayer() != null) {
-            BlockState clickedState = level.getBlockState(clickedPos.relative(clickedFace.getOpposite()));
-
-            if (clickedState.is(this)) {
-                Direction clickedStateFace = clickedState.getValue(FACING);
-
-                if (clickedFace == clickedStateFace) {
+        boolean waterlogged = level.getBlockState( clickedPos ).getFluidState().is( FluidTags.WATER );
+        
+        if( context.getPlayer() != null ) {
+            BlockState clickedState = level.getBlockState( clickedPos.relative( clickedFace.getOpposite() ) );
+            
+            if( clickedState.is( this ) ) {
+                Direction clickedStateFace = clickedState.getValue( FACING );
+                
+                if( clickedFace == clickedStateFace ) {
                     type = Type.TOP;
                 }
             }
         }
-        return this.defaultBlockState().setValue(FACING, clickedFace).setValue(PILLAR_TYPE, type).setValue(WATERLOGGED, waterlogged);
+        return this.defaultBlockState().setValue( FACING, clickedFace ).setValue( PILLAR_TYPE, type ).setValue( WATERLOGGED, waterlogged );
     }
-
+    
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
-        if (!state.is(this))
-            super.setPlacedBy(level, pos, state, livingEntity, itemStack);
-
-        Direction facing = state.getValue(FACING);
-        BlockPos behindPos = pos.relative(facing.getOpposite());
-        BlockState behindState = level.getBlockState(behindPos);
-
-        if (behindState.is(this)) {
-            if (behindState.getValue(PILLAR_TYPE) == Type.TOP && behindState.getValue(FACING) == facing) {
-                level.setBlock(behindPos, behindState.setValue(PILLAR_TYPE, Type.SMOOTH), 3);
+    public void setPlacedBy( Level level, BlockPos pos, BlockState state, @Nullable LivingEntity livingEntity, ItemStack itemStack ) {
+        if( !state.is( this ) )
+            super.setPlacedBy( level, pos, state, livingEntity, itemStack );
+        
+        Direction facing = state.getValue( FACING );
+        BlockPos behindPos = pos.relative( facing.getOpposite() );
+        BlockState behindState = level.getBlockState( behindPos );
+        
+        if( behindState.is( this ) ) {
+            if( behindState.getValue( PILLAR_TYPE ) == Type.TOP && behindState.getValue( FACING ) == facing ) {
+                level.setBlock( behindPos, behindState.setValue( PILLAR_TYPE, Type.SMOOTH ), 3 );
             }
         }
     }
-
+    
     @Override
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    @SuppressWarnings( "deprecation" )
+    public FluidState getFluidState( BlockState state ) {
+        return state.getValue( WATERLOGGED ) ? Fluids.WATER.getSource( false ) : super.getFluidState( state );
     }
-
+    
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(PILLAR_TYPE, FACING, WATERLOGGED);
+    protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
+        stateBuilder.add( PILLAR_TYPE, FACING, WATERLOGGED );
     }
-
+    
     public enum Type implements StringRepresentable {
-
-        BOTTOM("bottom"),
-        TOP("top"),
-        SMOOTH("smooth"),
-        SKULLS("skulls"),
-        FACES("faces"),
-        CHISELED("chiseled"),
-        HORIZONTAL_SWIRLY("horizontal_swirly"),
-        VERTICAL_SWIRLY("vertical_swirly"),
-        INDENTED("indented"),
-        LINES("lines"),
-        WIDE("wide");
-
-
-        Type(String name) {
+        
+        BOTTOM( "bottom" ),
+        TOP( "top" ),
+        SMOOTH( "smooth" ),
+        SKULLS( "skulls" ),
+        FACES( "faces" ),
+        CHISELED( "chiseled" ),
+        HORIZONTAL_SWIRLY( "horizontal_swirly" ),
+        VERTICAL_SWIRLY( "vertical_swirly" ),
+        INDENTED( "indented" ),
+        LINES( "lines" ),
+        WIDE( "wide" );
+        
+        
+        Type( String name ) {
             this.name = name;
         }
+        
         private final String name;
-
+        
         @Override
         public String getSerializedName() {
             return this.name;
         }
-
-
-        public static Type chiselCycle(boolean backwardCycle, Type type) {
-            if (type == BOTTOM || type == TOP)
+        
+        
+        public static Type chiselCycle( boolean backwardCycle, Type type ) {
+            if( type == BOTTOM || type == TOP )
                 return type;
-
+            
             int index;
-
-            if (backwardCycle) {
+            
+            if( backwardCycle ) {
                 index = type.ordinal() - 1;
-
-                if (index < 2)
+                
+                if( index < 2 )
                     index = values().length - 1;
             }
             else {
                 index = type.ordinal() + 1;
-
-                if (index >= values().length)
+                
+                if( index >= values().length )
                     index = 2;
             }
             return values()[index];
         }
-
+        
         public boolean canBeChiseled() {
             return this != BOTTOM && this != TOP;
         }

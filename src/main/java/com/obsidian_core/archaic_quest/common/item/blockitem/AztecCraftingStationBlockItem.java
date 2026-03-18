@@ -13,25 +13,25 @@ import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import java.util.function.Consumer;
 
 public class AztecCraftingStationBlockItem extends BlockItem {
-
-    public AztecCraftingStationBlockItem(Block block, Properties properties) {
-        super(block, properties);
+    
+    public AztecCraftingStationBlockItem( Block block, Properties properties ) {
+        super( block, properties );
     }
-
+    
     @Override
-    protected boolean canPlace(BlockPlaceContext useContext, BlockState state) {
+    protected boolean canPlace( BlockPlaceContext useContext, BlockState state ) {
         Player player = useContext.getPlayer();
-        CollisionContext collisionContext = player == null ? CollisionContext.empty() : CollisionContext.of(player);
-        return (!this.mustSurvive() || state.canSurvive(useContext.getLevel(), useContext.getClickedPos())) && useContext.getLevel().isUnobstructed(state, useContext.getClickedPos(), collisionContext);
+        CollisionContext collisionContext = player == null ? CollisionContext.empty() : CollisionContext.of( player );
+        return (!this.mustSurvive() || state.canSurvive( useContext.getLevel(), useContext.getClickedPos() )) && useContext.getLevel().isUnobstructed( state, useContext.getClickedPos(), collisionContext );
     }
-
+    
     @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
+    public void initializeClient( Consumer<IClientItemExtensions> consumer ) {
+        consumer.accept( new IClientItemExtensions() {
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return BEWLRS.AZTEC_CRAFTING_STATION.getInstance();
             }
-        });
+        } );
     }
 }

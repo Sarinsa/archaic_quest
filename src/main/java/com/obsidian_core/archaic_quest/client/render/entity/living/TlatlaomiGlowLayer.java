@@ -14,16 +14,16 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
 public class TlatlaomiGlowLayer extends RenderLayer<Tlatlaomi, TlatlaomiModel> {
-
-    private static final ResourceLocation TEXTURE = ArchaicQuest.resourceLoc("textures/entity/tlatlaomi/glow_overlay.png");
-
-    public TlatlaomiGlowLayer(RenderLayerParent<Tlatlaomi, TlatlaomiModel> parent) {
-        super(parent);
+    
+    private static final ResourceLocation TEXTURE = ArchaicQuest.rl( "textures/entity/tlatlaomi/glow_overlay.png" );
+    
+    public TlatlaomiGlowLayer( RenderLayerParent<Tlatlaomi, TlatlaomiModel> parent ) {
+        super( parent );
     }
-
+    
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, Tlatlaomi tlatlaomi, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
-        getParentModel().renderToBuffer(poseStack, vertexConsumer, LightTexture.pack(15, 15), OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.0F);
+    public void render( PoseStack poseStack, MultiBufferSource buffer, int packedLight, Tlatlaomi tlatlaomi, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch ) {
+        VertexConsumer vertexConsumer = buffer.getBuffer( RenderType.entityCutout( TEXTURE ) );
+        getParentModel().renderToBuffer( poseStack, vertexConsumer, LightTexture.pack( 15, 15 ), OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.0F );
     }
 }

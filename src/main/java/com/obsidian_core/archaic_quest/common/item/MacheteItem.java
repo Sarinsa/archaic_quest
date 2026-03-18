@@ -12,32 +12,32 @@ import net.minecraft.world.level.block.state.BlockState;
 
 
 public class MacheteItem extends AQSimpleWeaponItem {
-
-    public MacheteItem(Tier itemTier, int durability, int damage, float attackSpeed) {
-        super(itemTier, durability, damage, attackSpeed);
+    
+    public MacheteItem( Tier itemTier, int durability, int damage, float attackSpeed ) {
+        super( itemTier, durability, damage, attackSpeed );
     }
-
+    
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn( UseOnContext context ) {
         Player player = context.getPlayer();
-
-        if (player == null)
+        
+        if( player == null )
             return InteractionResult.PASS;
-
+        
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
-        BlockState state = level.getBlockState(pos);
+        BlockState state = level.getBlockState( pos );
         ItemStack stack = context.getItemInHand();
-
-        if (state.getBlock() instanceof CoolVinesBlock && !state.getValue(CoolVinesBlock.CUT)) {
-            if (player.isShiftKeyDown()) {
-                level.setBlock(pos, state.setValue(CoolVinesBlock.CAN_GROW, false), 2);
+        
+        if( state.getBlock() instanceof CoolVinesBlock && !state.getValue( CoolVinesBlock.CUT ) ) {
+            if( player.isShiftKeyDown() ) {
+                level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
             }
             else {
-                level.setBlock(pos, state.setValue(CoolVinesBlock.CUT, true).setValue(CoolVinesBlock.CAN_GROW, false), 2);
+                level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
             }
-            stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(context.getHand()));
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            stack.hurtAndBreak( 1, player, p -> p.broadcastBreakEvent( context.getHand() ) );
+            return InteractionResult.sidedSuccess( level.isClientSide );
         }
         return InteractionResult.PASS;
     }

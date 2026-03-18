@@ -9,16 +9,16 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 public class TlatlaomiRenderer extends MobRenderer<Tlatlaomi, TlatlaomiModel> {
-
-    private static final ResourceLocation TEXTURE = ArchaicQuest.resourceLoc("textures/entity/tlatlaomi/tlatlaomi.png");
-
-    public TlatlaomiRenderer(EntityRendererProvider.Context context) {
-        super(context, new TlatlaomiModel(context.bakeLayer(AQModelLayers.TLATLAOMI)), 0.5F);
-        addLayer(new TlatlaomiGlowLayer(this));
+    
+    private static final ResourceLocation TEXTURE = ArchaicQuest.rl( "textures/entity/tlatlaomi/tlatlaomi.png" );
+    
+    public TlatlaomiRenderer( EntityRendererProvider.Context context ) {
+        super( context, new TlatlaomiModel( context.bakeLayer( AQModelLayers.TLATLAOMI ) ), 0.5F );
+        addLayer( new TlatlaomiGlowLayer( this ) );
     }
-
+    
     @Override
-    public ResourceLocation getTextureLocation(Tlatlaomi p_114482_) {
+    public ResourceLocation getTextureLocation( Tlatlaomi p_114482_ ) {
         return TEXTURE;
     }
 }

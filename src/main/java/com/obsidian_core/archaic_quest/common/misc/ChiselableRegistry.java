@@ -14,32 +14,32 @@ import java.util.TreeMap;
  * belong to which chisel family (which blocks can be
  * chiseled into other blocks in the same family)
  */
-@Mod.EventBusSubscriber(modid = ArchaicQuest.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber( modid = ArchaicQuest.MODID, bus = Mod.EventBusSubscriber.Bus.MOD )
 public class ChiselableRegistry {
-
+    
     private static final TreeMap<Family, Block[]> CHISEL_MAP = new TreeMap<>();
-
+    
     private static boolean populated = false;
-
-
+    
+    
     @SubscribeEvent
-    public static void onCommonSetup(FMLCommonSetupEvent event) {
-
-
+    public static void onCommonSetup( FMLCommonSetupEvent event ) {
+        
+        
         populated = true;
     }
-
-    private static void addChiselable(Family family, Block block) {
-        if (populated) {
-            ArchaicQuest.LOGGER.error("Attempted to register chiselable block after the registry was populated.");
+    
+    private static void addChiselable( Family family, Block block ) {
+        if( populated ) {
+            ArchaicQuest.LOGGER.error( "Attempted to register chiselable block after the registry was populated." );
             return;
         }
-        Objects.requireNonNull(block);
-        Objects.requireNonNull(family);
-
-
+        Objects.requireNonNull( block );
+        Objects.requireNonNull( family );
+        
+        
     }
-
+    
     public enum Family {
         AZTEC_STONE,
         AZTEC_GOLD

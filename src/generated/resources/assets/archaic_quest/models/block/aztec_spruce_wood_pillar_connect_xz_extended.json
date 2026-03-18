@@ -1,6 +1,0 @@
-{
-  "parent": "archaic_quest:block/wood_pillar_connect_xz_extended",
-  "textures": {
-    "texture": "archaic_quest:block/aztec_spruce_wood_pillar"
-  }
-}

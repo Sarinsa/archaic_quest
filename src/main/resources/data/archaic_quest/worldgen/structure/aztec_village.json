@@ -1,21 +1,15 @@
 {
-  "type": "archaic_quest:aztec_village",
+  "type": "minecraft:jigsaw",
   "start_pool": "archaic_quest:aztec_village/aztec_village_start",
-  "size": 8,
-  "max_distance_from_center": 128,
+  "size": 7,
+  "max_distance_from_center": 100,
   "biomes": "#archaic_quest:has_structure/aztec_village_biomes",
   "step": "surface_structures",
   "start_height": {
     "absolute": 60
   },
+  "use_expansion_hack": false,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
-
-  "spawn_overrides": {
-    "monster": {
-      "bounding_box": "piece",
-      "spawns": [
-      ]
-    }
-  },
+  "spawn_overrides": {},
   "terrain_adaptation": "beard_box"
 }

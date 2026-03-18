@@ -8,24 +8,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 
 public class SimpleHorizontalBlock extends HorizontalDirectionalBlock {
-
+    
     private final boolean opposite;
-
-    public SimpleHorizontalBlock(Properties properties, boolean opposite) {
-        super(properties);
+    
+    public SimpleHorizontalBlock( Properties properties, boolean opposite ) {
+        super( properties );
         this.opposite = opposite;
-        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH));
+        registerDefaultState( stateDefinition.any().setValue( FACING, Direction.NORTH ) );
     }
-
+    
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext useContext) {
+    public BlockState getStateForPlacement( BlockPlaceContext useContext ) {
         return opposite
-                ? this.defaultBlockState().setValue(FACING, useContext.getHorizontalDirection().getOpposite())
-                : this.defaultBlockState().setValue(FACING, useContext.getHorizontalDirection());
+                ? this.defaultBlockState().setValue( FACING, useContext.getHorizontalDirection().getOpposite() )
+                : this.defaultBlockState().setValue( FACING, useContext.getHorizontalDirection() );
     }
-
+    
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(FACING);
+    protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
+        stateBuilder.add( FACING );
     }
 }

@@ -6,10 +6,10 @@ import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
 public class AQTerraBlender {
-
+    
     public static void setup() {
-        Regions.register(new AQCommonOverworldRegion());
-
-        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, ArchaicQuest.MODID, AQSurfaceRuleData.makeRules());
+        Regions.register( new AQCommonOverworldRegion() );
+        
+        SurfaceRuleManager.addSurfaceRules( SurfaceRuleManager.RuleCategory.OVERWORLD, ArchaicQuest.MODID, AQSurfaceRuleData.makeRules() );
     }
 }

@@ -9,22 +9,22 @@ import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class AQOreBlock extends DropExperienceBlock {
-
+    
     private final int minXp, maxXp;
-
-    public AQOreBlock(Properties properties) {
-        this(-1, 0, properties);
+    
+    public AQOreBlock( Properties properties ) {
+        this( -1, 0, properties );
     }
-
-    public AQOreBlock(int minXp, int maxXp, Properties properties) {
-        super(properties);
+    
+    public AQOreBlock( int minXp, int maxXp, Properties properties ) {
+        super( properties );
         this.minXp = minXp;
         this.maxXp = maxXp;
     }
-
+    
     @Override
-    public int getExpDrop(BlockState state, LevelReader level, RandomSource randomSource, BlockPos pos, int fortuneLevel, int silkTouchLevel) {
-        if (minXp < 0) return 0;
-        return Mth.nextInt(randomSource, minXp, maxXp);
+    public int getExpDrop( BlockState state, LevelReader level, RandomSource randomSource, BlockPos pos, int fortuneLevel, int silkTouchLevel ) {
+        if( minXp < 0 ) return 0;
+        return Mth.nextInt( randomSource, minXp, maxXp );
     }
 }
