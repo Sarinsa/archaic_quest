@@ -9,6 +9,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import java.util.Objects;
 import java.util.TreeMap;
 
+// TODO - Rework this
+
 /**
  * A simple registry keeping track of which blocks
  * belong to which chisel family (which blocks can be
@@ -25,7 +27,6 @@ public class ChiselableRegistry {
     @SubscribeEvent
     public static void onCommonSetup( FMLCommonSetupEvent event ) {
         
-        
         populated = true;
     }
     
@@ -36,8 +37,6 @@ public class ChiselableRegistry {
         }
         Objects.requireNonNull( block );
         Objects.requireNonNull( family );
-        
-        
     }
     
     public enum Family {
