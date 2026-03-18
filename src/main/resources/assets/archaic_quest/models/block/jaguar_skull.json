@@ -1,6 +1,6 @@
 {
   "parent": "archaic_quest:block/invis_model",
   "textures": {
-    "particle": "minecraft:block/bone_block"
+    "particle": "minecraft:block/bone_block_side"
   }
 }
