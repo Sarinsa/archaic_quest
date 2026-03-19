@@ -6,9 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nonnull;
-
-/** Modified copy-paste of {@link CampfireSmokeParticle} */
 public class PoisonCloudParticle extends TextureSheetParticle {
     
     PoisonCloudParticle( ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed ) {
@@ -53,7 +50,6 @@ public class PoisonCloudParticle extends TextureSheetParticle {
     }
     
     @Override
-    @Nonnull
     public ParticleRenderType getRenderType() {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }

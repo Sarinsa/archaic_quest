@@ -114,9 +114,8 @@ public class ClientRegister {
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_DUNGEON_CHEST.get(), AztecDungeonChestRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.SIMPLE_SKULL.get(), SimpleSkullRenderer::new );
         
-        for( BEWLRS.Holder holder : BEWLRS.BEWLR_LIST ) {
-            holder.populate( Minecraft.getInstance().getBlockEntityRenderDispatcher() );
-        }
+        BEWLRS.holders().forEachRemaining( holder -> holder.populate( Minecraft.getInstance().getBlockEntityRenderDispatcher() ) );
+        
         event.registerEntityRenderer( AQEntities.TLATLAOMI.get(), TlatlaomiRenderer::new );
         event.registerEntityRenderer( AQEntities.AQ_BOAT.get(), context -> new AQBoatRenderer( context, false ) );
         event.registerEntityRenderer( AQEntities.AQ_CHEST_BOAT.get(), context -> new AQBoatRenderer( context, true ) );
@@ -124,7 +123,7 @@ public class ClientRegister {
     
     @SubscribeEvent
     public static void registerReloadListeners( RegisterClientReloadListenersEvent event ) {
-        event.registerReloadListener( BEWLRS.MODEL_SET );
+    
     }
     
     @Deprecated // Render type should be specified in block model

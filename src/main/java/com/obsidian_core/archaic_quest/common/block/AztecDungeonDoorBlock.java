@@ -247,7 +247,6 @@ public class AztecDungeonDoorBlock extends Block implements EntityBlock {
     }
     
     @Override
-    @SuppressWarnings( "deprecation" )
     public PushReaction getPistonPushReaction( BlockState state ) {
         return PushReaction.BLOCK;
     }
@@ -259,14 +258,9 @@ public class AztecDungeonDoorBlock extends Block implements EntityBlock {
             super.neighborChanged( state, level, pos, block, neighborPos, flag );
             return;
         }
-        BlockPos masterPos;
-        
-        if( isMaster( state ) ) {
-            masterPos = pos;
-        }
-        else {
-            masterPos = calculateMasterPos( state, pos );
-        }
+        BlockPos masterPos = isMaster( state )
+                ? pos
+                : calculateMasterPos( state, pos );
         
         if( masterPos == null )
             return;
