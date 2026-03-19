@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO - Maybe do something with this, or get rid of it
 public class BlockFamRegObject {
     
     private final Map<BlockFamily.Variant, RegistryObject<Block>> collection = new HashMap<>();
