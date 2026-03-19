@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.core.register;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
-import com.obsidian_core.archaic_quest.common.inventory.container.KnappingTableContainer;
+import com.obsidian_core.archaic_quest.common.inventory.menu.KnappingTableMenu;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -14,7 +14,7 @@ public class AQContainers {
     public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create( ForgeRegistries.MENU_TYPES, ArchaicQuest.MODID );
     
     
-    public static final RegistryObject<MenuType<KnappingTableContainer>> KNAPPING = register( "knapping", KnappingTableContainer::new );
+    public static final RegistryObject<MenuType<KnappingTableMenu>> KNAPPING = register( "knapping", KnappingTableMenu::new );
     
     
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> register( String name, MenuType.MenuSupplier<T> factory ) {

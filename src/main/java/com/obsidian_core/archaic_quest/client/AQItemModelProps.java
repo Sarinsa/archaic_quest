@@ -14,11 +14,7 @@ public class AQItemModelProps {
             Entity entity = livingEntity != null ? livingEntity : itemStack.getEntityRepresentation();
             
             if( entity != null ) {
-                return switch( AdventurersTorchItem.getLitState( itemStack ) ) {
-                    case 1 -> 1.0F;
-                    case 2 -> 2.0F;
-                    default -> 0.0F;
-                };
+                return (float) AdventurersTorchItem.getLitFlag( itemStack ).ordinal();
             }
             return 0.0F;
         } );

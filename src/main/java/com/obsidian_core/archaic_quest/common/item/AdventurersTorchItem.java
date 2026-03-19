@@ -2,7 +2,10 @@ package com.obsidian_core.archaic_quest.common.item;
 
 import com.mojang.datafixers.util.Pair;
 import com.obsidian_core.archaic_quest.api.TorchInteraction;
+import com.obsidian_core.archaic_quest.api.TorchLitType;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.misc.NBTHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -25,6 +28,7 @@ import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,50 +37,17 @@ import java.util.function.Predicate;
 
 public class AdventurersTorchItem extends Item {
     
-    private static final Map<Block, Pair<Predicate<BlockState>, Boolean>> TORCH_LIGHTERS = new HashMap<>();
-    private static final Map<Block, TorchInteraction> TORCH_INTERACTABLES = new HashMap<>();
     
-    private static final byte UNLIT = (byte) 0;
-    private static final byte LIT = (byte) 1;
-    private static final byte SOULFIRE = (byte) 2;
+    private static final Map<Block, Pair<Predicate<BlockState>, TorchLitType>> TORCH_LIGHTERS = new HashMap<>();
+    private static final Map<Block, TorchInteraction> TORCH_INTERACTIONS = new HashMap<>();
+    
+    private static final String KEY_MOD_DATA = "ArchaicQuestData";
+    private static final String KEY_LIT_FLAG = "LitFlag";
     
     
-    public static void registerDefaults() {
-        registerTorchLightable( Blocks.FIRE, ( state ) -> true, false );
-        registerTorchLightable( Blocks.SOUL_FIRE, ( state ) -> true, true );
-        registerTorchLightable( Blocks.CAMPFIRE, ( state ) -> state.getValue( CampfireBlock.LIT ), false );
-        registerTorchLightable( Blocks.SOUL_CAMPFIRE, ( state ) -> state.getValue( CampfireBlock.LIT ), true );
-        
-        registerTorchInteraction( Blocks.CAMPFIRE, ( level, state, pos, soulfire ) -> {
-            if( !state.getValue( CampfireBlock.LIT ) ) {
-                if( soulfire ) {
-                    level.setBlockAndUpdate( pos, Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue( CampfireBlock.LIT, true ) );
-                }
-                else {
-                    level.setBlockAndUpdate( pos, state.setValue( CampfireBlock.LIT, true ) );
-                }
-                return true;
-            }
-            return false;
-        } );
-        
-        registerTorchInteraction( Blocks.SOUL_CAMPFIRE, ( level, state, pos, soulfire ) -> {
-            if( !state.getValue( CampfireBlock.LIT ) ) {
-                if( soulfire ) {
-                    level.setBlockAndUpdate( pos, state.setValue( CampfireBlock.LIT, true ) );
-                }
-                else {
-                    level.setBlockAndUpdate( pos, Blocks.CAMPFIRE.defaultBlockState().setValue( CampfireBlock.LIT, true ) );
-                }
-                return true;
-            }
-            return false;
-        } );
-    }
-    
-    private static final String modDataKey = "archaic_quest_data";
-    private static final String litKey = "Lit";
-    
+    //
+    // ----------------- Item implementation -----------------
+    //
     
     public AdventurersTorchItem() {
         super( new Item.Properties()
@@ -88,54 +59,118 @@ public class AdventurersTorchItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use( Level level, Player player, InteractionHand hand ) {
         BlockHitResult hitResult = getPlayerPOVHitResult( level, player, ClipContext.Fluid.WATER );
+        BlockState hitState = level.getBlockState( hitResult.getBlockPos() );
+        ItemStack heldItem = player.getItemInHand( hand );
         
-        if( level.getBlockState( hitResult.getBlockPos() ).getFluidState().is( FluidTags.WATER ) ) {
-            ItemStack itemStack = player.getItemInHand( hand );
-            
-            if( getLitState( itemStack ) > 0 ) {
-                
-                setLit( itemStack, UNLIT );
-                level.playSound( null, hitResult.getBlockPos(), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 1.0F );
-                
-                double x = hitResult.getBlockPos().getX();
-                double y = hitResult.getBlockPos().getY();
-                double z = hitResult.getBlockPos().getZ();
-                
-                for( int l = 0; l < 8; ++l ) {
-                    level.addParticle( ParticleTypes.LARGE_SMOKE, x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D );
-                }
-                return InteractionResultHolder.sidedSuccess( itemStack, level.isClientSide );
-            }
+        // Return early if we are not clicking water or the torch is unlit.
+        if( !hitState.getFluidState().is( FluidTags.WATER ) || getLitFlag( heldItem ) == TorchLitType.UNLIT )
+            return super.use( level, player, hand );
+        
+        // Extinguish the torch and play some effects.
+        setLitFlag( heldItem, TorchLitType.UNLIT );
+        level.playSound( null, hitResult.getBlockPos(), SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 1.0F );
+        
+        double x = hitResult.getBlockPos().getX();
+        double y = hitResult.getBlockPos().getY();
+        double z = hitResult.getBlockPos().getZ();
+        
+        for( int count = 0; count < 8; ++count ) {
+            level.addParticle(
+                    ParticleTypes.LARGE_SMOKE,
+                    x + Math.random(),
+                    y + Math.random(),
+                    z + Math.random(),
+                    0.0D,
+                    0.0D,
+                    0.0D
+            );
         }
-        return super.use( level, player, hand );
+        return InteractionResultHolder.sidedSuccess( heldItem, level.isClientSide );
     }
     
     @Override
     public InteractionResult useOn( UseOnContext context ) {
-        ItemStack torch = context.getItemInHand();
-        BlockState clickedState = context.getLevel().getBlockState( context.getClickedPos() );
+        final ItemStack torch = context.getItemInHand();
+        final Level level = context.getLevel();
+        final BlockPos clickedPos = context.getClickedPos();
+        final BlockState clickedState = level.getBlockState( clickedPos );
+        final Block clickedBlock = clickedState.getBlock();
+        final TorchLitType type = getLitFlag( torch );
         
-        if( getLitState( torch ) > 0 ) {
-            if( clickedState.getFluidState().isEmpty() && TORCH_INTERACTABLES.containsKey( clickedState.getBlock() ) ) {
-                return TORCH_INTERACTABLES.get( clickedState.getBlock() ).interact( context.getLevel(), clickedState, context.getClickedPos(), getLitState( torch ) == SOULFIRE )
+        // If the torch is not unlit, check if the clicked state has a registered interaction.
+        if( type != TorchLitType.UNLIT ) {
+            if( clickedState.getFluidState().isEmpty() && TORCH_INTERACTIONS.containsKey( clickedBlock ) ) {
+                return TORCH_INTERACTIONS.get( clickedBlock ).interact( level, clickedState, clickedPos, type )
                         ? InteractionResult.SUCCESS
                         : InteractionResult.FAIL;
             }
         }
+        // Check if the clicked state can light the torch.
         else {
-            if( TORCH_LIGHTERS.containsKey( clickedState.getBlock() ) ) {
-                if( TORCH_LIGHTERS.get( clickedState.getBlock() ).getFirst().test( clickedState ) ) {
-                    setLit( torch, TORCH_LIGHTERS.get( clickedState.getBlock() ).getSecond() ? SOULFIRE : LIT );
-                    return InteractionResult.SUCCESS;
+            if( TORCH_LIGHTERS.containsKey( clickedBlock ) ) {
+                if( TORCH_LIGHTERS.get( clickedBlock ).getFirst().test( clickedState ) ) {
+                    TorchLitType torchLitType = TORCH_LIGHTERS.get( clickedBlock ).getSecond();
+                    setLitFlag( torch, torchLitType );
+                    return InteractionResult.sidedSuccess( level.isClientSide );
                 }
             }
         }
         return super.useOn( context );
     }
     
-    public static void registerTorchLightable( Block block, Predicate<BlockState> predicate, boolean soulfire ) {
+    
+    //
+    // ----------------- Torch interaction registry -----------------
+    //
+    
+    /** Archaic Quest's default behaviors. */
+    public static void registerDefaults() {
+        registerTorchLightable( Blocks.FIRE, ( state ) -> true, TorchLitType.NORMAL );
+        registerTorchLightable( Blocks.SOUL_FIRE, ( state ) -> true, TorchLitType.SOULFIRE );
+        registerTorchLightable( Blocks.CAMPFIRE, ( state ) -> state.getValue( CampfireBlock.LIT ), TorchLitType.NORMAL );
+        registerTorchLightable( Blocks.SOUL_CAMPFIRE, ( state ) -> state.getValue( CampfireBlock.LIT ), TorchLitType.SOULFIRE );
+        
+        registerTorchInteraction( Blocks.CAMPFIRE, ( level, state, pos, type ) -> {
+            if( !state.getValue( CampfireBlock.LIT ) ) {
+                if( type == TorchLitType.SOULFIRE ) {
+                    level.setBlockAndUpdate( pos, Blocks.SOUL_CAMPFIRE.defaultBlockState().setValue( CampfireBlock.LIT, true ) );
+                }
+                else {
+                    level.setBlockAndUpdate( pos, state.setValue( CampfireBlock.LIT, true ) );
+                }
+                return true;
+            }
+            return false;
+        } );
+        
+        registerTorchInteraction( Blocks.SOUL_CAMPFIRE, ( level, state, pos, type ) -> {
+            if( !state.getValue( CampfireBlock.LIT ) ) {
+                if( type == TorchLitType.SOULFIRE ) {
+                    level.setBlockAndUpdate( pos, state.setValue( CampfireBlock.LIT, true ) );
+                }
+                else {
+                    level.setBlockAndUpdate( pos, Blocks.CAMPFIRE.defaultBlockState().setValue( CampfireBlock.LIT, true ) );
+                }
+                return true;
+            }
+            return false;
+        } );
+    }
+    
+    /**
+     * Registers a block that can light the Adventurer's Torch.
+     * This is for internal use; other mods should use the Archaic Quest API.
+     *
+     * @param block     The block that is able to light the torch.
+     * @param predicate The predicate to test if the block can light the torch.
+     * @param type      The lit type to apply to the torch. Using {@link TorchLitType#UNLIT}
+     *                  effectively makes this an extinguisher.
+     */
+    @ApiStatus.Internal
+    public static void registerTorchLightable( Block block, Predicate<BlockState> predicate, TorchLitType type ) {
         Objects.requireNonNull( block );
         Objects.requireNonNull( predicate );
+        Objects.requireNonNull( type );
         
         if( !ForgeRegistries.BLOCKS.containsValue( block ) ) {
             ArchaicQuest.LOGGER.warn( "Attempted to register torch lighter for unregistered block! Block obj: {}", block.toString() );
@@ -144,10 +179,18 @@ public class AdventurersTorchItem extends Item {
             ArchaicQuest.LOGGER.warn( "Attempted to register duplicate torch lighter for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
         }
         else {
-            TORCH_LIGHTERS.put( block, Pair.of( predicate, soulfire ) );
+            TORCH_LIGHTERS.put( block, Pair.of( predicate, type ) );
         }
     }
     
+    /**
+     * Registers a block that can be interacted with using a lit Adventurer's Torch.
+     * This is for internal use; other mods should use the Archaic Quest API.
+     *
+     * @param block            The block that is able to light the torch.
+     * @param torchInteraction The logic to use when the block is clicked with a lit adventurer's torch.
+     */
+    @ApiStatus.Internal
     public static void registerTorchInteraction( Block block, TorchInteraction torchInteraction ) {
         Objects.requireNonNull( block );
         Objects.requireNonNull( torchInteraction );
@@ -155,42 +198,38 @@ public class AdventurersTorchItem extends Item {
         if( !ForgeRegistries.BLOCKS.containsValue( block ) ) {
             ArchaicQuest.LOGGER.warn( "Attempted to register torch interactor for unregistered block! Block obj: {}", block.toString() );
         }
-        else if( TORCH_INTERACTABLES.containsKey( block ) ) {
+        else if( TORCH_INTERACTIONS.containsKey( block ) ) {
             ArchaicQuest.LOGGER.warn( "Attempted to register duplicate torch interactor for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
         }
         else {
-            TORCH_INTERACTABLES.put( block, torchInteraction );
+            TORCH_INTERACTIONS.put( block, torchInteraction );
         }
     }
     
-    public static byte getLitState( ItemStack itemStack ) {
-        if( !(itemStack.getItem() instanceof AdventurersTorchItem) ) return 0;
+    /**
+     * @return The TorchLitType in the given item stack's NBT, or {@link TorchLitType#UNLIT}
+     * if something went wrong or the tag didn't contain an ordinal for a TorchLitType.
+     */
+    public static TorchLitType getLitFlag( ItemStack itemStack ) {
+        if( !(itemStack.getItem() instanceof AdventurersTorchItem) )
+            return TorchLitType.UNLIT;
         
         CompoundTag compoundTag = itemStack.getOrCreateTag();
+        CompoundTag modData = NBTHelper.getOrCreate( compoundTag, KEY_MOD_DATA );
         
-        if( compoundTag.contains( modDataKey, Tag.TAG_COMPOUND ) ) {
-            CompoundTag modData = compoundTag.getCompound( modDataKey );
-            
-            if( modData.contains( litKey, Tag.TAG_BYTE ) ) {
-                return modData.getByte( litKey );
-            }
+        if( modData.contains( KEY_LIT_FLAG, Tag.TAG_ANY_NUMERIC ) ) {
+            return TorchLitType.fromOrdinal( modData.getInt( KEY_LIT_FLAG ) );
         }
-        return 0;
+        return TorchLitType.UNLIT;
     }
     
-    public static void setLit( ItemStack itemStack, byte type ) {
+    /**
+     * Saves a TorchLitType to the specified item stack's NBT.
+     */
+    public static void setLitFlag( ItemStack itemStack, TorchLitType flag ) {
         if( !(itemStack.getItem() instanceof AdventurersTorchItem) ) return;
         CompoundTag compoundTag = itemStack.getOrCreateTag();
-        
-        if( compoundTag.contains( modDataKey, Tag.TAG_COMPOUND ) ) {
-            CompoundTag modData = compoundTag.getCompound( modDataKey );
-            modData.putByte( litKey, type );
-        }
-        else {
-            CompoundTag modData = new CompoundTag();
-            modData.putByte( litKey, type );
-            compoundTag.put( modDataKey, modData );
-        }
-        itemStack.setTag( compoundTag );
+        CompoundTag modData = NBTHelper.getOrCreate( compoundTag, KEY_MOD_DATA );
+        modData.putInt( KEY_LIT_FLAG, flag.ordinal() );
     }
 }
