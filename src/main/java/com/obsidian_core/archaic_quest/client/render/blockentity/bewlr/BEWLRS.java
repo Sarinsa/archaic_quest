@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 /**
- * Utility class that holds Archaic Quest's BEWLR instances,
- * in the form of holders
+ * Utility class that holds Archaic Quest's BEWLR instances, wrapped in holders.
  */
 public class BEWLRS {
     
