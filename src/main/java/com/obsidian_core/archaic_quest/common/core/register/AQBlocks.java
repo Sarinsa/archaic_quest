@@ -6,6 +6,7 @@ import com.obsidian_core.archaic_quest.common.block.data.DungeonDoorType;
 import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
 import com.obsidian_core.archaic_quest.common.block.tree.AztecJungleTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.util.EmptyTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecCraftingStationBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecDungeonChestBlockItem;
@@ -55,7 +56,7 @@ public class AQBlocks {
     public static final RegistryObject<Block> VINES_1 = registerBlock( "vines_1", AQCreativeTabs.Keys.BLOCKS, () -> new CoolVinesBlock( BlockBehaviour.Properties.copy( Blocks.VINE ) ) );
     public static final RegistryObject<Block> AZTEC_JUNGLE_SAPLING = registerBlock( "aztec_jungle_sapling", AQCreativeTabs.Keys.BLOCKS, () -> new SaplingBlock( new AztecJungleTreeGrower(), BlockBehaviour.Properties.copy( Blocks.JUNGLE_SAPLING ) ) );
     
-    public static final WoodSet AHUEHUETE_WOOD_SET = new WoodSet( "ahuehuete", BlockBehaviour.Properties.copy( Blocks.OAK_PLANKS ), null, null );
+    public static final WoodSet AHUEHUETE_WOOD_SET = new WoodSet( "ahuehuete", BlockBehaviour.Properties.copy( Blocks.OAK_PLANKS ), EmptyTreeGrower.INSTANCE );
     
     // CROPS
     public static final RegistryObject<Block> CORN_CROP = registerBlockNoItem( "corn_crop", CornCropBlock::new );
