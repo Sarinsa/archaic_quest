@@ -30,9 +30,11 @@ public class LootModifierAdd extends LootModifier {
                             ForgeRegistries.ITEMS.getCodec()
                                     .fieldOf( "item" )
                                     .forGetter( m -> m.itemToAdd ),
-                            Codec.INT.fieldOf( "maxCount" )
+                            Codec.INT
+                                    .fieldOf( "maxCount" )
                                     .forGetter( m -> m.maxStackCount ),
-                            Codec.INT.fieldOf( "minCount" )
+                            Codec.INT
+                                    .fieldOf( "minCount" )
                                     .forGetter( m -> m.minStackCount ),
                             ResourceLocation.CODEC
                                     .fieldOf( "lootTable" )
