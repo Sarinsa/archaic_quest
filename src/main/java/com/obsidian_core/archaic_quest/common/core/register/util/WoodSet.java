@@ -59,33 +59,55 @@ public class WoodSet {
     private final RegistryObject<AQBoatItem> chestBoat;
     
     
-    public WoodSet( String name, BlockBehaviour.Properties properties, @Nullable BlockSetType type, AbstractTreeGrower treeGrower ) {
-        blockSetType = type == null ? new BlockSetType( name ) : type;
+    /**
+     * Creates a new wood set with a default block set type.
+     *
+     * @param name           The name of this wood set.
+     * @param baseProperties The base properties that are applied to the blocks in this wood set.
+     * @param treeGrower     The tree grower for this wood set's sapling block. Use {@link EmptyTreeGrower#INSTANCE}
+     *                       if no tree feature has been made for the sapling yet.
+     */
+    public WoodSet( String name, BlockBehaviour.Properties baseProperties, AbstractTreeGrower treeGrower ) {
+        this( name, baseProperties, null, treeGrower );
+    }
+    
+    /**
+     * Creates a new wood set with the specified block set type.
+     *
+     * @param name           The name of this wood set.
+     * @param baseProperties The base properties that are applied to the blocks in this wood set.
+     * @param blockSet       The block set type to use for the blocks in this wood set.
+     * @param treeGrower     The tree grower for this wood set's sapling block. Use {@link EmptyTreeGrower#INSTANCE}
+     *                       if no tree feature has been made for the sapling yet.
+     */
+    public WoodSet( String name, BlockBehaviour.Properties baseProperties, @Nullable BlockSetType blockSet, AbstractTreeGrower treeGrower ) {
+        blockSetType = blockSet == null ? new BlockSetType( name ) : blockSet;
         woodType = WoodType.register( new WoodType( ArchaicQuest.rl( name ).toString(), blockSetType ) );
         WoodType.register( woodType );
         
         // Blocks
         sapling = register( name + "_sapling", () -> new SaplingBlock( treeGrower, BlockBehaviour.Properties.copy( Blocks.OAK_SAPLING ).noCollission().randomTicks().instabreak().sound( SoundType.GRASS ) ), true );
         leaves = register( name + "_leaves", () -> new LeavesBlock( BlockBehaviour.Properties.copy( Blocks.OAK_LEAVES ).strength( 0.2F ).randomTicks().sound( SoundType.GRASS ).noOcclusion().isValidSpawn( Blocks::ocelotOrParrot ).isSuffocating( Blocks::never ).isViewBlocking( Blocks::never ) ), true );
-        wood = register( name + "_wood", () -> new RotatedPillarBlock( properties ), false );
-        strippedWood = register( name + "_stripped_wood", () -> new RotatedPillarBlock( properties ), false );
-        log = register( name + "_log", () -> new RotatedPillarBlock( properties ), false );
-        strippedLog = register( name + "_stripped_log", () -> new RotatedPillarBlock( properties ), false );
-        planks = register( name + "_planks", () -> new Block( properties ), false );
-        slab = register( name + "_slab", () -> new SlabBlock( properties ), false );
-        verticalSlab = register( name + "_vertical_slab", () -> new VerticalSlabBlock( properties ), false );
-        stairs = register( name + "_stairs", () -> new StairBlock( () -> planks.get().defaultBlockState(), properties ), false );
-        fence = register( name + "_fence", () -> new FenceBlock( properties ), true );
-        fenceGate = register( name + "_fence_gate", () -> new FenceGateBlock( properties, woodType ), true );
-        pressurePlate = register( name + "_pressure_plate", () -> new PressurePlateBlock( PressurePlateBlock.Sensitivity.MOBS, properties, blockSetType ), true );
-        button = register( name + "_button", () -> new ButtonBlock( properties.noCollission().strength( 0.5F ).pushReaction( PushReaction.DESTROY ), blockSetType, 30, true ), true );
+        wood = register( name + "_wood", () -> new RotatedPillarBlock( baseProperties ), false );
+        strippedWood = register( name + "_stripped_wood", () -> new RotatedPillarBlock( baseProperties ), false );
+        log = register( name + "_log", () -> new RotatedPillarBlock( baseProperties ), false );
+        strippedLog = register( name + "_stripped_log", () -> new RotatedPillarBlock( baseProperties ), false );
+        planks = register( name + "_planks", () -> new Block( baseProperties ), false );
+        slab = register( name + "_slab", () -> new SlabBlock( baseProperties ), false );
+        verticalSlab = register( name + "_vertical_slab", () -> new VerticalSlabBlock( baseProperties ), false );
+        stairs = register( name + "_stairs", () -> new StairBlock( () -> planks.get().defaultBlockState(), baseProperties ), false );
+        fence = register( name + "_fence", () -> new FenceBlock( baseProperties ), true );
+        fenceGate = register( name + "_fence_gate", () -> new FenceGateBlock( baseProperties, woodType ), true );
+        pressurePlate = register( name + "_pressure_plate", () -> new PressurePlateBlock( PressurePlateBlock.Sensitivity.MOBS, baseProperties, blockSetType ), true );
+        button = register( name + "_button", () -> new ButtonBlock( baseProperties.noCollission().strength( 0.5F ).pushReaction( PushReaction.DESTROY ), blockSetType, 30, true ), true );
         trapDoor = register( name + "_trapdoor", () -> new TrapDoorBlock( BlockBehaviour.Properties.copy( planks.get() ).noCollission(), blockSetType ), true );
-        door = registerDoor( name + "_door", blockSetType, properties );
+        door = registerDoor( name + "_door", blockSetType, baseProperties );
         
-        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new StandingSignBlock( properties, woodType ) );
-        wallSign = AQBlocks.REGISTRY.register( name + "_wall_sign", () -> new WallSignBlock( properties, woodType ) );
-        hangingSign = AQBlocks.REGISTRY.register( name + "_hanging_sign", () -> new CeilingHangingSignBlock( properties, woodType ) );
-        wallHangingSign = AQBlocks.REGISTRY.register( name + "_wall_hanging_sign", () -> new WallHangingSignBlock( properties, woodType ) );
+        // Signs
+        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new StandingSignBlock( baseProperties, woodType ) );
+        wallSign = AQBlocks.REGISTRY.register( name + "_wall_sign", () -> new WallSignBlock( baseProperties, woodType ) );
+        hangingSign = AQBlocks.REGISTRY.register( name + "_hanging_sign", () -> new CeilingHangingSignBlock( baseProperties, woodType ) );
+        wallHangingSign = AQBlocks.REGISTRY.register( name + "_wall_hanging_sign", () -> new WallHangingSignBlock( baseProperties, woodType ) );
         
         // Block items
         AQItems.registerItem( name + "_sign", AQCreativeTabs.Keys.DECORATION, () -> new SignItem( new Item.Properties().stacksTo( 16 ), sign.get(), wallSign.get() ) );
