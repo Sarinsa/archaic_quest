@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.inventory.container;
+package com.obsidian_core.archaic_quest.common.inventory.menu;
 
 import com.obsidian_core.archaic_quest.common.core.register.AQContainers;
 import net.minecraft.core.BlockPos;
@@ -13,17 +13,17 @@ import net.minecraft.world.level.block.Block;
 
 import javax.annotation.Nullable;
 
-public class KnappingTableContainer extends AbstractContainerMenu {
+public class KnappingTableMenu extends AbstractContainerMenu {
     
     private final Container container;
     @Nullable
     private final BlockPos openedPos;
     
-    public KnappingTableContainer( int id, Inventory inventory ) {
+    public KnappingTableMenu( int id, Inventory inventory ) {
         this( id, inventory, null );
     }
     
-    public KnappingTableContainer( int id, Inventory inventory, @Nullable BlockPos openedPos ) {
+    public KnappingTableMenu( int id, Inventory inventory, @Nullable BlockPos openedPos ) {
         super( AQContainers.KNAPPING.get(), id );
         this.openedPos = openedPos;
         container = new SimpleContainer( 11 ) {

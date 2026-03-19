@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.inventory.container.KnappingTableContainer;
+import com.obsidian_core.archaic_quest.common.inventory.menu.KnappingTableMenu;
 import com.obsidian_core.archaic_quest.common.misc.TranslationReferences;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -55,7 +55,7 @@ public class KnappingTableBlock extends Block {
     @SuppressWarnings( "deprecation" )
     public MenuProvider getMenuProvider( BlockState state, Level level, BlockPos pos ) {
         return new SimpleMenuProvider( ( id, inventory, player )
-                -> new KnappingTableContainer( id, inventory, pos ), TranslationReferences.KNAPPING_TABLE_CONTAINER_NAME );
+                -> new KnappingTableMenu( id, inventory, pos ), TranslationReferences.KNAPPING_TABLE_CONTAINER_NAME );
     }
     
     @Override
