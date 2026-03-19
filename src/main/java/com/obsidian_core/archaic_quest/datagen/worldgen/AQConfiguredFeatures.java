@@ -3,13 +3,14 @@ package com.obsidian_core.archaic_quest.datagen.worldgen;
 import com.google.common.collect.ImmutableList;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
-import com.obsidian_core.archaic_quest.common.worldgen.feature.decorators.LeafVineVarDecorator;
-import com.obsidian_core.archaic_quest.common.worldgen.feature.decorators.TrunkVineVarDecorator;
+import com.obsidian_core.archaic_quest.common.worldgen.feature.decorators.CustomLeavesVineDecorator;
+import com.obsidian_core.archaic_quest.common.worldgen.feature.decorators.CustomTrunkVineDecorator;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -46,14 +47,19 @@ public class AQConfiguredFeatures {
     public static void bootstrap( BootstapContext<ConfiguredFeature<?, ?>> context ) {
         // Trees
         register( context, AZTEC_JUNGLE_TREE, new ConfiguredFeature<>( Feature.TREE,
-                new TreeConfiguration.TreeConfigurationBuilder( BlockStateProvider.simple( Blocks.JUNGLE_LOG ),
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple( Blocks.JUNGLE_LOG ),
                         new MegaJungleTrunkPlacer( 10, 2, 19 ),
                         BlockStateProvider.simple( Blocks.JUNGLE_LEAVES ),
                         new MegaJungleFoliagePlacer( ConstantInt.of( 2 ), ConstantInt.of( 0 ), 2 ),
-                        new TwoLayersFeatureSize( 1, 1, 2 ) )
-                        .decorators( ImmutableList.of( TrunkVineVarDecorator.INSTANCE, new LeafVineVarDecorator( 0.40F ) ) )
-                        .build() )
-        );
+                        new TwoLayersFeatureSize( 1, 1, 2 )
+                ).decorators(
+                        ImmutableList.of(
+                                new CustomTrunkVineDecorator( 0.3F, AQBlocks.VINES_1.get().defaultBlockState() ),
+                                new CustomLeavesVineDecorator( 0.4F, UniformInt.of( 3, 6 ), AQBlocks.VINES_1.get().defaultBlockState() )
+                        )
+                ).build() ) );
+        
         // Ores
         simpleOre( context, TIN_ORE, IS_STONE, AQBlocks.TIN_ORE.get().defaultBlockState(), 9 );
         simpleOre( context, SILVER_ORE, IS_STONE, AQBlocks.SILVER_ORE.get().defaultBlockState(), 9 );
