@@ -19,6 +19,7 @@ public class KnappingTableMenu extends AbstractContainerMenu {
     @Nullable
     private final BlockPos openedPos;
     
+    
     public KnappingTableMenu( int id, Inventory inventory ) {
         this( id, inventory, null );
     }
@@ -40,26 +41,26 @@ public class KnappingTableMenu extends AbstractContainerMenu {
         
         // Crafting slots
         int slotId = 0;
-        for( int i = 0; i < 3; ++i ) {
-            for( int j = 0; j < 3; ++j ) {
-                this.addSlot( new Slot( container, slotId, 62 + j * 18, i * 18 + 17 ) );
+        for( int row = 0; row < 3; ++row ) {
+            for( int column = 0; column < 3; ++column ) {
+                addSlot( new Slot( container, slotId, 62 + column * 18, row * 18 + 17 ) );
                 ++slotId;
             }
         }
         // Tool slot
-        this.addSlot( new Slot( container, 9, 26, 53 ) );
+        addSlot( new Slot( container, 9, 26, 53 ) );
         // Result slot
-        this.addSlot( new ResultSlot( container, 10, 143, 35 ) );
+        addSlot( new ResultSlot( container, 10, 143, 35 ) );
         
         // Player inventory
-        for( int l = 0; l < 3; ++l ) {
-            for( int k = 0; k < 9; ++k ) {
-                this.addSlot( new Slot( inventory, k + l * 9 + 9, 8 + k * 18, l * 18 + 84 ) );
+        for( int row = 0; row < 3; ++row ) {
+            for( int column = 0; column < 9; ++column ) {
+                addSlot( new Slot( inventory, column + row * 9 + 9, 8 + column * 18, row * 18 + 84 ) );
             }
         }
-        
-        for( int i1 = 0; i1 < 9; ++i1 ) {
-            this.addSlot( new Slot( inventory, i1, 8 + i1 * 18, 142 ) );
+        // Hotbar slots
+        for( int i = 0; i < 9; ++i ) {
+            addSlot( new Slot( inventory, i, 8 + i * 18, 142 ) );
         }
     }
     
@@ -70,19 +71,19 @@ public class KnappingTableMenu extends AbstractContainerMenu {
         Slot slot = slots.get( slotId );
         
         if( slot != null && slot.hasItem() ) {
-            ItemStack slotItem = slot.getItem();
-            returnedItem = slotItem.copy();
+            ItemStack itemInSlot = slot.getItem();
+            returnedItem = itemInSlot.copy();
             
             if( slotId < container.getContainerSize() ) {
-                if( !this.moveItemStackTo( slotItem, container.getContainerSize(), slots.size(), true ) ) {
+                if( !moveItemStackTo( itemInSlot, container.getContainerSize(), slots.size(), true ) ) {
                     return ItemStack.EMPTY;
                 }
             }
-            else if( !this.moveItemStackTo( slotItem, 9, 10, false ) ) {
+            else if( !moveItemStackTo( itemInSlot, 9, 10, false ) ) {
                 return ItemStack.EMPTY;
             }
             
-            if( slotItem.isEmpty() ) {
+            if( itemInSlot.isEmpty() ) {
                 slot.set( ItemStack.EMPTY );
             }
             else {
