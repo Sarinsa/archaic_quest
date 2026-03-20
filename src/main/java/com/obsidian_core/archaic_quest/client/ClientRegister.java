@@ -8,6 +8,7 @@ import com.obsidian_core.archaic_quest.client.render.entity.misc.AQBoatRenderer;
 import com.obsidian_core.archaic_quest.client.render.entity.model.IchcahuipilliArmorModel;
 import com.obsidian_core.archaic_quest.client.render.entity.model.TlatlaomiModel;
 import com.obsidian_core.archaic_quest.client.screen.KnappingTableScreen;
+import com.obsidian_core.archaic_quest.common.compat.ryoamic.RyoamicCompat;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.*;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
@@ -45,16 +46,17 @@ public class ClientRegister {
     
     @SubscribeEvent
     public static void onClientSetup( FMLClientSetupEvent event ) {
-        AQModelLayers.init();
         MinecraftForge.EVENT_BUS.register( new ClientEvents() );
         
-        setBlockRenderTypes();
+        AQModelLayers.init();
+        
         registerScreenMenus();
         addSkippedHighlightBlocks();
         
+        RyoamicCompat.init();
+        
         event.enqueueWork( () -> {
             AQItemModelProps.register();
-            
             WoodSet.WOOD_SETS.forEach( ( woodSet ) -> Sheets.addWoodType( woodSet.getWoodType() ) );
         } );
     }
@@ -123,11 +125,6 @@ public class ClientRegister {
     
     @SubscribeEvent
     public static void registerReloadListeners( RegisterClientReloadListenersEvent event ) {
-    
-    }
-    
-    @Deprecated // Render type should be specified in block model
-    private static void setBlockRenderTypes() {
     
     }
     

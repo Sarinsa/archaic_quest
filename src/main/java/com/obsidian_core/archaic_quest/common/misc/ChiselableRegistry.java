@@ -32,7 +32,7 @@ public class ChiselableRegistry {
     
     private static void addChiselable( Family family, Block block ) {
         if( populated ) {
-            ArchaicQuest.LOGGER.error( "Attempted to register chiselable block after the registry was populated." );
+            ArchaicQuest.LOG.error( "Attempted to register chiselable block after the registry was populated." );
             return;
         }
         Objects.requireNonNull( block );

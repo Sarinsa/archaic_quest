@@ -18,8 +18,10 @@ import org.apache.logging.log4j.Logger;
 @Mod( ArchaicQuest.MODID )
 public class ArchaicQuest {
     
+    /** The mod ID. */
     public static final String MODID = "archaic_quest";
-    public static final Logger LOGGER = LogManager.getLogger( MODID );
+    /** A logger instance with our namespace. */
+    public static final Logger LOG = LogManager.getLogger( MODID );
     
     @SuppressWarnings( "FieldCanBeLocal" )
     private final PacketHandler packetHandler = new PacketHandler();
@@ -57,6 +59,7 @@ public class ArchaicQuest {
             }
         } );
         
+        // TODO - This can probably be moved to the wood set class
         for( WoodSet woodSet : WoodSet.WOOD_SETS ) {
             ComposterBlock.COMPOSTABLES.put( woodSet.getLeaves().get(), 0.3F );
             ComposterBlock.COMPOSTABLES.put( woodSet.getSapling().get(), 0.3F );

@@ -173,10 +173,10 @@ public class AdventurersTorchItem extends Item {
         Objects.requireNonNull( type );
         
         if( !ForgeRegistries.BLOCKS.containsValue( block ) ) {
-            ArchaicQuest.LOGGER.warn( "Attempted to register torch lighter for unregistered block! Block obj: {}", block.toString() );
+            ArchaicQuest.LOG.warn( "Attempted to register torch lighter for unregistered block! Block obj: {}", block.toString() );
         }
         else if( TORCH_LIGHTERS.containsKey( block ) ) {
-            ArchaicQuest.LOGGER.warn( "Attempted to register duplicate torch lighter for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
+            ArchaicQuest.LOG.warn( "Attempted to register duplicate torch lighter for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
         }
         else {
             TORCH_LIGHTERS.put( block, Pair.of( predicate, type ) );
@@ -196,10 +196,10 @@ public class AdventurersTorchItem extends Item {
         Objects.requireNonNull( torchInteraction );
         
         if( !ForgeRegistries.BLOCKS.containsValue( block ) ) {
-            ArchaicQuest.LOGGER.warn( "Attempted to register torch interactor for unregistered block! Block obj: {}", block.toString() );
+            ArchaicQuest.LOG.warn( "Attempted to register torch interactor for unregistered block! Block obj: {}", block.toString() );
         }
         else if( TORCH_INTERACTIONS.containsKey( block ) ) {
-            ArchaicQuest.LOGGER.warn( "Attempted to register duplicate torch interactor for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
+            ArchaicQuest.LOG.warn( "Attempted to register duplicate torch interactor for block '{}'", ForgeRegistries.BLOCKS.getKey( block ) );
         }
         else {
             TORCH_INTERACTIONS.put( block, torchInteraction );

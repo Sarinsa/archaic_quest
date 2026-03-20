@@ -126,6 +126,11 @@ dependencies {
     // Terrablender
     implementation fg.deobf("curse.maven:terrablender-563928:${tb_version}")
 
+    // Ryomic Lights - NOTE: comment out this when testing dedicated server or crash
+    implementation fg.deobf("curse.maven:ryoamiclights-913587:${ryoamic_version}")
+    compileOnly "curse.maven:ryoamiclights_src-913587:${ryoamic_src_version}"
+    implementation fg.deobf("curse.maven:obsidianui-684718:${obsidianui_version}")
+
     // WorldEdit
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:${we_version}")
 
