@@ -2,8 +2,8 @@ package com.obsidian_core.archaic_quest.datagen.loot_table;
 
 import com.mojang.math.MethodsReturnNonnullByDefault;
 import com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock;
-import com.obsidian_core.archaic_quest.common.block.DoubleCropBlock;
-import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
+import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -221,21 +221,21 @@ public class AQBlockLootTableProvider extends BlockLootSubProvider {
             if( block instanceof SlabBlock || block instanceof StairBlock || block instanceof VerticalSlabBlock ) {
                 dropSelf( block );
             }
-            else if( block instanceof DoubleCropBlock crop ) {
+            else if( block instanceof BaseDoubleCropBlock crop ) {
                 doubleCrop( crop );
             }
         }
     }
     
-    private void doubleCrop( DoubleCropBlock crop ) {
+    private void doubleCrop( BaseDoubleCropBlock crop ) {
         LootItemCondition.Builder harvestCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties( crop )
                 .setProperties( StatePropertiesPredicate.Builder.properties()
                         .hasProperty( crop.getAgeProperty(), crop.getMaxAge() )
-                        .hasProperty( DoubleCropBlock.IS_TOP, false ) );
+                        .hasProperty( BaseDoubleCropBlock.IS_TOP, false ) );
         
         LootItemCondition.Builder retrieveSeedCondition = LootItemBlockStatePropertyCondition.hasBlockStateProperties( crop )
                 .setProperties( StatePropertiesPredicate.Builder.properties()
-                        .hasProperty( DoubleCropBlock.IS_TOP, false ) );
+                        .hasProperty( BaseDoubleCropBlock.IS_TOP, false ) );
         
         LootTable.Builder builder = applyExplosionDecay( crop, LootTable.lootTable()
                 .withPool( LootPool.lootPool()

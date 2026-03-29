@@ -4,9 +4,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 
-public class AQSimpleWeaponItem extends SwordItem {
+public class SimpleWeaponItem extends SwordItem {
     
-    public AQSimpleWeaponItem( Tier itemTier, int durability, int damage, float attackSpeed ) {
+    public SimpleWeaponItem( Tier itemTier, int durability, int damage, float attackSpeed ) {
         super( itemTier, damage, attackSpeed, new Item.Properties()
                 .stacksTo( 1 )
                 .durability( durability )

@@ -11,7 +11,6 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.function.Consumer;
@@ -36,7 +35,7 @@ public class IchcahuipilliArmorItem extends ArmorItem {
     public void initializeClient( Consumer<IClientItemExtensions> consumer ) {
         consumer.accept( new IClientItemExtensions() {
             @Override
-            public @NotNull HumanoidModel<?> getHumanoidArmorModel( LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original ) {
+            public HumanoidModel<?> getHumanoidArmorModel( LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot, HumanoidModel<?> original ) {
                 return equipmentSlot.getType() == EquipmentSlot.Type.ARMOR ? ClientRegister.ICHCAHUIPILLI_ARMOR_MODELS.get( equipmentSlot ) : original;
             }
         } );

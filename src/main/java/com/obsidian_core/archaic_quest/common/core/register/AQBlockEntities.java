@@ -2,6 +2,7 @@ package com.obsidian_core.archaic_quest.common.core.register;
 
 import com.obsidian_core.archaic_quest.common.blockentity.*;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
+import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,6 +19,7 @@ public class AQBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create( ForgeRegistries.BLOCK_ENTITY_TYPES, ArchaicQuest.MODID );
     
     
+    public static final RegistryObject<BlockEntityType<CustomSignBlockEntity>> CUSTOM_SIGN = register( "sign", CustomSignBlockEntity::new, WoodSet.allSignBlocks() );
     public static final RegistryObject<BlockEntityType<SimpleSkullBlockEntity>> SIMPLE_SKULL = register( "simple_skull", SimpleSkullBlockEntity::new, List.of(
             AQBlocks.CRYSTAL_SKULL.getFirst(),
             AQBlocks.CRYSTAL_SKULL.getSecond(),

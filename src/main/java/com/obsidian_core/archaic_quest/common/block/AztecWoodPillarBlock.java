@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.state.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;

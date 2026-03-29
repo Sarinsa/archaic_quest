@@ -1,6 +1,7 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
 import com.obsidian_core.archaic_quest.common.block.*;
+import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.data.PackOutput;
@@ -36,7 +37,7 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
         for( RegistryObject<Block> regObject : REGISTRY.getEntries() ) {
             Block block = regObject.get();
             
-            if( block instanceof DoubleCropBlock doubleCropBlock ) {
+            if( block instanceof BaseDoubleCropBlock doubleCropBlock ) {
                 doubleCrop( doubleCropBlock );
             }
             else if( block instanceof CoolVinesBlock vine ) {

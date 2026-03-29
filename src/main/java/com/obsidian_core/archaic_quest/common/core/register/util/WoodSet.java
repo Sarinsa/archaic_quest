@@ -1,12 +1,12 @@
 package com.obsidian_core.archaic_quest.common.core.register.util;
 
-import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQCreativeTabs;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import com.obsidian_core.archaic_quest.common.entity.AQBoat;
-import com.obsidian_core.archaic_quest.common.item.AQBoatItem;
+import com.obsidian_core.archaic_quest.common.item.CustomBoatItem;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -55,8 +56,8 @@ public class WoodSet {
     private final RegistryObject<TrapDoorBlock> trapDoor;
     private final RegistryObject<DoorBlock> door;
     
-    private final RegistryObject<AQBoatItem> boat;
-    private final RegistryObject<AQBoatItem> chestBoat;
+    private final RegistryObject<CustomBoatItem> boat;
+    private final RegistryObject<CustomBoatItem> chestBoat;
     
     
     /**
@@ -112,8 +113,8 @@ public class WoodSet {
         // Block items
         AQItems.registerItem( name + "_sign", AQCreativeTabs.Keys.DECORATION, () -> new SignItem( new Item.Properties().stacksTo( 16 ), sign.get(), wallSign.get() ) );
         AQItems.registerItem( name + "_hanging_sign", AQCreativeTabs.Keys.DECORATION, () -> new HangingSignItem( hangingSign.get(), wallHangingSign.get(), new Item.Properties().stacksTo( 16 ) ) );
-        boat = AQItems.registerItem( name + "_boat", AQCreativeTabs.Keys.ITEMS, () -> new AQBoatItem( false, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo( 16 ) ) );
-        chestBoat = AQItems.registerItem( name + "_chest_boat", AQCreativeTabs.Keys.ITEMS, () -> new AQBoatItem( true, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo( 16 ) ) );
+        boat = AQItems.registerItem( name + "_boat", AQCreativeTabs.Keys.ITEMS, () -> new CustomBoatItem( false, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo( 16 ) ) );
+        chestBoat = AQItems.registerItem( name + "_chest_boat", AQCreativeTabs.Keys.ITEMS, () -> new CustomBoatItem( true, AQBoat.BoatType.AHUEHUETE, new Item.Properties().stacksTo( 16 ) ) );
         
         // Collect all blocks
         allBlocks = List.of(
@@ -223,9 +224,9 @@ public class WoodSet {
         return leaves;
     }
     
-    public RegistryObject<AQBoatItem> getBoat() { return boat; }
+    public RegistryObject<CustomBoatItem> getBoat() { return boat; }
     
-    public RegistryObject<AQBoatItem> getChestBoat() { return chestBoat; }
+    public RegistryObject<CustomBoatItem> getChestBoat() { return chestBoat; }
     
     
     /** @return An iterable of all the block registry object held by this wood set. */
@@ -242,5 +243,26 @@ public class WoodSet {
     /** @return This wood set's {@link WoodType}. */
     public WoodType getWoodType() {
         return woodType;
+    }
+    
+    /**
+     * @return A list containing all sign block registry objects from all wood sets.
+     * Primarily used for registering our custom sign block entity.
+     */
+    public static List<RegistryObject<? extends Block>> allSignBlocks() {
+        if( WOOD_SETS.isEmpty() || !WOOD_SETS.get( 0 ).sign.isPresent() ) {
+            throw new IllegalStateException( "Wood sets have not yet been constructed!" );
+        }
+        List<RegistryObject<? extends Block>> signs = new ArrayList<>();
+        
+        for( WoodSet woodSet : WOOD_SETS ) {
+            Collections.addAll( signs,
+                    woodSet.sign,
+                    woodSet.wallSign,
+                    woodSet.hangingSign,
+                    woodSet.wallHangingSign
+            );
+        }
+        return signs;
     }
 }

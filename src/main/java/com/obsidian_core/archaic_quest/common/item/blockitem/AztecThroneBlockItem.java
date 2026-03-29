@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.item.blockitem;
 
 import com.obsidian_core.archaic_quest.client.render.blockentity.bewlr.BEWLRS;
-import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

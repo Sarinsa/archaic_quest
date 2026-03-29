@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.data.DungeonDoorType;
+import com.obsidian_core.archaic_quest.common.block.base.DungeonDoorType;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonDoorBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQSoundEvents;

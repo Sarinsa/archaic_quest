@@ -1,7 +1,7 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.base;
 
 import com.mojang.datafixers.util.Pair;
-import com.obsidian_core.archaic_quest.common.block.state.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public abstract class DoubleCropBlock extends CropBlock {
+public abstract class BaseDoubleCropBlock extends CropBlock {
     
     public static final BooleanProperty IS_TOP = AQStateProperties.IS_TOP;
     public static final IntegerProperty AGE_4 = BlockStateProperties.AGE_4;
@@ -56,7 +56,7 @@ public abstract class DoubleCropBlock extends CropBlock {
     private final Supplier<ItemLike> seed;
     
     
-    public DoubleCropBlock( Properties properties, Supplier<ItemLike> seed ) {
+    public BaseDoubleCropBlock( Properties properties, Supplier<ItemLike> seed ) {
         super( properties );
         this.seed = Objects.requireNonNull( seed );
         registerDefaultState( stateDefinition.any().setValue( IS_TOP, false ) );
@@ -67,7 +67,7 @@ public abstract class DoubleCropBlock extends CropBlock {
         if( getMaxAge() <= 0 )
             throw new IllegalArgumentException( "Tried constructing a double block crop with a max age less or equal to 0." );
         if( getDoublingAge() > getMaxAge() )
-            throw new IllegalArgumentException( "Tried constructing a double block crop with a doubling age greater than max age." );
+            throw new IllegalArgumentException( "Tried constructing a double block crop with doubling age greater than max age." );
     }
     
     @Override
@@ -86,12 +86,15 @@ public abstract class DoubleCropBlock extends CropBlock {
     /** @return The crop age for when the crop should grow its top block. */
     public abstract int getDoublingAge();
     
+    /** @return This double crop's max age. */
     public abstract int maxAge();
     
-    public int getMaxAge() {
+    @Override
+    public final int getMaxAge() {
         return maxAge();
     }
     
+    /** @return This double crop's age property. */
     public abstract IntegerProperty ageProperty();
     
     @Override

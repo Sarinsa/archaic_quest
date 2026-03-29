@@ -17,6 +17,10 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
+mixin {
+    add sourceSets.main, "archaic_quest.mixins.refmap.json"
+}
+
 version = "${mod_version}-${mc_version}"
 group = 'com.obsidian_core.archaic_quest'
 archivesBaseName = 'archaic_quest'
@@ -29,61 +33,32 @@ minecraft {
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
+        configureEach {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                archaic_quest {
+                    source sourceSets.main
+                }
+            }
+        }
+
         client {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'archaic_quest'
-
-            mods {
-                archaic_quest {
-                    source sourceSets.main
-                }
-            }
+            property "mixin.debug.export", "true"
+            arg "-mixin.config=archaic_quest.mixins.json"
         }
-
         server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'forge.enabledGameTestNamespaces', 'archaic_quest'
-
-            mods {
-                archaic_quest {
-                    source sourceSets.main
-                }
-            }
+            property "mixin.debug.export", "true"
+            arg "-mixin.config=archaic_quest.mixins.json"
         }
-
         gameTestServer {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'archaic_quest'
-
-            mods {
-                dampsoil {
-                    source sourceSets.main
-                }
-            }
         }
-
         data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-
             args '--mod', 'archaic_quest', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            mods {
-                archaic_quest {
-                    source sourceSets.main
-                }
-            }
         }
     }
 }
@@ -136,6 +111,9 @@ dependencies {
 
     // Mekanism
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:${mekanism_version}")
+
+    // Mixin
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -147,7 +125,8 @@ jar {
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
                 "Implementation-Vendor"   : "Archaic Quest Team",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "archaic_quest.mixins.json"
         ])
     }
 }

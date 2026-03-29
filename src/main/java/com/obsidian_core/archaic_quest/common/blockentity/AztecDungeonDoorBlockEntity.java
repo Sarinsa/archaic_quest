@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.blockentity;
 
 import com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock;
-import com.obsidian_core.archaic_quest.common.block.data.DungeonDoorType;
+import com.obsidian_core.archaic_quest.common.block.base.DungeonDoorType;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlockEntities;
 import com.obsidian_core.archaic_quest.common.network.NetworkHelper;
 import net.minecraft.core.BlockPos;
@@ -24,6 +24,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.Nullable;
 
 public class AztecDungeonDoorBlockEntity extends BlockEntity {
+    
+    public static final String KEY_DOOR_STATE = "DoorState";
+    public static final String KEY_DOOR_POSITION = "DoorPosition";
     
     private DoorState doorState = DoorState.STAND_BY;
     private final int minDoorPos = 0;
@@ -55,28 +58,28 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
         DungeonDoorType doorType = dungeonDoor.doorType;
         DoorState doorState = dungeonDoor.doorState;
         
+        // If type is unknown/null or an unanimated frame, do nothing
         if( doorType == null || doorType.isFrame() )
             return;
         
-        if( doorState == DoorState.STAND_BY )
-            return;
-        
-        if( doorState == DoorState.OPENING ) {
-            if( dungeonDoor.doorPosition < 60 ) {
-                ++dungeonDoor.doorPosition;
+        switch( doorState ) {
+            case OPENING -> {
+                if( dungeonDoor.doorPosition < 60 ) {
+                    ++dungeonDoor.doorPosition;
+                }
+                else {
+                    dungeonDoor.setDoorState( DoorState.STAND_BY );
+                    dungeonDoor.toggleDoorBlocks( true );
+                }
             }
-            else {
-                dungeonDoor.setDoorState( DoorState.STAND_BY );
-                dungeonDoor.toggleDoorBlocks( true );
-            }
-        }
-        else if( doorState == DoorState.CLOSING ) {
-            if( dungeonDoor.doorPosition > 0 ) {
-                --dungeonDoor.doorPosition;
-            }
-            else {
-                dungeonDoor.setDoorState( DoorState.STAND_BY );
-                dungeonDoor.toggleDoorBlocks( false );
+            case CLOSING -> {
+                if( dungeonDoor.doorPosition > 0 ) {
+                    --dungeonDoor.doorPosition;
+                }
+                else {
+                    dungeonDoor.setDoorState( DoorState.STAND_BY );
+                    dungeonDoor.toggleDoorBlocks( false );
+                }
             }
         }
     }
@@ -139,12 +142,12 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
     public void load( CompoundTag compoundTag ) {
         super.load( compoundTag );
         
-        if( compoundTag.contains( "DoorPosition", Tag.TAG_ANY_NUMERIC ) ) {
-            doorPosition = Mth.clamp( compoundTag.getInt( "DoorPosition" ), minDoorPos, maxDoorPos );
+        if( compoundTag.contains( KEY_DOOR_POSITION, Tag.TAG_ANY_NUMERIC ) ) {
+            doorPosition = Mth.clamp( compoundTag.getInt( KEY_DOOR_POSITION ), minDoorPos, maxDoorPos );
         }
         
-        if( compoundTag.contains( "DoorState", Tag.TAG_ANY_NUMERIC ) ) {
-            int stateId = compoundTag.getInt( "DoorState" );
+        if( compoundTag.contains( KEY_DOOR_STATE, Tag.TAG_ANY_NUMERIC ) ) {
+            int stateId = compoundTag.getInt( KEY_DOOR_STATE );
             DoorState doorState = DoorState.byId( stateId );
             setDoorState( doorState == null ? DoorState.STAND_BY : doorState );
         }
@@ -154,13 +157,13 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
     public void saveAdditional( CompoundTag compoundTag ) {
         super.saveAdditional( compoundTag );
         
-        compoundTag.putInt( "DoorPosition", doorPosition );
-        compoundTag.putInt( "DoorState", getDoorState().ordinal() );
+        compoundTag.putInt( KEY_DOOR_POSITION, doorPosition );
+        compoundTag.putInt( KEY_DOOR_STATE, getDoorState().ordinal() );
     }
     
     private void writeUpdateData( CompoundTag compoundTag ) {
-        compoundTag.putInt( "DoorPosition", doorPosition );
-        compoundTag.putInt( "DoorState", getDoorState().ordinal() );
+        compoundTag.putInt( KEY_DOOR_POSITION, doorPosition );
+        compoundTag.putInt( KEY_DOOR_STATE, getDoorState().ordinal() );
     }
     
     
@@ -183,7 +186,8 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
     
     @Override
     public void onDataPacket( Connection net, ClientboundBlockEntityDataPacket pkt ) {
-        if( level.isClientSide ) {
+        // noinspection ConstantConditions
+        if( getLevel().isClientSide ) {
             super.handleUpdateTag( pkt.getTag() );
             
             CompoundTag compoundTag = pkt.getTag();
@@ -191,11 +195,11 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
             if( compoundTag == null )
                 return;
             
-            if( compoundTag.contains( "DoorPosition", Tag.TAG_ANY_NUMERIC ) ) {
-                doorPosition = Mth.clamp( compoundTag.getInt( "DoorPosition" ), minDoorPos, maxDoorPos );
+            if( compoundTag.contains( KEY_DOOR_POSITION, Tag.TAG_ANY_NUMERIC ) ) {
+                doorPosition = Mth.clamp( compoundTag.getInt( KEY_DOOR_POSITION ), minDoorPos, maxDoorPos );
             }
-            if( compoundTag.contains( "DoorState", Tag.TAG_ANY_NUMERIC ) ) {
-                int stateId = compoundTag.getInt( "DoorState" );
+            if( compoundTag.contains( KEY_DOOR_STATE, Tag.TAG_ANY_NUMERIC ) ) {
+                int stateId = compoundTag.getInt( KEY_DOOR_STATE );
                 DoorState doorState = DoorState.byId( stateId );
                 setDoorState( doorState == null ? DoorState.STAND_BY : doorState );
             }
@@ -215,7 +219,6 @@ public class AztecDungeonDoorBlockEntity extends BlockEntity {
                 ? new AABB( pos.offset( -2, 0, -2 ), pos.offset( 2, 3, 2 ) )
                 : INFINITE_EXTENT_AABB;
     }
-    
     
     public enum DoorState {
         OPENING,

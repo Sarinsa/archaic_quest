@@ -22,13 +22,13 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class AQBoatItem extends Item {
+public class CustomBoatItem extends Item {
     
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and( Entity::isPickable );
     private final AQBoat.BoatType type;
     private final boolean hasChest;
     
-    public AQBoatItem( boolean hasChest, AQBoat.BoatType type, Item.Properties properties ) {
+    public CustomBoatItem( boolean hasChest, AQBoat.BoatType type, Item.Properties properties ) {
         super( properties );
         this.hasChest = hasChest;
         this.type = type;

@@ -26,6 +26,7 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.Nullable;
 
 public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEntity implements LidBlockEntity {
     
@@ -75,7 +76,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
         super.load( compoundTag );
         items = NonNullList.withSize( getContainerSize(), ItemStack.EMPTY );
         
-        if( !this.tryLoadLootTable( compoundTag ) ) {
+        if( !tryLoadLootTable( compoundTag ) ) {
             ContainerHelper.loadAllItems( compoundTag, items );
         }
     }
@@ -107,6 +108,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     @Override
     public void startOpen( Player player ) {
         if( !remove && !player.isSpectator() ) {
+            // noinspection ConstantConditions
             openersCounter.incrementOpeners( player, level, getBlockPos(), getBlockState() );
         }
     }
@@ -114,6 +116,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     @Override
     public void stopOpen( Player player ) {
         if( !remove && !player.isSpectator() ) {
+            // noinspection ConstantConditions
             openersCounter.decrementOpeners( player, level, getBlockPos(), getBlockState() );
         }
     }
@@ -164,7 +167,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     }
     
     @Override
-    public <T> LazyOptional<T> getCapability( Capability<T> cap, Direction side ) {
+    public <T> LazyOptional<T> getCapability( Capability<T> cap, @Nullable Direction side ) {
         if( !remove && cap == ForgeCapabilities.ITEM_HANDLER ) {
             if( chestHandler == null )
                 chestHandler = LazyOptional.of( this::createHandler );
@@ -178,6 +181,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
         if( !(state.getBlock() instanceof ChestBlock) ) {
             return new InvWrapper( this );
         }
+        // noinspection ConstantConditions
         Container inv = ChestBlock.getContainer( (ChestBlock) state.getBlock(), state, level, getBlockPos(), true );
         return new InvWrapper( inv == null ? this : inv );
     }
@@ -194,6 +198,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     
     public void recheckOpen() {
         if( !remove ) {
+            // noinspection ConstantConditions
             openersCounter.recheckOpeners( level, getBlockPos(), getBlockState() );
         }
     }

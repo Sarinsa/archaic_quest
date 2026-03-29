@@ -97,8 +97,8 @@ public class AztecDungeonChestBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public MenuProvider getMenuProvider( BlockState state, Level level, BlockPos pos ) {
-        BlockEntity blockEntity = level.getBlockEntity( pos );
-        return blockEntity instanceof MenuProvider ? (MenuProvider) blockEntity : null;
+        BlockEntity blockEntity = level.getExistingBlockEntity( pos );
+        return blockEntity instanceof MenuProvider menuProvider ? menuProvider : null;
     }
     
     
@@ -120,12 +120,14 @@ public class AztecDungeonChestBlock extends Block implements EntityBlock {
     public boolean triggerEvent( BlockState state, Level level, BlockPos pos, int id, int data ) {
         super.triggerEvent( state, level, pos, id, data );
         BlockEntity blockEntity = level.getBlockEntity( pos );
+        
         return blockEntity != null && blockEntity.triggerEvent( id, data );
     }
     
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker( Level level, BlockState blockState, BlockEntityType<T> type ) {
-        return ( lvl, pos, state, blockEntity ) -> AztecDungeonChestBlockEntity.lidAnimateTick( lvl, pos, state, (AztecDungeonChestBlockEntity) blockEntity );
+        return ( lvl, pos, state, blockEntity )
+                -> AztecDungeonChestBlockEntity.lidAnimateTick( lvl, pos, state, (AztecDungeonChestBlockEntity) blockEntity );
     }
 }

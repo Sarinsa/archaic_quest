@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.base;
 
 
 import net.minecraft.core.BlockPos;
@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class AztecWoodPillarBaseBlock extends Block implements SimpleWaterloggedBlock {
+public class BaseAztecWoodPillarBlock extends Block implements SimpleWaterloggedBlock {
     
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     
@@ -29,7 +29,7 @@ public class AztecWoodPillarBaseBlock extends Block implements SimpleWaterlogged
                     Block.box( 3.0D, 5.0D, 3.0D, 13.0D, 7.0D, 13.0D )
             );
     
-    public AztecWoodPillarBaseBlock( Properties properties ) {
+    public BaseAztecWoodPillarBlock( Properties properties ) {
         super( properties );
         registerDefaultState( stateDefinition.any().setValue( WATERLOGGED, false ) );
     }
@@ -46,7 +46,7 @@ public class AztecWoodPillarBaseBlock extends Block implements SimpleWaterlogged
         Level level = context.getLevel();
         boolean waterlogged = level.getBlockState( clickedPos ).getFluidState().is( FluidTags.WATER );
         
-        return this.defaultBlockState().setValue( WATERLOGGED, waterlogged );
+        return defaultBlockState().setValue( WATERLOGGED, waterlogged );
     }
     
     @Override

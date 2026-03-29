@@ -1,6 +1,10 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
-import com.obsidian_core.archaic_quest.common.block.*;
+import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
+import com.obsidian_core.archaic_quest.common.block.CoolVinesBlock;
+import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
+import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
+import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.core.Direction;
@@ -190,12 +194,12 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         }
     }
     
-    public void doubleCrop( DoubleCropBlock block ) {
+    public void doubleCrop( BaseDoubleCropBlock block ) {
         ResourceLocation crossModel = mcLoc( "block/cross" );
         
         getVariantBuilder( block ).forAllStates( ( state ) -> {
             int age = state.getValue( block.getAgeProperty() );
-            boolean top = state.getValue( DoubleCropBlock.IS_TOP );
+            boolean top = state.getValue( BaseDoubleCropBlock.IS_TOP );
             String modelFileName = name( block ) + "_stage_" + age + (top ? "_top" : "");
             
             return ConfiguredModel.builder()

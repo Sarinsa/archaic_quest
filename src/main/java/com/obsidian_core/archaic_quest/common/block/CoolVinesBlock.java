@@ -1,5 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
+import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
-import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecThroneBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import net.minecraft.client.model.geom.ModelPart;

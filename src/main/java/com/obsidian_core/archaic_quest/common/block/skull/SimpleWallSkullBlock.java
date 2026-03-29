@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.skull;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;

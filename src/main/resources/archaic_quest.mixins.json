@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.obsidian_core.archaic_quest.common.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "archaic_quest.mixins.refmap.json",
+  "mixins": [
+    "BlockEntityTypeMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecThroneBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import net.minecraft.core.BlockPos;

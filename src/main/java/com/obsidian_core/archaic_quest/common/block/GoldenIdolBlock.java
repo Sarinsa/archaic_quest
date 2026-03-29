@@ -1,5 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
+import com.obsidian_core.archaic_quest.common.block.base.SimpleHorizontalBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;

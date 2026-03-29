@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 
-public class MacheteItem extends AQSimpleWeaponItem {
+public class MacheteItem extends SimpleWeaponItem {
     
     public MacheteItem( Tier itemTier, int durability, int damage, float attackSpeed ) {
         super( itemTier, durability, damage, attackSpeed );

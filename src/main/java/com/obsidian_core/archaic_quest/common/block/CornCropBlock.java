@@ -1,14 +1,13 @@
 package com.obsidian_core.archaic_quest.common.block;
 
 import com.mojang.datafixers.util.Pair;
+import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import javax.annotation.Nonnull;
-
-public class CornCropBlock extends DoubleCropBlock {
+public class CornCropBlock extends BaseDoubleCropBlock {
     
     protected static final Pair<VoxelShape[], VoxelShape[]> SHAPES = Pair.of(
             new VoxelShape[] {
@@ -31,7 +30,6 @@ public class CornCropBlock extends DoubleCropBlock {
         super( DEFAULT_PROPS, AQItems.CORN::get );
     }
     
-    @Nonnull
     @Override
     public Pair<VoxelShape[], VoxelShape[]> getShapes() {
         return SHAPES;

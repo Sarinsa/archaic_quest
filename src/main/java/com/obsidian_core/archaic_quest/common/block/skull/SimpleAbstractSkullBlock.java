@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.skull;
 
 import com.obsidian_core.archaic_quest.common.blockentity.SimpleSkullBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;

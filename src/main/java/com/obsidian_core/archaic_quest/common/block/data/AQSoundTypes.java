@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.data;
 
 import com.obsidian_core.archaic_quest.common.core.register.AQSoundEvents;
 import net.minecraft.sounds.SoundEvents;

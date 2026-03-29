@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.base;
 
 
 import net.minecraft.core.Direction;

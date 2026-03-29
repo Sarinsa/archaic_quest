@@ -54,6 +54,7 @@ public class ArchaicQuest {
         event.enqueueWork( () -> {
             AdventurersTorchItem.registerDefaults();
             
+            // Terrablender compat setup
             if( ModList.get().isLoaded( "terrablender" ) ) {
                 AQTerraBlender.setup();
             }

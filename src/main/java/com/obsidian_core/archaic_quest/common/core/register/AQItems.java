@@ -77,10 +77,10 @@ public class AQItems {
     public static final RegistryObject<Item> HAMMER_AND_CHISEL = registerSimpleItem( "hammer_and_chisel", Keys.TOOLS, HammerAndChiselItem::new );
     public static final RegistryObject<Item> WHIP = registerSimpleItem( "whip", Keys.ITEMS );
     
-    public static final RegistryObject<Item> WOOD_BONE_DAGGER = registerSimpleItem( "wood_bone_dagger", Keys.WEAPONS, () -> new AQSimpleWeaponItem( Tiers.WOOD, 60, 3, 0.0F ) );
-    public static final RegistryObject<Item> WOOD_JADE_DAGGER = registerSimpleItem( "wood_jade_dagger", Keys.WEAPONS, () -> new AQSimpleWeaponItem( AQItemTier.JADE, 60, 3, 0.0F ) );
-    public static final RegistryObject<Item> WOOD_OBSIDIAN_DAGGER = registerSimpleItem( "wood_obsidian_dagger", Keys.WEAPONS, () -> new AQSimpleWeaponItem( AQItemTier.OBSIDIAN, 60, 3, 0.0F ) );
-    public static final RegistryObject<Item> BONE_CLUB = registerSimpleItem( "bone_club", Keys.WEAPONS, () -> new AQSimpleWeaponItem( Tiers.WOOD, 60, 5, -3.0F ) );
+    public static final RegistryObject<Item> WOOD_BONE_DAGGER = registerSimpleItem( "wood_bone_dagger", Keys.WEAPONS, () -> new SimpleWeaponItem( Tiers.WOOD, 60, 3, 0.0F ) );
+    public static final RegistryObject<Item> WOOD_JADE_DAGGER = registerSimpleItem( "wood_jade_dagger", Keys.WEAPONS, () -> new SimpleWeaponItem( AQItemTier.JADE, 60, 3, 0.0F ) );
+    public static final RegistryObject<Item> WOOD_OBSIDIAN_DAGGER = registerSimpleItem( "wood_obsidian_dagger", Keys.WEAPONS, () -> new SimpleWeaponItem( AQItemTier.OBSIDIAN, 60, 3, 0.0F ) );
+    public static final RegistryObject<Item> BONE_CLUB = registerSimpleItem( "bone_club", Keys.WEAPONS, () -> new SimpleWeaponItem( Tiers.WOOD, 60, 5, -3.0F ) );
     
     public static final RegistryObject<Item> BONE_BLOWPIPE = registerSimpleItem( "bone_blowpipe", Keys.WEAPONS );
     public static final RegistryObject<Item> WOODEN_BLOWPIPE = registerSimpleItem( "wooden_blowpipe", Keys.WEAPONS );

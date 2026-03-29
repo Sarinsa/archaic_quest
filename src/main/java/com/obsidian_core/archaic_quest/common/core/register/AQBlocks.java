@@ -2,8 +2,11 @@ package com.obsidian_core.archaic_quest.common.core.register;
 
 import com.mojang.datafixers.util.Pair;
 import com.obsidian_core.archaic_quest.common.block.*;
-import com.obsidian_core.archaic_quest.common.block.data.DungeonDoorType;
-import com.obsidian_core.archaic_quest.common.block.data.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.base.*;
+import com.obsidian_core.archaic_quest.common.block.data.AQSoundTypes;
+import com.obsidian_core.archaic_quest.common.block.skull.SimpleSkullBlock;
+import com.obsidian_core.archaic_quest.common.block.skull.SimpleWallSkullBlock;
+import com.obsidian_core.archaic_quest.common.block.skull.SkullGobletBlock;
 import com.obsidian_core.archaic_quest.common.block.tree.AztecJungleTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.EmptyTreeGrower;
@@ -62,13 +65,13 @@ public class AQBlocks {
     public static final RegistryObject<Block> CORN_CROP = registerBlockNoItem( "corn_crop", CornCropBlock::new );
     
     // ORES
-    public static final RegistryObject<Block> TIN_ORE = simpleBlock( "tin_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL );
-    public static final RegistryObject<Block> SILVER_ORE = simpleBlock( "silver_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
-    public static final RegistryObject<Block> BASALT_ORE = simpleBlock( "basalt_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
-    public static final RegistryObject<Block> GRANITE_QUARTZ_ORE = simpleBlock( "granite_quartz_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( 2, 5, BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL );
-    public static final RegistryObject<Block> ANDESITE_TURQUOISE_ORE = simpleBlock( "andesite_turquoise_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( 2, 5, BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
-    public static final RegistryObject<Block> DIORITE_JADE_ORE = simpleBlock( "diorite_jade_ore", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( 2, 5, BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
-    public static final RegistryObject<Block> ONYX = simpleBlock( "onyx", AQCreativeTabs.Keys.BLOCKS, () -> new AQOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
+    public static final RegistryObject<Block> TIN_ORE = simpleBlock( "tin_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL );
+    public static final RegistryObject<Block> SILVER_ORE = simpleBlock( "silver_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
+    public static final RegistryObject<Block> BASALT_ORE = simpleBlock( "basalt_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
+    public static final RegistryObject<Block> GRANITE_QUARTZ_ORE = simpleBlock( "granite_quartz_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ), 2, 5 ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_STONE_TOOL );
+    public static final RegistryObject<Block> ANDESITE_TURQUOISE_ORE = simpleBlock( "andesite_turquoise_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ), 2, 5 ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
+    public static final RegistryObject<Block> DIORITE_JADE_ORE = simpleBlock( "diorite_jade_ore", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ), 2, 5 ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
+    public static final RegistryObject<Block> ONYX = simpleBlock( "onyx", AQCreativeTabs.Keys.BLOCKS, () -> new BaseOreBlock( BlockBehaviour.Properties.of().sound( SoundType.STONE ).requiresCorrectToolForDrops().strength( 3.0F, 3.0F ) ), BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_IRON_TOOL );
     
     
     // AZTEC STUFF
@@ -203,7 +206,7 @@ public class AQBlocks {
     public static final RegistryObject<Block> ANDESITE_AZTEC_TRAP_1 = registerBlock( "andesite_aztec_trap_1", AQCreativeTabs.Keys.BLOCKS, () -> new AztecTrapBlock( AQBlocks.ANDESITE_BRICKS_PROP ), BlockTags.MINEABLE_WITH_PICKAXE );
     
     public static final RegistryObject<Block> AZTEC_SPRUCE_WOOD_PILLAR = registerBlock( "aztec_spruce_wood_pillar", AQCreativeTabs.Keys.DECORATION, () -> new AztecWoodPillarBlock( BlockBehaviour.Properties.copy( Blocks.SPRUCE_WOOD ) ), BlockTags.MINEABLE_WITH_AXE );
-    public static final RegistryObject<Block> AZTEC_SPRUCE_WOOD_PILLAR_ANDESITE_BASE = registerBlock( "aztec_spruce_wood_pillar_andesite_base", AQCreativeTabs.Keys.DECORATION, () -> new AztecWoodPillarBaseBlock( BlockBehaviour.Properties.copy( Blocks.COBBLESTONE ) ), BlockTags.MINEABLE_WITH_PICKAXE );
+    public static final RegistryObject<Block> AZTEC_SPRUCE_WOOD_PILLAR_ANDESITE_BASE = registerBlock( "aztec_spruce_wood_pillar_andesite_base", AQCreativeTabs.Keys.DECORATION, () -> new BaseAztecWoodPillarBlock( BlockBehaviour.Properties.copy( Blocks.COBBLESTONE ) ), BlockTags.MINEABLE_WITH_PICKAXE );
     
     public static final RegistryObject<CeramicVaseBlock> AZTEC_VASE = registerBlock( "aztec_vase", AQCreativeTabs.Keys.DECORATION, () -> new CeramicVaseBlock( BlockBehaviour.Properties.of().sound( AQSoundTypes.CERAMIC_VASE ).strength( 0.7F ) ), BlockTags.MINEABLE_WITH_PICKAXE );
     public static final RegistryObject<Block> INFESTED_VASE = registerBlock( "aztec_infested_vase", AQCreativeTabs.Keys.DECORATION, () -> new InfestedVaseBlock( BlockBehaviour.Properties.of().sound( AQSoundTypes.CERAMIC_VASE ).strength( 0.35F ) ), BlockTags.MINEABLE_WITH_PICKAXE );

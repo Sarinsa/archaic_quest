@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.skull;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;

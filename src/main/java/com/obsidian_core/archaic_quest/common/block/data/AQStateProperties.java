@@ -1,7 +1,7 @@
-package com.obsidian_core.archaic_quest.common.block.state;
+package com.obsidian_core.archaic_quest.common.block.data;
 
 import com.obsidian_core.archaic_quest.common.block.SpikeTrapBlock;
-import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
