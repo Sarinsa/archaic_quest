@@ -24,7 +24,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.MapColor;
@@ -43,7 +42,6 @@ import java.util.function.Supplier;
 public abstract class BaseDoubleCropBlock extends CropBlock {
     
     public static final BooleanProperty IS_TOP = AQStateProperties.IS_TOP;
-    public static final IntegerProperty AGE_4 = BlockStateProperties.AGE_4;
     
     protected static final BlockBehaviour.Properties DEFAULT_PROPS = BlockBehaviour.Properties.copy( Blocks.WHEAT )
             .mapColor( MapColor.PLANT )
@@ -63,7 +61,7 @@ public abstract class BaseDoubleCropBlock extends CropBlock {
         
         // Some sanity checks
         if( getShapes().getFirst().length - 1 != getMaxAge() || getShapes().getSecond().length - 1 != getMaxAge() )
-            throw new IllegalArgumentException( "Tried constructing a double block crop block with inconsistent voxel shape array sizes." );
+            throw new IllegalArgumentException( "Tried constructing a double block crop with inconsistent voxel shape array sizes." );
         if( getMaxAge() <= 0 )
             throw new IllegalArgumentException( "Tried constructing a double block crop with a max age less or equal to 0." );
         if( getDoublingAge() > getMaxAge() )
@@ -130,10 +128,10 @@ public abstract class BaseDoubleCropBlock extends CropBlock {
                 
                 if( ForgeHooks.onCropsGrowPre( level, pos, state, randomSource.nextInt( (int) (25.0F / growthSpeed) + 1 ) == 0 ) ) {
                     int newAge = age + 1;
-                    level.setBlock( pos, getStateForAge( newAge ), 2 );
+                    level.setBlock( pos, getStateForAge( newAge ), Block.UPDATE_CLIENTS );
                     
                     if( newAge >= getDoublingAge() ) {
-                        level.setBlock( pos.above(), getStateForAge( newAge ).setValue( IS_TOP, true ), 2 );
+                        level.setBlock( pos.above(), getStateForAge( newAge ).setValue( IS_TOP, true ), Block.UPDATE_CLIENTS );
                     }
                     ForgeHooks.onCropsGrowPost( level, pos, state );
                 }
@@ -146,12 +144,12 @@ public abstract class BaseDoubleCropBlock extends CropBlock {
     public InteractionResult use( BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult ) {
         if( getAge( state ) >= maxAge() ) {
             if( isTop( state ) ) {
-                world.setBlock( pos, getStateForAge( getOnHarvestAge() ).setValue( IS_TOP, true ), 2 );
-                world.setBlock( pos.below(), getStateForAge( getOnHarvestAge() ), 2 );
+                world.setBlock( pos, getStateForAge( getOnHarvestAge() ).setValue( IS_TOP, true ), Block.UPDATE_CLIENTS );
+                world.setBlock( pos.below(), getStateForAge( getOnHarvestAge() ), Block.UPDATE_CLIENTS );
             }
             else {
-                world.setBlock( pos, getStateForAge( getOnHarvestAge() ), 2 );
-                world.setBlock( pos.above(), getStateForAge( getOnHarvestAge() ).setValue( IS_TOP, true ), 2 );
+                world.setBlock( pos, getStateForAge( getOnHarvestAge() ), Block.UPDATE_CLIENTS );
+                world.setBlock( pos.above(), getStateForAge( getOnHarvestAge() ).setValue( IS_TOP, true ), Block.UPDATE_CLIENTS );
             }
             if( !world.isClientSide ) {
                 List<ItemStack> drops = getDrops( getStateForAge( maxAge() ), (ServerLevel) world, pos, null );
@@ -172,16 +170,16 @@ public abstract class BaseDoubleCropBlock extends CropBlock {
     
     @Override
     public void growCrops( Level level, BlockPos pos, BlockState state ) {
-        int age = this.getAge( state ) + getBonemealAgeIncrease( level );
-        int maxAge = this.getMaxAge();
+        int age = getAge( state ) + getBonemealAgeIncrease( level );
+        int maxAge = getMaxAge();
         
         if( age > maxAge ) {
             age = maxAge;
         }
-        level.setBlock( pos, getStateForAge( age ), 2 );
+        level.setBlock( pos, getStateForAge( age ), Block.UPDATE_CLIENTS );
         
         if( age >= getDoublingAge() ) {
-            level.setBlock( pos.above(), getStateForAge( age ).setValue( IS_TOP, true ), 2 );
+            level.setBlock( pos.above(), getStateForAge( age ).setValue( IS_TOP, true ), Block.UPDATE_CLIENTS );
         }
     }
     
@@ -236,7 +234,7 @@ public abstract class BaseDoubleCropBlock extends CropBlock {
     
     @Override
     public boolean isValidBonemealTarget( LevelReader level, BlockPos pos, BlockState state, boolean clientSide ) {
-        return !this.isMaxAge( state ) && !isTop( state );
+        return !isMaxAge( state ) && !isTop( state );
     }
     
     @Override

@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -16,11 +17,13 @@ public class CornCropBlock extends BaseDoubleCropBlock {
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
+                    Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
             },
             new VoxelShape[] {
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 11.0D, 16.0D ),
+                    Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
                     Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
             }
@@ -42,12 +45,12 @@ public class CornCropBlock extends BaseDoubleCropBlock {
     
     @Override
     public int maxAge() {
-        return 4;
+        return 5;
     }
     
     @Override
     public IntegerProperty ageProperty() {
-        return AGE_4;
+        return BlockStateProperties.AGE_5;
     }
     
     @Override
