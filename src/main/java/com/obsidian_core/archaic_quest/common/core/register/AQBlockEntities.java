@@ -19,7 +19,8 @@ public class AQBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> REGISTRY = DeferredRegister.create( ForgeRegistries.BLOCK_ENTITY_TYPES, ArchaicQuest.MODID );
     
     
-    public static final RegistryObject<BlockEntityType<CustomSignBlockEntity>> CUSTOM_SIGN = register( "sign", CustomSignBlockEntity::new, WoodSet.allSignBlocks() );
+    public static final RegistryObject<BlockEntityType<CustomSignBlockEntity>> CUSTOM_SIGN = register( "sign", CustomSignBlockEntity::new, WoodSet.allNormalSignBlocks() );
+    public static final RegistryObject<BlockEntityType<CustomHangingSignBlockEntity>> CUSTOM_HANGING_SIGN = register( "hanging_sign", CustomHangingSignBlockEntity::new, WoodSet.allHangingSignBlocks() );
     public static final RegistryObject<BlockEntityType<SimpleSkullBlockEntity>> SIMPLE_SKULL = register( "simple_skull", SimpleSkullBlockEntity::new, List.of(
             AQBlocks.CRYSTAL_SKULL.getFirst(),
             AQBlocks.CRYSTAL_SKULL.getSecond(),

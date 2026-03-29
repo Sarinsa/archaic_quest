@@ -142,6 +142,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         buttonBlock( woodSet.getButton().get(), blockTexture( planks ) );
         trapDoor( woodSet.getTrapdoor().get(), true, true );
         door( woodSet.getDoor().get(), true );
+        
         blockNoModel( woodSet.getSign().get(), blockTexture( woodSet.getPlanks().get() ) );
         blockNoModel( woodSet.getWallSign().get(), blockTexture( woodSet.getPlanks().get() ) );
         blockNoModel( woodSet.getHangingSign().get(), blockTexture( woodSet.getPlanks().get() ) );

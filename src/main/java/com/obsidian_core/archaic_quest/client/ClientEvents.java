@@ -26,7 +26,7 @@ public class ClientEvents {
         }
     }
     
-    protected static void skipHighlight( RegistryObject<? extends Block> regObj ) {
+    protected static void addHighlightSkip( RegistryObject<? extends Block> regObj ) {
         HIGHLIGHT_SKIPPED_BLOCKS.add( regObj.get() );
     }
 }

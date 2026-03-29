@@ -1,6 +1,10 @@
 package com.obsidian_core.archaic_quest.common.core.register.util;
 
 import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.sign.CustomCeilingHangingSignBlock;
+import com.obsidian_core.archaic_quest.common.block.sign.CustomStandingSignBlock;
+import com.obsidian_core.archaic_quest.common.block.sign.CustomWallHangingSignBlock;
+import com.obsidian_core.archaic_quest.common.block.sign.CustomWallSignBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQCreativeTabs;
@@ -105,10 +109,10 @@ public class WoodSet {
         door = registerDoor( name + "_door", blockSetType, baseProperties );
         
         // Signs
-        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new StandingSignBlock( baseProperties, woodType ) );
-        wallSign = AQBlocks.REGISTRY.register( name + "_wall_sign", () -> new WallSignBlock( baseProperties, woodType ) );
-        hangingSign = AQBlocks.REGISTRY.register( name + "_hanging_sign", () -> new CeilingHangingSignBlock( baseProperties, woodType ) );
-        wallHangingSign = AQBlocks.REGISTRY.register( name + "_wall_hanging_sign", () -> new WallHangingSignBlock( baseProperties, woodType ) );
+        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new CustomStandingSignBlock( baseProperties, woodType ) );
+        wallSign = AQBlocks.REGISTRY.register( name + "_wall_sign", () -> new CustomWallSignBlock( baseProperties, woodType ) );
+        hangingSign = AQBlocks.REGISTRY.register( name + "_hanging_sign", () -> new CustomCeilingHangingSignBlock( baseProperties, woodType ) );
+        wallHangingSign = AQBlocks.REGISTRY.register( name + "_wall_hanging_sign", () -> new CustomWallHangingSignBlock( baseProperties, woodType ) );
         
         // Block items
         AQItems.registerItem( name + "_sign", AQCreativeTabs.Keys.DECORATION, () -> new SignItem( new Item.Properties().stacksTo( 16 ), sign.get(), wallSign.get() ) );
@@ -246,11 +250,11 @@ public class WoodSet {
     }
     
     /**
-     * @return A list containing all sign block registry objects from all wood sets.
+     * @return A list containing all normal (standing and wall) sign block registry objects from all wood sets.
      * Primarily used for registering our custom sign block entity.
      */
-    public static List<RegistryObject<? extends Block>> allSignBlocks() {
-        if( WOOD_SETS.isEmpty() || !WOOD_SETS.get( 0 ).sign.isPresent() ) {
+    public static List<RegistryObject<? extends Block>> allNormalSignBlocks() {
+        if( WOOD_SETS.isEmpty() ) {
             throw new IllegalStateException( "Wood sets have not yet been constructed!" );
         }
         List<RegistryObject<? extends Block>> signs = new ArrayList<>();
@@ -258,7 +262,24 @@ public class WoodSet {
         for( WoodSet woodSet : WOOD_SETS ) {
             Collections.addAll( signs,
                     woodSet.sign,
-                    woodSet.wallSign,
+                    woodSet.wallSign
+            );
+        }
+        return signs;
+    }
+    
+    /**
+     * @return A list containing all hanging (ceiling and wall) sign block registry objects from all wood sets.
+     * Primarily used for registering our custom hanging sign block entity.
+     */
+    public static List<RegistryObject<? extends Block>> allHangingSignBlocks() {
+        if( WOOD_SETS.isEmpty() ) {
+            throw new IllegalStateException( "Wood sets have not yet been constructed!" );
+        }
+        List<RegistryObject<? extends Block>> signs = new ArrayList<>();
+        
+        for( WoodSet woodSet : WOOD_SETS ) {
+            Collections.addAll( signs,
                     woodSet.hangingSign,
                     woodSet.wallHangingSign
             );

@@ -22,6 +22,8 @@ import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
@@ -109,6 +111,8 @@ public class ClientRegister {
     
     @SubscribeEvent
     public static void registerRenderers( EntityRenderersEvent.RegisterRenderers event ) {
+        event.registerBlockEntityRenderer( AQBlockEntities.CUSTOM_SIGN.get(), SignRenderer::new );
+        event.registerBlockEntityRenderer( AQBlockEntities.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_DUNGEON_DOOR.get(), AztecDungeonDoorRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_CRAFTING_STATION.get(), AztecWorktableRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_THRONE.get(), AztecThroneRenderer::new );
@@ -129,15 +133,17 @@ public class ClientRegister {
     }
     
     private static void addSkippedHighlightBlocks() {
-        ClientEvents.skipHighlight( AQBlocks.AZTEC_DUNGEON_DOOR_0 );
-        ClientEvents.skipHighlight( AQBlocks.AZTEC_DUNGEON_DOOR_1 );
-        ClientEvents.skipHighlight( AQBlocks.AZTEC_DUNGEON_DOOR_FRAME_0 );
-        ClientEvents.skipHighlight( AQBlocks.AZTEC_DUNGEON_DOOR_FRAME_1 );
+        ClientEvents.addHighlightSkip( AQBlocks.AZTEC_DUNGEON_DOOR_0 );
+        ClientEvents.addHighlightSkip( AQBlocks.AZTEC_DUNGEON_DOOR_1 );
+        ClientEvents.addHighlightSkip( AQBlocks.AZTEC_DUNGEON_DOOR_FRAME_0 );
+        ClientEvents.addHighlightSkip( AQBlocks.AZTEC_DUNGEON_DOOR_FRAME_1 );
     }
     
     @SubscribeEvent
     public static void registerBlockColors( RegisterColorHandlersEvent.Block event ) {
-        event.register( ( state, blockDisplayReader, pos, color ) -> blockDisplayReader != null && pos != null ? BiomeColors.getAverageFoliageColor( blockDisplayReader, pos ) : FoliageColor.getDefaultColor(),
+        event.register( ( state, blockDisplayReader, pos, color ) -> blockDisplayReader != null && pos != null
+                        ? BiomeColors.getAverageFoliageColor( blockDisplayReader, pos )
+                        : FoliageColor.getDefaultColor(),
                 AQBlocks.VINES_1.get() );
     }
     

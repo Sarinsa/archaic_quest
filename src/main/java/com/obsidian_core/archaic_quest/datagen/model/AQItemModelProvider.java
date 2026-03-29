@@ -57,16 +57,17 @@ public class AQItemModelProvider extends ItemModelProvider {
         existingBlock( woodSet.getFenceGate() );
         existingBlock( woodSet.getPressurePlate() );
         
-        withExistingParent( woodSet.getFence().getId().getPath(), ResourceLocation.withDefaultNamespace( "block/fence_inventory" ) )
+        withExistingParent( Objects.requireNonNull( woodSet.getFence().getId() ).getPath(), ResourceLocation.withDefaultNamespace( "block/fence_inventory" ) )
                 .texture( "texture", blockTexture( woodSet.getPlanks().get() ) );
         
-        withExistingParent( woodSet.getButton().getId().getPath(), ResourceLocation.withDefaultNamespace( "block/button_inventory" ) )
+        withExistingParent( Objects.requireNonNull( woodSet.getButton().getId() ).getPath(), ResourceLocation.withDefaultNamespace( "block/button_inventory" ) )
                 .texture( "texture", blockTexture( woodSet.getPlanks().get() ) );
         
-        withExistingParent( woodSet.getTrapdoor().getId().getPath(), resLoc( "block/" + woodSet.getTrapdoor().getId().getPath() + "_bottom" ) );
+        withExistingParent( Objects.requireNonNull( woodSet.getTrapdoor().getId() ).getPath(), resLoc( "block/" + woodSet.getTrapdoor().getId().getPath() + "_bottom" ) );
         
         simpleItem( woodSet.getDoor().get().asItem(), false );
         simpleItem( woodSet.getSign().get().asItem(), false );
+        simpleItem( woodSet.getHangingSign().get().asItem(), false );
         simpleItem( woodSet.getBoat().get(), false );
         simpleItem( woodSet.getChestBoat().get(), false );
     }
