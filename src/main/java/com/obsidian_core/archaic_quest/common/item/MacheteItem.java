@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 
@@ -31,10 +32,10 @@ public class MacheteItem extends SimpleWeaponItem {
         
         if( state.getBlock() instanceof CoolVinesBlock && !state.getValue( CoolVinesBlock.CUT ) ) {
             if( player.isShiftKeyDown() ) {
-                level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+                level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), Block.UPDATE_CLIENTS );
             }
             else {
-                level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+                level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), Block.UPDATE_CLIENTS );
             }
             stack.hurtAndBreak( 1, player, p -> p.broadcastBreakEvent( context.getHand() ) );
             return InteractionResult.sidedSuccess( level.isClientSide );

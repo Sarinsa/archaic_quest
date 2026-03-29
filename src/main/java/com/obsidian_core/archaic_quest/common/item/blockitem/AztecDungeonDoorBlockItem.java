@@ -29,24 +29,24 @@ public class AztecDungeonDoorBlockItem extends BlockItem {
         
         switch( direction ) {
             case SOUTH, NORTH -> {
-                level.setBlock( pos.west(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_LEFT ), 2 );
-                level.setBlock( pos.east(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_RIGHT ), 2 );
-                level.setBlock( pos.above(), blockState.setValue( BLOCK_TYPE, BlockType.MIDDLE ), 2 );
-                level.setBlock( pos.above().west(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT ), 2 );
-                level.setBlock( pos.above().east(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT ), 2 );
-                level.setBlock( pos.above( 2 ), blockState.setValue( BLOCK_TYPE, BlockType.TOP ), 2 );
-                level.setBlock( pos.above( 2 ).west(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT_TOP ), 2 );
-                level.setBlock( pos.above( 2 ).east(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT_TOP ), 2 );
+                level.setBlock( pos.west(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_LEFT ), Block.UPDATE_ALL );
+                level.setBlock( pos.east(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_RIGHT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above(), blockState.setValue( BLOCK_TYPE, BlockType.MIDDLE ), Block.UPDATE_ALL );
+                level.setBlock( pos.above().west(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above().east(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ), blockState.setValue( BLOCK_TYPE, BlockType.TOP ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ).west(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT_TOP ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ).east(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT_TOP ), Block.UPDATE_ALL );
             }
             case EAST, WEST -> {
-                level.setBlock( pos.south(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_LEFT ), 2 );
-                level.setBlock( pos.north(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_RIGHT ), 2 );
-                level.setBlock( pos.above(), blockState.setValue( BLOCK_TYPE, BlockType.MIDDLE ), 2 );
-                level.setBlock( pos.above().south(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT ), 2 );
-                level.setBlock( pos.above().north(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT ), 2 );
-                level.setBlock( pos.above( 2 ), blockState.setValue( BLOCK_TYPE, BlockType.TOP ), 2 );
-                level.setBlock( pos.above( 2 ).south(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT_TOP ), 2 );
-                level.setBlock( pos.above( 2 ).north(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT_TOP ), 2 );
+                level.setBlock( pos.south(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_LEFT ), Block.UPDATE_ALL );
+                level.setBlock( pos.north(), blockState.setValue( BLOCK_TYPE, BlockType.LOWER_RIGHT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above(), blockState.setValue( BLOCK_TYPE, BlockType.MIDDLE ), Block.UPDATE_ALL );
+                level.setBlock( pos.above().south(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above().north(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ), blockState.setValue( BLOCK_TYPE, BlockType.TOP ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ).south(), blockState.setValue( BLOCK_TYPE, BlockType.LEFT_TOP ), Block.UPDATE_ALL );
+                level.setBlock( pos.above( 2 ).north(), blockState.setValue( BLOCK_TYPE, BlockType.RIGHT_TOP ), Block.UPDATE_ALL );
             }
         }
         return super.placeBlock( context, blockState );
