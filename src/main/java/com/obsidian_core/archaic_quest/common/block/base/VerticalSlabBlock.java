@@ -1,7 +1,8 @@
 package com.obsidian_core.archaic_quest.common.block.base;
 
 
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -40,11 +41,8 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     public static final EnumProperty<SlabState> SLAB_STATE = AQStateProperties.VERTICAL_SLAB_STATE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     
-    private static final VoxelShape NORTH = Block.box( 0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D );
-    private static final VoxelShape EAST = Block.box( 0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D );
-    private static final VoxelShape WEST = Block.box( 8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D );
-    private static final VoxelShape SOUTH = Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D );
-    private static final VoxelShape DOUBLE = Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D );
+    private static final DirectionalShape SHAPE = DirectionalShape.builder().x( 0.0, 16.0 ).y( 0.0, 16.0 ).z( 8.0, 16.0 ).build();
+    private static final VoxelShape DOUBLE_SHAPE = Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D );
     
     
     public VerticalSlabBlock( Properties properties ) {
@@ -59,11 +57,11 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     @SuppressWarnings( "deprecation" )
     public VoxelShape getShape( BlockState state, BlockGetter level, BlockPos pos, CollisionContext context ) {
         return switch( state.getValue( SLAB_STATE ) ) {
-            case NORTH -> NORTH;
-            case SOUTH -> SOUTH;
-            case WEST -> WEST;
-            case EAST -> EAST;
-            case DOUBLE -> DOUBLE;
+            case NORTH -> SHAPE.getFor( Direction.NORTH );
+            case SOUTH -> SHAPE.getFor( Direction.SOUTH );
+            case WEST -> SHAPE.getFor( Direction.WEST );
+            case EAST -> SHAPE.getFor( Direction.EAST );
+            case DOUBLE -> DOUBLE_SHAPE;
         };
     }
     

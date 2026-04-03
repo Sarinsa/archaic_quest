@@ -1,11 +1,17 @@
 package com.obsidian_core.archaic_quest.common.block;
 
 import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
+import com.obsidian_core.archaic_quest.common.item.misc.IMacheteCuttable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -23,33 +29,39 @@ import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 
-public class CoolVinesBlock extends Block implements IForgeShearable {
+public class CoolVinesBlock extends Block implements IForgeShearable, IMacheteCuttable {
     
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty CUT = BooleanProperty.create( "cut" );
     public static final BooleanProperty CAN_GROW = BooleanProperty.create( "can_grow" );
     
-    private static final VoxelShape[] shapes = {
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D ),
-            Block.box( 15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 8.0D, 0.0D, 16.0D, 16.0D, 1.0D ),
-            Block.box( 15.0D, 8.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 8.0D, 15.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 8.0D, 0.0D, 1.0D, 16.0D, 16.0D ),
-    };
+    private static final DirectionalShape FULL_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 15.0, 16.0 )
+            .build();
+    private static final DirectionalShape CUT_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 16.0 )
+            .y( 8.0, 16.0 )
+            .z( 15.0, 16.0 )
+            .build();
     
     
     public CoolVinesBlock( Properties properties ) {
         super( properties );
-        registerDefaultState( stateDefinition.any().setValue( FACING, Direction.NORTH ).setValue( CUT, false ).setValue( CAN_GROW, true ) );
+        registerDefaultState( stateDefinition.any()
+                .setValue( FACING, Direction.NORTH )
+                .setValue( CUT, false )
+                .setValue( CAN_GROW, true )
+        );
     }
     
     @Override
     @SuppressWarnings( "deprecation" )
     public VoxelShape getShape( BlockState state, BlockGetter world, BlockPos pos, CollisionContext context ) {
-        return shapes[state.getValue( FACING ).get2DDataValue() + (state.getValue( CUT ) ? 4 : 0)];
+        Direction dir = state.getValue( FACING );
+        return state.getValue( CUT ) ? CUT_SHAPE.getFor( dir ) : FULL_SHAPE.getFor( dir );
+        //return shapes[state.getValue( FACING ).get2DDataValue() + (state.getValue( CUT ) ? 4 : 0)];
     }
     
     public boolean isCut( BlockState state ) {
@@ -129,11 +141,6 @@ public class CoolVinesBlock extends Block implements IForgeShearable {
     }
     
     @Override
-    protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
-        stateBuilder.add( FACING, CUT, CAN_GROW );
-    }
-    
-    @Override
     @SuppressWarnings( "deprecation" )
     public BlockState rotate( BlockState state, Rotation rotation ) {
         return state.setValue( FACING, rotation.rotate( state.getValue( FACING ) ) );
@@ -143,5 +150,27 @@ public class CoolVinesBlock extends Block implements IForgeShearable {
     @SuppressWarnings( "deprecation" )
     public BlockState mirror( BlockState state, Mirror mirror ) {
         return state.rotate( mirror.getRotation( state.getValue( FACING ) ) );
+    }
+    
+    @Override
+    protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
+        stateBuilder.add( FACING, CUT, CAN_GROW );
+    }
+    
+    @Override
+    public boolean onCut( UseOnContext useContext ) {
+        final Level level = useContext.getLevel();
+        final BlockPos pos = useContext.getClickedPos();
+        final BlockState state = level.getBlockState( pos );
+        final Player player = useContext.getPlayer();
+        
+        if( player != null && player.isShiftKeyDown() ) {
+            level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+        }
+        else {
+            level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+        }
+        level.playSound( player, pos, SoundEvents.MOSS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F );
+        return true;
     }
 }
