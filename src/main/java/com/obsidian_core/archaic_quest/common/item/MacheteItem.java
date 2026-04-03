@@ -1,14 +1,10 @@
 package com.obsidian_core.archaic_quest.common.item;
 
-import com.obsidian_core.archaic_quest.common.block.CoolVinesBlock;
-import net.minecraft.core.BlockPos;
+import com.obsidian_core.archaic_quest.common.item.misc.IMacheteCuttable;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 
@@ -20,26 +16,12 @@ public class MacheteItem extends SimpleWeaponItem {
     
     @Override
     public InteractionResult useOn( UseOnContext context ) {
-        Player player = context.getPlayer();
+        final Level level = context.getLevel();
+        final BlockState state = level.getBlockState( context.getClickedPos() );
         
-        if( player == null )
-            return InteractionResult.PASS;
-        
-        Level level = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockState state = level.getBlockState( pos );
-        ItemStack stack = context.getItemInHand();
-        
-        if( state.getBlock() instanceof CoolVinesBlock && !state.getValue( CoolVinesBlock.CUT ) ) {
-            if( player.isShiftKeyDown() ) {
-                level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), Block.UPDATE_CLIENTS );
-            }
-            else {
-                level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), Block.UPDATE_CLIENTS );
-            }
-            stack.hurtAndBreak( 1, player, p -> p.broadcastBreakEvent( context.getHand() ) );
-            return InteractionResult.sidedSuccess( level.isClientSide );
+        if( state.getBlock() instanceof IMacheteCuttable macheteCuttable ) {
+            return macheteCuttable.onCut( context ) ? InteractionResult.sidedSuccess( level.isClientSide ) : InteractionResult.FAIL;
         }
-        return InteractionResult.PASS;
+        return InteractionResult.FAIL;
     }
 }
