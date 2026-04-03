@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.RegistryObject;
@@ -109,7 +110,7 @@ public class WoodSet {
         door = registerDoor( name + "_door", blockSetType, baseProperties );
         
         // Signs
-        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new CustomStandingSignBlock( baseProperties, woodType ) );
+        sign = AQBlocks.REGISTRY.register( name + "_sign", () -> new CustomStandingSignBlock( baseProperties.forceSolidOn().instrument( NoteBlockInstrument.BASS ).noCollission(), woodType ) );
         wallSign = AQBlocks.REGISTRY.register( name + "_wall_sign", () -> new CustomWallSignBlock( baseProperties, woodType ) );
         hangingSign = AQBlocks.REGISTRY.register( name + "_hanging_sign", () -> new CustomCeilingHangingSignBlock( baseProperties, woodType ) );
         wallHangingSign = AQBlocks.REGISTRY.register( name + "_wall_hanging_sign", () -> new CustomWallHangingSignBlock( baseProperties, woodType ) );

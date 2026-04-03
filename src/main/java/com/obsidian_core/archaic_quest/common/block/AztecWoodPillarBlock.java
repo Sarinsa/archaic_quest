@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
@@ -29,12 +29,14 @@ public class AztecWoodPillarBlock extends Block implements SimpleWaterloggedBloc
     
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty EXTENDED = AQStateProperties.EXTENDED;
+    
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.AXIS;
+    
     public static final BooleanProperty CONNECTED_X = BooleanProperty.create( "connected_x" );
     public static final BooleanProperty CONNECTED_Z = BooleanProperty.create( "connected_z" );
     
     
-    private static final VoxelShape[] shapes = new VoxelShape[] {
+    private static final VoxelShape[] SHAPES = new VoxelShape[] {
             // normal
             Block.box( 5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D ),
             // Z axis
@@ -53,9 +55,6 @@ public class AztecWoodPillarBlock extends Block implements SimpleWaterloggedBloc
                     Block.box( 0.0D, 4.0D, 0.0D, 16.0D, 10.0D, 6.0D ) )
     };
     
-    
-    private static final VoxelShape SHAPE = Block.box( 5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D );
-    
     public AztecWoodPillarBlock( Properties properties ) {
         super( properties );
         this.registerDefaultState( stateDefinition.any()
@@ -73,18 +72,18 @@ public class AztecWoodPillarBlock extends Block implements SimpleWaterloggedBloc
         boolean connectedZ = state.getValue( CONNECTED_Z );
         Direction.Axis axis = state.getValue( AXIS );
         
-        switch( axis ) {
-            case Z: return shapes[1];
-            case X: return shapes[2];
-            default: {
+        return switch( axis ) {
+            case Z -> SHAPES[1];
+            case X -> SHAPES[2];
+            default -> {
                 if( connectedX && connectedZ )
-                    return shapes[5];
+                    yield SHAPES[5];
                 else if( connectedZ )
-                    return shapes[3];
+                    yield SHAPES[3];
                 
-                return connectedX ? shapes[4] : shapes[0];
+                yield connectedX ? SHAPES[4] : SHAPES[0];
             }
-        }
+        };
     }
     
     @Override

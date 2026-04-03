@@ -30,7 +30,7 @@ public class AztecWorktableBlockEntity extends BlockEntity implements MenuProvid
     
     @Nullable
     @Override
-    public AbstractContainerMenu createMenu( int p_39954_, Inventory p_39955_, Player p_39956_ ) {
+    public AbstractContainerMenu createMenu( int id, Inventory inventory, Player player ) {
         return null;
     }
     

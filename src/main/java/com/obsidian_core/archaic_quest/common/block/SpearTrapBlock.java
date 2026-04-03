@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.datagen.damage.AQDamageTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

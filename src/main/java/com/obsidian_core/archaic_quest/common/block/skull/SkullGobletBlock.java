@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block.skull;
 
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.context.BlockPlaceContext;

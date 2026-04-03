@@ -2,7 +2,7 @@ package com.obsidian_core.archaic_quest.common.core.register;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.item.*;
-import com.obsidian_core.archaic_quest.common.item.data.AQItemTier;
+import com.obsidian_core.archaic_quest.common.item.misc.AQItemTier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;

@@ -3,7 +3,7 @@ package com.obsidian_core.archaic_quest.common.core.register;
 import com.mojang.datafixers.util.Pair;
 import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.block.base.*;
-import com.obsidian_core.archaic_quest.common.block.data.AQSoundTypes;
+import com.obsidian_core.archaic_quest.common.block.misc.AQSoundTypes;
 import com.obsidian_core.archaic_quest.common.block.skull.SimpleSkullBlock;
 import com.obsidian_core.archaic_quest.common.block.skull.SimpleWallSkullBlock;
 import com.obsidian_core.archaic_quest.common.block.skull.SkullGobletBlock;

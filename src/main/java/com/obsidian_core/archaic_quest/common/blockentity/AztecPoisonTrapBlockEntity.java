@@ -32,7 +32,6 @@ public class AztecPoisonTrapBlockEntity extends BlockEntity {
     @Override
     public void onLoad() {
         super.onLoad();
-        
         effectBox = new AABB( getBlockPos().above() ).inflate( 3.0D, 1.0D, 3.0D );
     }
     

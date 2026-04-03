@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.block.base;
 
 import com.mojang.datafixers.util.Pair;
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;

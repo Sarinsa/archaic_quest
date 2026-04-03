@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.data.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.blockentity.SpikeTrapBlockEntity;
 import com.obsidian_core.archaic_quest.common.network.NetworkHelper;
 import net.minecraft.core.BlockPos;

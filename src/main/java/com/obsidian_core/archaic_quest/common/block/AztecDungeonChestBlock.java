@@ -29,6 +29,7 @@ public class AztecDungeonChestBlock extends Block implements EntityBlock {
     
     public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
     
+    
     public AztecDungeonChestBlock( Properties properties ) {
         super( properties.noOcclusion() );
         registerDefaultState( stateDefinition.any().setValue( ROTATION, 0 ) );
