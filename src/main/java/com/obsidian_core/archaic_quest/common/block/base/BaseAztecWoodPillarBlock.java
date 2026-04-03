@@ -22,12 +22,11 @@ public class BaseAztecWoodPillarBlock extends Block implements SimpleWaterlogged
     
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     
-    private static final VoxelShape SHAPE =
-            Shapes.or(
-                    Block.box( 5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D ),
-                    Block.box( 4.0D, 0.0D, 4.0D, 12.0D, 5.0D, 12.0D ),
-                    Block.box( 3.0D, 5.0D, 3.0D, 13.0D, 7.0D, 13.0D )
-            );
+    private static final VoxelShape SHAPE = Shapes.or(
+            Block.box( 5.0D, 0.0D, 5.0D, 11.0D, 16.0D, 11.0D ),
+            Block.box( 4.0D, 0.0D, 4.0D, 12.0D, 5.0D, 12.0D ),
+            Block.box( 3.0D, 5.0D, 3.0D, 13.0D, 7.0D, 13.0D )
+    );
     
     public BaseAztecWoodPillarBlock( Properties properties ) {
         super( properties );

@@ -20,8 +20,8 @@ public class SimpleHorizontalBlock extends HorizontalDirectionalBlock {
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext useContext ) {
         return opposite
-                ? this.defaultBlockState().setValue( FACING, useContext.getHorizontalDirection().getOpposite() )
-                : this.defaultBlockState().setValue( FACING, useContext.getHorizontalDirection() );
+                ? defaultBlockState().setValue( FACING, useContext.getHorizontalDirection().getOpposite() )
+                : defaultBlockState().setValue( FACING, useContext.getHorizontalDirection() );
     }
     
     @Override
