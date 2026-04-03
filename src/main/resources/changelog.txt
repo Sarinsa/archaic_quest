@@ -1,3 +1,14 @@
 1.20.1-2.2.0-b
     - Ported to 1.20.1.
     - Added logo file.
+    - Fixed wall skulls
+        - Added missing block break particles.
+        - Fixed strange model render transformations.
+    - Documented a bunch of stuff.
+    - Added some compat for RyoamicLights.
+    - Reworked the Adventurer's Torch interaction registry.
+    - Made the machete's block interaction functionality extendable.
+    - Increased corn crop max age.
+    - Fixed custom sign blocks.
+        - Added hanging signs.
+        - Now actually renders correctly.
