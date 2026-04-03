@@ -20,7 +20,7 @@ public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlock
     private final ModelPart skullModel;
     //private final ModelPart wallSkullModel;
     private final ModelPart animalSkullModel;
-    //private final ModelPart wallAnimalSkull;
+    //private final ModelPart wallAnimalSkullModel;
     
     
     public SimpleSkullRenderer( BlockEntityRendererProvider.Context context ) {
@@ -32,7 +32,7 @@ public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlock
         this.skullModel = skullRoot.getChild( "skull" );
         //this.wallSkullModel = wallSkullRoot.getChild("wall_skull");
         this.animalSkullModel = animalRoot.getChild( "skull" );
-        //this.wallAnimalSkull = animalWallRoot.getChild("animal_wall_skull");
+        //this.wallAnimalSkullModel = animalWallRoot.getChild("animal_wall_skull");
     }
     
     
@@ -86,10 +86,16 @@ public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlock
                 : 22.5F * (float) skull.getBlockState().getValue( SimpleSkullBlock.ROTATION );
         
         // TODO - Tilt wall skulls a bit downward (I don't understand matrix transformations lol)
-        poseStack.translate( 0.5D, isWall ? 1.75 : 1.5F, isWall ? 0.25 : 0.5D );
+        poseStack.translate( 0.5D, isWall ? 1.75 : 1.5F, 0.5D );
         
         poseStack.mulPose( Axis.YP.rotationDegrees( -rot ) );
         poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
+        
+        if( isWall ) {
+            poseStack.translate( 0.0D, 0.0D, -0.3D );
+            poseStack.mulPose( Axis.XP.rotationDegrees( 22.5F ) );
+            poseStack.translate( 0.0D, 0.1D, 0.0D );
+        }
         
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( skull.getSkull().getTexture() ) );
         
