@@ -40,8 +40,8 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
             if( block instanceof BaseDoubleCropBlock doubleCropBlock ) {
                 doubleCrop( doubleCropBlock );
             }
-            else if( block instanceof CoolVinesBlock vine ) {
-                vine( vine );
+            else if( block instanceof CuttableVinesBlock vine ) {
+                cuttableVine( vine );
             }
             else if( block instanceof AztecDungeonDoorBlock ) {
                 simpleBlock( block, models().withExistingParent( name( block ), ArchaicQuest.rl( "block/aztec_dungeon_door" ) ) );

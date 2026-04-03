@@ -29,7 +29,7 @@ import net.minecraftforge.common.IForgeShearable;
 
 import javax.annotation.Nullable;
 
-public class CoolVinesBlock extends Block implements IForgeShearable, IMacheteCuttable {
+public class CuttableVinesBlock extends Block implements IForgeShearable, IMacheteCuttable {
     
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty CUT = BooleanProperty.create( "cut" );
@@ -47,7 +47,7 @@ public class CoolVinesBlock extends Block implements IForgeShearable, IMacheteCu
             .build();
     
     
-    public CoolVinesBlock( Properties properties ) {
+    public CuttableVinesBlock( Properties properties ) {
         super( properties );
         registerDefaultState( stateDefinition.any()
                 .setValue( FACING, Direction.NORTH )
@@ -165,10 +165,10 @@ public class CoolVinesBlock extends Block implements IForgeShearable, IMacheteCu
         final Player player = useContext.getPlayer();
         
         if( player != null && player.isShiftKeyDown() ) {
-            level.setBlock( pos, state.setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+            level.setBlock( pos, state.setValue( CuttableVinesBlock.CAN_GROW, false ), 2 );
         }
         else {
-            level.setBlock( pos, state.setValue( CoolVinesBlock.CUT, true ).setValue( CoolVinesBlock.CAN_GROW, false ), 2 );
+            level.setBlock( pos, state.setValue( CuttableVinesBlock.CUT, true ).setValue( CuttableVinesBlock.CAN_GROW, false ), 2 );
         }
         level.playSound( player, pos, SoundEvents.MOSS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F );
         return true;

@@ -56,7 +56,7 @@ public class AQBlocks {
     
     
     // VEGETATION
-    public static final RegistryObject<Block> VINES_1 = registerBlock( "vines_1", AQCreativeTabs.Keys.BLOCKS, () -> new CoolVinesBlock( BlockBehaviour.Properties.copy( Blocks.VINE ) ) );
+    public static final RegistryObject<Block> VINES_1 = registerBlock( "vines_1", AQCreativeTabs.Keys.BLOCKS, () -> new CuttableVinesBlock( BlockBehaviour.Properties.copy( Blocks.VINE ) ) );
     public static final RegistryObject<Block> AZTEC_JUNGLE_SAPLING = registerBlock( "aztec_jungle_sapling", AQCreativeTabs.Keys.BLOCKS, () -> new SaplingBlock( new AztecJungleTreeGrower(), BlockBehaviour.Properties.copy( Blocks.JUNGLE_SAPLING ) ) );
     
     public static final WoodSet AHUEHUETE_WOOD_SET = new WoodSet( "ahuehuete", BlockBehaviour.Properties.copy( Blocks.OAK_PLANKS ), EmptyTreeGrower.INSTANCE );

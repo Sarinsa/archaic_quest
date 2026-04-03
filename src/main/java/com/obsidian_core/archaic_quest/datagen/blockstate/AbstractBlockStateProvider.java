@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
 import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
-import com.obsidian_core.archaic_quest.common.block.CoolVinesBlock;
+import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
 import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
 import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
@@ -211,10 +211,10 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         } );
     }
     
-    public void vine( CoolVinesBlock vineBlock ) {
+    public void cuttableVine( CuttableVinesBlock vineBlock ) {
         getVariantBuilder( vineBlock ).forAllStatesExcept( ( state ) -> {
-            Direction face = state.getValue( CoolVinesBlock.FACING );
-            boolean cut = state.getValue( CoolVinesBlock.CUT );
+            Direction face = state.getValue( CuttableVinesBlock.FACING );
+            boolean cut = state.getValue( CuttableVinesBlock.CUT );
             int yRot = (int) face.getOpposite().toYRot();
             
             String textureName = name( vineBlock ) + (cut ? "_cut" : "");
@@ -225,7 +225,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                             .texture( "vine", texture( textureName ) ) )
                     .rotationY( yRot )
                     .build();
-        }, CoolVinesBlock.CAN_GROW );
+        }, CuttableVinesBlock.CAN_GROW );
         generatedItem( vineBlock );
     }
     

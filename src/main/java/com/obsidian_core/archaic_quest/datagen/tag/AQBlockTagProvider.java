@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.datagen.tag;
 
-import com.obsidian_core.archaic_quest.common.block.CoolVinesBlock;
+import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
@@ -62,7 +62,7 @@ public class AQBlockTagProvider extends BlockTagsProvider {
         for( RegistryObject<Block> regObject : AQBlocks.REGISTRY.getEntries() ) {
             Block block = regObject.get();
             
-            if( block instanceof CoolVinesBlock ) {
+            if( block instanceof CuttableVinesBlock ) {
                 CLIMBABLE.add( block );
             }
         }
