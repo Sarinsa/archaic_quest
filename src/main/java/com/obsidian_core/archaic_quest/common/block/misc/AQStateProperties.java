@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block.data;
+package com.obsidian_core.archaic_quest.common.block.misc;
 
 import com.obsidian_core.archaic_quest.common.block.SpikeTrapBlock;
 import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class AQStateProperties {
     
+    public static final BooleanProperty MASTER = BooleanProperty.create( "master" );
     public static final BooleanProperty EXTENDED = BooleanProperty.create( "extended" );
     public static final BooleanProperty IS_TOP = BooleanProperty.create( "top" );
     public static final BooleanProperty FILLED = BooleanProperty.create( "filled" );

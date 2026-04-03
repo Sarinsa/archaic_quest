@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.item.data;
+package com.obsidian_core.archaic_quest.common.item.misc;
 
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import net.minecraft.world.item.Items;
