@@ -85,16 +85,22 @@ public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlock
                 ? skull.getBlockState().getValue( SimpleWallSkullBlock.FACING ).getOpposite().toYRot()
                 : 22.5F * (float) skull.getBlockState().getValue( SimpleSkullBlock.ROTATION );
         
-        // TODO - Tilt wall skulls a bit downward (I don't understand matrix transformations lol)
         poseStack.translate( 0.5D, isWall ? 1.75 : 1.5F, 0.5D );
         
         poseStack.mulPose( Axis.YP.rotationDegrees( -rot ) );
         poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
         
         if( isWall ) {
-            poseStack.translate( 0.0D, 0.0D, -0.3D );
-            poseStack.mulPose( Axis.XP.rotationDegrees( 22.5F ) );
-            poseStack.translate( 0.0D, 0.1D, 0.0D );
+            if( isAnimal ) {
+                poseStack.translate( 0.0D, 0.0D, -0.375D );
+                poseStack.mulPose( Axis.XP.rotationDegrees( 22.5F ) );
+                //poseStack.translate( 0.0D, 0.0D, 0.0D );
+            }
+            else {
+                poseStack.translate( 0.0D, 0.0D, -0.3D );
+                poseStack.mulPose( Axis.XP.rotationDegrees( 22.5F ) );
+                poseStack.translate( 0.0D, 0.1D, 0.0D );
+            }
         }
         
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( skull.getSkull().getTexture() ) );
