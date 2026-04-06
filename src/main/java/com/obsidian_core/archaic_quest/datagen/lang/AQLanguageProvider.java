@@ -6,7 +6,7 @@ import com.obsidian_core.archaic_quest.common.core.register.AQCreativeTabs;
 import com.obsidian_core.archaic_quest.common.core.register.AQEntities;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
-import com.obsidian_core.archaic_quest.common.misc.TranslationReferences;
+import com.obsidian_core.archaic_quest.common.util.TranslationHelper;
 import com.obsidian_core.archaic_quest.datagen.damage.AQDamageTypes;
 import com.obsidian_core.archaic_quest.datagen.worldgen.AQBiomes;
 import net.minecraft.data.PackOutput;
@@ -122,8 +122,8 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         
         addBiome( AQBiomes.AZTEC_JUNGLE, "Aztec Jungle" );
         
-        addTranslationComponent( TranslationReferences.KNAPPING_TABLE_CONTAINER_NAME, "Knapping Table" );
-        addTranslationComponent( TranslationReferences.AZTEC_CRAFTING_STATION_CONTAINER_NAME, "Aztec Crafting Station" );
+        addTranslationComponent( TranslationHelper.KNAPPING_TABLE_CONTAINER_NAME, "Knapping Table" );
+        addTranslationComponent( TranslationHelper.AZTEC_CRAFTING_STATION_CONTAINER_NAME, "Aztec Crafting Station" );
         
         addDamageType( AQDamageTypes.SPEAR_TRAP,
                 ARG_1 + " was impaled on a spear trap",

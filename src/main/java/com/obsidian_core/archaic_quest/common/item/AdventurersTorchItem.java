@@ -4,7 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.obsidian_core.archaic_quest.api.TorchInteraction;
 import com.obsidian_core.archaic_quest.api.TorchLitType;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
-import com.obsidian_core.archaic_quest.common.misc.NBTHelper;
+import com.obsidian_core.archaic_quest.common.util.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;

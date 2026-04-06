@@ -2,7 +2,7 @@ package com.obsidian_core.archaic_quest.common.blockentity;
 
 import com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlockEntities;
-import com.obsidian_core.archaic_quest.common.misc.TranslationReferences;
+import com.obsidian_core.archaic_quest.common.util.TranslationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -25,7 +25,7 @@ public class AztecWorktableBlockEntity extends BlockEntity implements MenuProvid
     
     @Override
     public Component getDisplayName() {
-        return TranslationReferences.AZTEC_CRAFTING_STATION_CONTAINER_NAME;
+        return TranslationHelper.AZTEC_CRAFTING_STATION_CONTAINER_NAME;
     }
     
     @Nullable

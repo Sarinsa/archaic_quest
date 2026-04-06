@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
 import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecThroneBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import net.minecraft.client.model.geom.ModelPart;
@@ -51,6 +52,10 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
     @Override
     public void render( AztecThroneBlockEntity throne, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
         BlockState state = throne.getLevel() == null ? AQBlocks.AZTEC_THRONE.get().defaultBlockState() : throne.getBlockState();
+        
+        // Cancel rendering for non-master block entities in the world.
+        if( throne.hasLevel() && !state.getValue( AQStateProperties.MASTER ) ) return;
+        
         Direction direction = state.getValue( BlockStateProperties.HORIZONTAL_FACING );
         float rotation = direction.toYRot();
         

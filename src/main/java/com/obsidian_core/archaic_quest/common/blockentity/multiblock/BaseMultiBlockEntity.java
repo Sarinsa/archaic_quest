@@ -1,10 +1,13 @@
 package com.obsidian_core.archaic_quest.common.blockentity.multiblock;
 
+import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import javax.annotation.Nullable;
 
@@ -13,6 +16,9 @@ public abstract class BaseMultiBlockEntity<T extends BlockEntity> extends BlockE
     @Nullable
     private BlockPos masterPos;
     private boolean isMaster;
+    
+    @Nullable
+    private BlockPos[] childPositions;
     
     
     public BaseMultiBlockEntity( BlockEntityType<?> type, BlockPos pos, BlockState state ) {
@@ -37,6 +43,25 @@ public abstract class BaseMultiBlockEntity<T extends BlockEntity> extends BlockE
     }
     
     @Override
+    public void setMasterPos( @Nullable BlockPos pos ) {
+        masterPos = pos;
+    }
+    
+    @Override
+    @Nullable
+    public BlockPos[] getChildPositions() {
+        return childPositions;
+    }
+    
+    @Override
+    public void setChildPositions( @Nullable BlockPos[] childPositions ) {
+        if( !isMaster && FMLEnvironment.production ) {
+            ArchaicQuest.LOG.error( "Attempted to set child position array for multiblock entity not flagged as master!" );
+        }
+        this.childPositions = childPositions;
+    }
+    
+    @Override
     public void loadMultiData( CompoundTag saveTag ) {
         if( saveTag.contains( KEY_MASTER_POSITION, CompoundTag.TAG_ANY_NUMERIC ) ) {
             isMaster = saveTag.getBoolean( KEY_MASTER_POSITION );
@@ -46,6 +71,20 @@ public abstract class BaseMultiBlockEntity<T extends BlockEntity> extends BlockE
             
             if( coords.length == 3 )
                 masterPos = new BlockPos( coords[0], coords[1], coords[2] );
+        }
+        if( saveTag.contains( KEY_CHILD_POSITIONS, CompoundTag.TAG_LIST ) ) {
+            ListTag listTag = saveTag.getList( KEY_CHILD_POSITIONS, ListTag.TAG_INT_ARRAY );
+            BlockPos[] positions = new BlockPos[listTag.size()];
+            
+            for( int i = 0; i < listTag.size(); ++i ) {
+                int[] coords = listTag.getIntArray( i );
+                
+                if( coords.length != 3 )
+                    continue;
+                
+                positions[i] = new BlockPos( coords[0], coords[1], coords[2] );
+            }
+            childPositions = positions;
         }
     }
     

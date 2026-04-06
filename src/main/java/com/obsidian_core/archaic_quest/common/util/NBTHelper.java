@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.misc;
+package com.obsidian_core.archaic_quest.common.util;
 
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.nbt.CompoundTag;

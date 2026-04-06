@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.misc;
+package com.obsidian_core.archaic_quest.common.util;
 
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import net.minecraft.world.level.block.Block;
