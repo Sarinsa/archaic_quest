@@ -10,7 +10,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -110,7 +110,8 @@ public class PlaceableConstruct {
     
     /**
      * @return True if the space this construct will occupy upon placement is
-     * either free (air) or replaceable.
+     * either free (air) or replaceable. This is primarily used by block item
+     * to check if the construct can be placed.
      */
     public boolean isSpaceUnoccupied( LevelAccessor level, BlockPos origin, @Nullable Direction direction ) {
         for( PlaceableBlock placeableBlock : blocksToPlace ) {
@@ -129,22 +130,16 @@ public class PlaceableConstruct {
      */
     private void sanitizePlacements() {
         final List<Vec3i> knownOffsets = new ArrayList<>();
-        final List<PlaceableBlock> duplicates = new ArrayList<>();
         
         for( PlaceableBlock toPlace : blocksToPlace ) {
             if( knownOffsets.contains( toPlace.getOffset() ) ) {
-                duplicates.add( toPlace );
-                
-                // Throw an exception in dev env so we can fix it.
-                if( FMLEnvironment.production ) {
-                    throw new IllegalArgumentException( "PlaceableConstruct cannot have multiple placements with the same offset!" );
-                }
+                throw new IllegalArgumentException( "PlaceableConstruct cannot have multiple placements with the same offset!" +
+                        " Duplicate offset: " + toPlace.getOffset() );
             }
             else {
                 knownOffsets.add( toPlace.getOffset() );
             }
         }
-        blocksToPlace.removeIf( duplicates::contains );
     }
     
     /** @return A new builder instance. */
@@ -159,32 +154,103 @@ public class PlaceableConstruct {
         private boolean isMultiBlocKEntity = false;
         
         
+        /** For internal use; use {@link PlaceableConstruct#builder()} outside this class. */
         private Builder() { }
         
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         *
+         * @param state  The block state to be placed.
+         * @param offset The placement offset.
+         */
         public Builder add( BlockState state, Vec3i offset ) {
             blocksToPlace.add( new PlaceableBlock( state, offset ) );
             return this;
         }
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         * with the given x, y and z offsets.
+         *
+         * @param state The block state to be placed.
+         */
         public Builder add( BlockState state, int x, int y, int z ) {
             return add( state, new Vec3i( x, y, z ) );
         }
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         *
+         * @param block  The block to be placed. The block's default state is used.
+         * @param offset The placement offset.
+         */
         public Builder add( Block block, Vec3i offset ) {
             return add( block.defaultBlockState(), offset );
         }
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         * with the given x, y and z offsets.
+         *
+         * @param block The block to be placed. The block's default state is used.
+         */
         public Builder add( Block block, int x, int y, int z ) {
             return add( block, new Vec3i( x, y, z ) );
         }
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         *
+         * @param blockSupplier The block to be placed. The block's default state is used.
+         * @param offset        The placement offset.
+         */
         public Builder add( Supplier<Block> blockSupplier, Vec3i offset ) {
             return add( blockSupplier.get(), offset );
         }
         
+        /**
+         * Adds a new placeable block entry to the builder.
+         * with the given x, y and z offsets.
+         *
+         * @param blockSupplier The block to be placed. The block's default state is used.
+         */
         public Builder add( Supplier<Block> blockSupplier, int x, int y, int z ) {
             return add( blockSupplier.get(), new Vec3i( x, y, z ) );
+        }
+        
+        /**
+         * Adds a new placeable block entry to the builder.
+         * The given state will be replaced with one that
+         * has all the same properties except the facing direction
+         * value is set to the opposite to "flip" the block.
+         * <br><br>
+         * Only use for block states that have the {@link net.minecraft.world.level.block.state.properties.BlockStateProperties#FACING} property!
+         *
+         * @param state  The block state to be placed.
+         * @param offset The placement offset.
+         */
+        public Builder addOpposite( BlockState state, Vec3i offset ) {
+            Direction dir = state.getValue( BlockStateProperties.FACING );
+            return add( state.setValue( BlockStateProperties.FACING, dir.getOpposite() ), offset );
+        }
+        
+        /**
+         * Adds a new placeable block entry to the builder.
+         * The given state will be replaced with one that
+         * has all the same properties except the facing direction
+         * value is set to the opposite to "flip" the block.
+         * <br><br>
+         * Only use for block states that have the {@link net.minecraft.world.level.block.state.properties.BlockStateProperties#HORIZONTAL_FACING} property!
+         *
+         * @param state The block state to be placed.
+         * @param x     The X placement offset.
+         * @param y     The Y placement offset.
+         * @param z     The Z placement offset.
+         */
+        public Builder addOpposite( BlockState state, int x, int y, int z ) {
+            Direction dir = state.getValue( BlockStateProperties.HORIZONTAL_FACING );
+            return add( state.setValue( BlockStateProperties.HORIZONTAL_FACING, dir.getOpposite() ), new Vec3i( x, y, z ) );
         }
         
         /** Sets the construct's {@link PlaceableConstruct#isMultiBlocKEntity} flag to true. */

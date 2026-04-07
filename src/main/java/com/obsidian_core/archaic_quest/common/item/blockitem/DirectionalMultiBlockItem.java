@@ -23,17 +23,6 @@ public class DirectionalMultiBlockItem extends BlockItem {
         this.placeableConstruct = placeableConstruct;
     }
     
-    
-    private boolean placeMultiblock( BlockPlaceContext context ) {
-        try {
-            placeableConstruct.place( context.getLevel(), context.getClickedPos(), context.getHorizontalDirection() );
-            return true;
-        }
-        catch( Exception e ) {
-            return false;
-        }
-    }
-    
     @Override
     protected boolean placeBlock( BlockPlaceContext context, BlockState state ) {
         return placeMultiblock( context );
@@ -44,10 +33,29 @@ public class DirectionalMultiBlockItem extends BlockItem {
         return canPlaceMultiBlock( context );
     }
     
-    public PlaceableConstruct getPlaceableConstruct() {
+    /** Attempts to place this multiblock item's multiblock construct. */
+    private boolean placeMultiblock( BlockPlaceContext context ) {
+        try {
+            placeableConstruct.place( context.getLevel(), context.getClickedPos(), context.getHorizontalDirection() );
+            return true;
+        }
+        catch( Exception e ) {
+            return false;
+        }
+    }
+    
+    /**
+     * @return This multiblock item's {@link PlaceableConstruct}
+     * that is used to place the multiblock.
+     */
+    public PlaceableConstruct getConstruct() {
         return placeableConstruct;
     }
     
+    /**
+     * @return True if this multiblock item's construct can
+     * be placed, using the provided block place context.
+     */
     public boolean canPlaceMultiBlock( BlockPlaceContext context ) {
         Level level = context.getLevel();
         BlockPos origin = context.getClickedPos();
