@@ -40,7 +40,7 @@ public class AQBlockEntities {
     public static final RegistryObject<BlockEntityType<SpikeTrapBlockEntity>> SPIKE_TRAP = register( "spike_trap", SpikeTrapBlockEntity::new, List.of(
             AQBlocks.AZTEC_ANDESITE_SPIKE_TRAP
     ) );
-    public static final RegistryObject<BlockEntityType<AztecWorktableBlockEntity>> AZTEC_CRAFTING_STATION = register( "aztec_crafting_station", AztecWorktableBlockEntity::new, List.of(
+    public static final RegistryObject<BlockEntityType<AztecWorktableBlockEntity>> AZTEC_WORKTABLE = register( "aztec_worktable", AztecWorktableBlockEntity::new, List.of(
             AQBlocks.AZTEC_WORKTABLE
     ) );
     public static final RegistryObject<BlockEntityType<AztecDungeonDoorBlockEntity>> AZTEC_DUNGEON_DOOR = register( "aztec_dungeon_door", AztecDungeonDoorBlockEntity::new, List.of(

@@ -114,7 +114,7 @@ public class ClientRegister {
         event.registerBlockEntityRenderer( AQBlockEntities.CUSTOM_SIGN.get(), SignRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.CUSTOM_HANGING_SIGN.get(), HangingSignRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_DUNGEON_DOOR.get(), AztecDungeonDoorRenderer::new );
-        event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_CRAFTING_STATION.get(), AztecWorktableRenderer::new );
+        event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_WORKTABLE.get(), AztecWorktableRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_THRONE.get(), AztecThroneRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.SPIKE_TRAP.get(), SpikeTrapRenderer::new );
         event.registerBlockEntityRenderer( AQBlockEntities.AZTEC_DUNGEON_CHEST.get(), AztecDungeonChestRenderer::new );

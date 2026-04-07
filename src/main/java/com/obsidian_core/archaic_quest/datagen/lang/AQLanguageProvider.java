@@ -123,7 +123,7 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBiome( AQBiomes.AZTEC_JUNGLE, "Aztec Jungle" );
         
         addTranslationComponent( TranslationHelper.KNAPPING_TABLE_CONTAINER_NAME, "Knapping Table" );
-        addTranslationComponent( TranslationHelper.AZTEC_CRAFTING_STATION_CONTAINER_NAME, "Aztec Crafting Station" );
+        addTranslationComponent( TranslationHelper.AZTEC_WORKTABLE_CONTAINER_NAME, "Aztec Worktable" );
         
         addDamageType( AQDamageTypes.SPEAR_TRAP,
                 ARG_1 + " was impaled on a spear trap",

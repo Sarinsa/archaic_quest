@@ -11,10 +11,10 @@ import com.obsidian_core.archaic_quest.common.block.tree.AztecJungleTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.EmptyTreeGrower;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
-import com.obsidian_core.archaic_quest.common.item.blockitem.AztecCraftingStationBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecDungeonChestBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecDungeonDoorBlockItem;
 import com.obsidian_core.archaic_quest.common.item.blockitem.AztecThroneBlockItem;
+import com.obsidian_core.archaic_quest.common.item.blockitem.AztecWorktableBlockItem;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -211,9 +211,9 @@ public class AQBlocks {
     public static final RegistryObject<CeramicVaseBlock> AZTEC_VASE = registerBlock( "aztec_vase", AQCreativeTabs.Keys.DECORATION, () -> new CeramicVaseBlock( BlockBehaviour.Properties.of().sound( AQSoundTypes.CERAMIC_VASE ).strength( 0.7F ) ), BlockTags.MINEABLE_WITH_PICKAXE );
     public static final RegistryObject<Block> INFESTED_VASE = registerBlock( "aztec_infested_vase", AQCreativeTabs.Keys.DECORATION, () -> new InfestedVaseBlock( BlockBehaviour.Properties.of().sound( AQSoundTypes.CERAMIC_VASE ).strength( 0.35F ) ), BlockTags.MINEABLE_WITH_PICKAXE );
     
-    public static final RegistryObject<Block> AZTEC_WORKTABLE = registerBlock( "aztec_crafting_station",
+    public static final RegistryObject<Block> AZTEC_WORKTABLE = registerBlock( "aztec_worktable",
             () -> new AztecWorktableBlock( BlockBehaviour.Properties.copy( Blocks.STONE ).noOcclusion().strength( 1.5F, 4.0F ) ),
-            () -> new AztecCraftingStationBlockItem( AQBlocks.AZTEC_WORKTABLE.get(), new Item.Properties() ),
+            () -> new AztecWorktableBlockItem( AQBlocks.AZTEC_WORKTABLE.get(), new Item.Properties() ),
             AQCreativeTabs.Keys.DECORATION,
             BlockTags.MINEABLE_WITH_PICKAXE
     );
