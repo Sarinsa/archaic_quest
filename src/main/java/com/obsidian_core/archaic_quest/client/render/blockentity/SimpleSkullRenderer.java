@@ -95,9 +95,7 @@ public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlock
                 poseStack.translate( 0.0D, 0.1D, 0.0D );
             }
         }
-        
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( skull.getSkull().getTexture() ) );
-        
         ModelPart modelPart = isAnimal ? animalSkullModel : skullModel;
         
         modelPart.render( poseStack, vertexConsumer, packedLight, textureOverlay );
