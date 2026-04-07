@@ -56,14 +56,16 @@ public abstract class BaseEntityMultiBlock extends BaseEntityBlock implements IM
         // Multiblock entity should be present, but let's check to be safe
         if( multiBlockEntity == null ) return;
         
+        // Fetch the master block entity
         if( !multiBlockEntity.isMaster() && multiBlockEntity.getMasterPos() != null )
             multiBlockEntity = IMultiBlockEntity.getExisting( level, multiBlockEntity.getMasterPos() );
         
-        // Master block entity should be present, but let's check to be safe
+        // Juuuust in case
         if( multiBlockEntity == null ) return;
         
         final BlockPos[] childPositions = multiBlockEntity.getChildPositions();
         
+        // Destroy all child blocks
         if( childPositions != null ) {
             for( BlockPos childPos : childPositions ) {
                 if( !childPos.equals( pos ) ) {
@@ -71,9 +73,10 @@ public abstract class BaseEntityMultiBlock extends BaseEntityBlock implements IM
                 }
             }
         }
-        BlockPos masterPos = multiBlockEntity.asBlockEntity().getBlockPos();
+        final BlockPos masterPos = multiBlockEntity.getMasterPos();
         
-        if( !masterPos.equals( pos ) ) {
+        // Destroy the master block, if it wasn't already destroyed
+        if( !pos.equals( masterPos ) && masterPos != null ) {
             level.destroyBlock( masterPos, true );
         }
         super.onRemove( state, level, pos, newState, flag );

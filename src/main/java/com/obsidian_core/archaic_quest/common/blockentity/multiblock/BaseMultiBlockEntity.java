@@ -21,10 +21,6 @@ public abstract class BaseMultiBlockEntity<T extends BlockEntity> extends BlockE
     private BlockPos[] childPositions;
     
     
-    public BaseMultiBlockEntity( BlockEntityType<?> type, BlockPos pos, BlockState state ) {
-        this( type, pos, state, false );
-    }
-    
     public BaseMultiBlockEntity( BlockEntityType<?> type, BlockPos pos, BlockState state, boolean isMaster ) {
         super( type, pos, state );
         this.isMaster = isMaster;
@@ -39,7 +35,7 @@ public abstract class BaseMultiBlockEntity<T extends BlockEntity> extends BlockE
     @Override
     @Nullable
     public BlockPos getMasterPos() {
-        return masterPos;
+        return isMaster ? getBlockPos() : masterPos;
     }
     
     @Override

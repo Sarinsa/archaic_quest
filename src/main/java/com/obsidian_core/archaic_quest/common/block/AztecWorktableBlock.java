@@ -1,6 +1,9 @@
 package com.obsidian_core.archaic_quest.common.block;
 
+import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
+import com.obsidian_core.archaic_quest.common.block.multiblock.BaseEntityMultiBlock;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecWorktableBlockEntity;
+import com.obsidian_core.archaic_quest.common.blockentity.multiblock.IMultiBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -8,13 +11,13 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -22,32 +25,54 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-public class AztecWorktableBlock extends Block implements EntityBlock {
+public class AztecWorktableBlock extends BaseEntityMultiBlock {
     
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    // Whether this block state is the "master" block or a sub-block for collision purposes.
-    public static final EnumProperty<BlockType> BLOCK_TYPE = EnumProperty.create( "block_type", BlockType.class );
+    public static final EnumProperty<Part> PART = EnumProperty.create( "part", Part.class );
     
-    private static final VoxelShape[] shapes = new VoxelShape[] {
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-            Block.box( 0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D ),
-    };
+    private static final DirectionalShape BASE_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 16.0 )
+            .build();
+    private static final DirectionalShape SIDE_SHAPE = DirectionalShape.builder()
+            .x( 5.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 16.0 )
+            .build();
+    private static final DirectionalShape FRONT_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 8.0 )
+            .build();
+    private static final DirectionalShape LEFT_CORNER_SHAPE = DirectionalShape.builder()
+            .x( 5.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 8.0 )
+            .build();
+    private static final DirectionalShape RIGHT_CORNER_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 11.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 8.0 )
+            .build();
+    private static final DirectionalShape PANEL_SHAPE = DirectionalShape.builder()
+            .x( 0.0, 16.0 )
+            .y( 0.0, 16.0 )
+            .z( 0.0, 8.0 )
+            .build();
     
     
     public AztecWorktableBlock( Properties properties ) {
         super( properties );
-        this.registerDefaultState( stateDefinition.any().setValue( FACING, Direction.NORTH ).setValue( BLOCK_TYPE, BlockType.MASTER ) );
+        registerDefaultState( stateDefinition.any()
+                .setValue( FACING, Direction.NORTH )
+                .setValue( PART, Part.BASE )
+                .setValue( MASTER, false )
+        );
     }
     
     @Override
@@ -57,7 +82,7 @@ public class AztecWorktableBlock extends Block implements EntityBlock {
             return InteractionResult.SUCCESS;
         }
         else {
-            this.openContainer( level, pos, player );
+            openContainer( level, pos, player );
             return InteractionResult.CONSUME;
         }
     }
@@ -65,15 +90,17 @@ public class AztecWorktableBlock extends Block implements EntityBlock {
     @Deprecated
     @SuppressWarnings( "deprecation" )
     public VoxelShape getShape( BlockState state, BlockGetter level, BlockPos pos, CollisionContext context ) {
-        BlockType type = state.getValue( BLOCK_TYPE );
+        Part part = state.getValue( PART );
+        Direction facing = state.getValue( FACING );
         
-        if( type == BlockType.MASTER ) {
-            return Shapes.block();
-        }
-        else {
-            int i = state.getValue( FACING ).get2DDataValue();
-            return shapes[type == BlockType.LEFT ? i : i + 4];
-        }
+        return switch( part ) {
+            case BASE -> BASE_SHAPE.getFor( facing );
+            case SIDE -> SIDE_SHAPE.getFor( facing );
+            case FRONT -> FRONT_SHAPE.getFor( facing );
+            case LEFT_CORNER -> LEFT_CORNER_SHAPE.getFor( facing );
+            case RIGHT_CORNER -> RIGHT_CORNER_SHAPE.getFor( facing );
+            case PANEL -> PANEL_SHAPE.getFor( facing );
+        };
     }
     
     protected void openContainer( Level level, BlockPos pos, Player player ) {
@@ -85,27 +112,9 @@ public class AztecWorktableBlock extends Block implements EntityBlock {
     }
     
     @Override
-    public BlockState getStateForPlacement( BlockPlaceContext useContext ) {
-        return this.defaultBlockState().setValue( FACING, useContext.getHorizontalDirection() ).setValue( BLOCK_TYPE, BlockType.MASTER );
-    }
-    
-    @Override
-    @SuppressWarnings( "deprecation" )
-    public void onPlace( BlockState state, Level level, BlockPos pos, BlockState oldState, boolean b ) {
-        super.onPlace( state, level, pos, oldState, b );
-    }
-    
-    @Override
-    public BlockEntity newBlockEntity( BlockPos pos, BlockState state ) {
-        return state.getValue( BLOCK_TYPE ) == BlockType.MASTER
-                ? new AztecWorktableBlockEntity( pos, state )
-                : null;
-    }
-    
-    @Override
-    @SuppressWarnings( "deprecation" )
-    public RenderShape getRenderShape( BlockState state ) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+    @Nullable
+    public IMultiBlockEntity<?> newMultiBlockEntity( BlockPos pos, BlockState state, boolean isMaster ) {
+        return new AztecWorktableBlockEntity( pos, state, isMaster );
     }
     
     @Override
@@ -128,25 +137,22 @@ public class AztecWorktableBlock extends Block implements EntityBlock {
     
     @Override
     protected void createBlockStateDefinition( StateDefinition.Builder<Block, BlockState> stateBuilder ) {
-        stateBuilder.add( FACING, BLOCK_TYPE );
+        super.createBlockStateDefinition( stateBuilder.add( FACING, PART ) );
     }
     
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker( Level level, BlockState state, BlockEntityType<T> blockEntityType ) {
-        return EntityBlock.super.getTicker( level, state, blockEntityType );
-    }
-    
-    private enum BlockType implements StringRepresentable {
-        MASTER( "master" ),
-        LEFT( "left" ),
-        RIGHT( "right" );
-        
-        BlockType( String name ) {
-            this.name = name;
-        }
+    public enum Part implements StringRepresentable {
+        BASE( "base" ),
+        SIDE( "side" ),
+        FRONT( "front" ),
+        LEFT_CORNER( "left_corner" ),
+        RIGHT_CORNER( "right_corner" ),
+        PANEL( "panel" );
         
         private final String name;
+        
+        Part( String name ) {
+            this.name = name;
+        }
         
         @Override
         public String getSerializedName() {
