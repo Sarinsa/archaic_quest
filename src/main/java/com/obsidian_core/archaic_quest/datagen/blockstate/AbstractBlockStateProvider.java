@@ -49,7 +49,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
     }
     
     public void topBottomCube( Block block, ResourceLocation sides, ResourceLocation topBottom ) {
-        ModelFile model = models().cubeBottomTop( resLoc( ":block/" + name( block ) ).toString(), sides, topBottom, topBottom );
+        ModelFile model = models().cubeBottomTop( rl( ":block/" + name( block ) ).toString(), sides, topBottom, topBottom );
         
         getVariantBuilder( block ).forAllStates( state -> ConfiguredModel.builder()
                 .modelFile( model )
@@ -93,7 +93,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
     }
     
     public void verticalSlab( VerticalSlabBlock block, Block doubleBlock, ResourceLocation side, ResourceLocation bottom, ResourceLocation top ) {
-        ModelFile model = models().withExistingParent( name( block ), resLoc( "block/vertical_slab" ) )
+        ModelFile model = models().withExistingParent( name( block ), rl( "block/vertical_slab" ) )
                 .texture( "side", side )
                 .texture( "bottom", bottom )
                 .texture( "top", top );
@@ -218,7 +218,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
             int yRot = (int) face.getOpposite().toYRot();
             
             String textureName = name( vineBlock ) + (cut ? "_cut" : "");
-            ResourceLocation modelName = resLoc( "block/vine_var_1" + (cut ? "_cut" : "") );
+            ResourceLocation modelName = rl( "block/vine_var_1" + (cut ? "_cut" : "") );
             
             return ConfiguredModel.builder()
                     .modelFile( models().withExistingParent( name( vineBlock ) + (cut ? "_cut" : ""), modelName )
@@ -232,7 +232,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
     public void spearTrap( SpearTrapBlock trapBlock ) {
         getVariantBuilder( trapBlock ).forAllStatesExcept( ( state ) -> {
             boolean extended = state.getValue( SpearTrapBlock.EXTENDED );
-            ResourceLocation parentModel = resLoc( "block/spear_trap" );
+            ResourceLocation parentModel = rl( "block/spear_trap" );
             
             return ConfiguredModel.builder()
                     .modelFile( models().withExistingParent( extended ? name( trapBlock ) + "_extended" : name( trapBlock ), parentModel )
@@ -298,11 +298,11 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
             }
             
             return ConfiguredModel.builder()
-                    .modelFile( models().withExistingParent( name( woodPillarBlock ) + modelName, resLoc( "block/wood_pillar" + modelName ) )
+                    .modelFile( models().withExistingParent( name( woodPillarBlock ) + modelName, rl( "block/wood_pillar" + modelName ) )
                             .texture( "texture", texture( name( woodPillarBlock ) ) ) )
                     .build();
         }, AztecWoodPillarBlock.WATERLOGGED );
-        simpleBlockItem( woodPillarBlock, models().withExistingParent( name( woodPillarBlock ), resLoc( "block/wood_pillar" ) ) );
+        simpleBlockItem( woodPillarBlock, models().withExistingParent( name( woodPillarBlock ), rl( "block/wood_pillar" ) ) );
     }
     
     private void generatedItem( Block block ) {
@@ -315,24 +315,24 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                 .texture( "layer0", texture( name( block ) ) );
     }
     
-    public static ResourceLocation resLoc( String path ) {
+    public static ResourceLocation rl( String path ) {
         return ArchaicQuest.rl( path );
     }
     
     public static ResourceLocation texture( String textureName ) {
-        return resLoc( "block/" + textureName );
+        return rl( "block/" + textureName );
     }
     
     public static ResourceLocation itemTexture( String textureName ) {
-        return resLoc( "item/" + textureName );
+        return rl( "item/" + textureName );
     }
     
     public static ResourceLocation blockTextureWith( Block block, String suffix ) {
-        ResourceLocation name = key( block );
+        ResourceLocation name = regKey( block );
         return ResourceLocation.fromNamespaceAndPath( name.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + name.getPath() + "_" + suffix );
     }
     
-    public static ResourceLocation key( Block block ) {
+    public static ResourceLocation regKey( Block block ) {
         return ForgeRegistries.BLOCKS.getKey( block );
     }
 }

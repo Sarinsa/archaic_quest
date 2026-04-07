@@ -2,7 +2,6 @@ package com.obsidian_core.archaic_quest.datagen.blockstate;
 
 import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
-import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -24,14 +23,13 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
         SIMPLE_BLOCKS.forEach( ( block ) -> simpleBlockAndItem( block.get() ) );
         VERT_SLAB_VARIANTS.forEach( ( block, vertSlab ) -> simpleVerticalSlab( vertSlab.get(), block.get() ) );
         SLAB_VARIANTS.forEach( ( block, slab ) -> slab( slab.get(), block.get() ) );
-        
         STAIRS_VARIANTS.forEach( ( block, stairs ) -> {
             stairsBlock( stairs.get(), blockTexture( block.get() ) );
             ModelFile model = models().withExistingParent( name( stairs.get() ), mcLoc( "block/stairs" ) );
-            
             simpleBlockItem( stairs.get(), model );
         } );
         
+        // Wood sets
         WoodSet.WOOD_SETS.forEach( this::woodSet );
         
         for( RegistryObject<Block> regObject : REGISTRY.getEntries() ) {
@@ -44,10 +42,16 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
                 cuttableVine( vine );
             }
             else if( block instanceof AztecDungeonDoorBlock ) {
-                simpleBlock( block, models().withExistingParent( name( block ), ArchaicQuest.rl( "block/aztec_dungeon_door" ) ) );
+                blockNoModel( block, blockTexture( ANDESITE_AZTEC_BRICKS_16.get() ) );
             }
             else if( block instanceof AztecThroneBlock ) {
-                simpleBlock( block, models().withExistingParent( name( block ), ArchaicQuest.rl( "block/template_throne" ) ) );
+                blockNoModel( block, blockTexture( ANDESITE_AZTEC_BRICKS_16.get() ) );
+            }
+            else if( block instanceof AztecDungeonChestBlock ) {
+                blockNoModel( block, blockTexture( ANDESITE_AZTEC_BRICKS_16.get() ) );
+            }
+            else if( block instanceof AztecWorktableBlock ) {
+                blockNoModel( block, blockTexture( ANDESITE_AZTEC_BRICKS_16.get() ) );
             }
             else if( block instanceof SpearTrapBlock spearTrap ) {
                 spearTrap( spearTrap );
