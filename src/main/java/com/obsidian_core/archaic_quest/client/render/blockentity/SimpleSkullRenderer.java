@@ -18,21 +18,15 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 public class SimpleSkullRenderer implements BlockEntityRenderer<SimpleSkullBlockEntity> {
     
     private final ModelPart skullModel;
-    //private final ModelPart wallSkullModel;
     private final ModelPart animalSkullModel;
-    //private final ModelPart wallAnimalSkullModel;
     
     
     public SimpleSkullRenderer( BlockEntityRendererProvider.Context context ) {
         ModelPart skullRoot = context.bakeLayer( AQModelLayers.SKULL );
-        //ModelPart wallSkullRoot = context.bakeLayer(AQModelLayers.WALL_SKULL);
         ModelPart animalRoot = context.bakeLayer( AQModelLayers.ANIMAL_SKULL );
-        //ModelPart animalWallRoot = context.bakeLayer(AQModelLayers.ANIMAL_WALL_SKULL);
         
-        this.skullModel = skullRoot.getChild( "skull" );
-        //this.wallSkullModel = wallSkullRoot.getChild("wall_skull");
-        this.animalSkullModel = animalRoot.getChild( "skull" );
-        //this.wallAnimalSkullModel = animalWallRoot.getChild("animal_wall_skull");
+        skullModel = skullRoot.getChild( "skull" );
+        animalSkullModel = animalRoot.getChild( "skull" );
     }
     
     
