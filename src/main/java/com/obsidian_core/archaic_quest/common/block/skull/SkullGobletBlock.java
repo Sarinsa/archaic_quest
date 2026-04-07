@@ -2,7 +2,6 @@ package com.obsidian_core.archaic_quest.common.block.skull;
 
 import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +31,10 @@ public class SkullGobletBlock extends Block {
                 .noOcclusion()
                 .strength( 0.8F, 0.3F )
         );
-        registerDefaultState( stateDefinition.any().setValue( FILLED, false ).setValue( ROTATION, 0 ) );
+        registerDefaultState( stateDefinition.any()
+                .setValue( FILLED, false )
+                .setValue( ROTATION, 0 )
+        );
     }
     
     @Override
@@ -47,17 +49,20 @@ public class SkullGobletBlock extends Block {
     
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext context ) {
-        return this.defaultBlockState().setValue( ROTATION, Mth.floor( (double) (context.getRotation() * 8.0F / 360.0F) + 0.5D ) & 15 );
+        return defaultBlockState().setValue( ROTATION, AQStateProperties.SEGMENTED_ANGLE_8.fromDegrees( context.getRotation() ) );
     }
     
     @Override
     public BlockState rotate( BlockState state, Rotation rotation ) {
-        return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), 8 ) );
+        return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), AQStateProperties.SEGMENTED_ANGLE_8.getMask() + 1 ) );
+        //return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), 7 ) );
     }
     
     @Override
     public BlockState mirror( BlockState state, Mirror mirror ) {
-        return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), 8 ) );
+        return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), AQStateProperties.SEGMENTED_ANGLE_8.getMask() + 1 ) );
+        
+        //return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), 7 ) );
     }
     
     @Override
