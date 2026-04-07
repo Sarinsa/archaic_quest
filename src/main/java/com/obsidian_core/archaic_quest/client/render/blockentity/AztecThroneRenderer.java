@@ -30,10 +30,10 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
     }
     
     public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
+        MeshDefinition meshDefinition = new MeshDefinition();
+        PartDefinition partDefinition = meshDefinition.getRoot();
         
-        PartDefinition throne = partdefinition.addOrReplaceChild( "throne", CubeListBuilder.create().texOffs( 74, 0 ).addBox( -8.0F, -8.0F, -8.0F, 16.0F, 8.0F, 16.0F, new CubeDeformation( 0.0F ) )
+        PartDefinition throne = partDefinition.addOrReplaceChild( "throne", CubeListBuilder.create().texOffs( 74, 0 ).addBox( -8.0F, -8.0F, -8.0F, 16.0F, 8.0F, 16.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 82, 34 ).addBox( -8.0F, -11.0F, -9.0F, 16.0F, 3.0F, 17.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 37, 13 ).addBox( 8.0F, -13.0F, -11.0F, 6.0F, 13.0F, 25.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 0, 0 ).addBox( -14.0F, -13.0F, -11.0F, 6.0F, 13.0F, 25.0F, new CubeDeformation( 0.0F ) )
@@ -41,11 +41,10 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
                 .texOffs( 42, 55 ).addBox( 7.0F, -17.0F, -11.99F, 8.0F, 4.0F, 26.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 0, 51 ).addBox( -15.0F, -17.0F, -11.99F, 8.0F, 4.0F, 26.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 84, 54 ).addBox( -11.0F, -44.0F, 5.0F, 22.0F, 6.0F, 10.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 24.0F, 0.0F ) );
+        throne.addOrReplaceChild( "cube_r1", CubeListBuilder.create().texOffs( 52, 85 ).addBox( -6.0F, -22.0F, -0.001F, 6.0F, 22.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 13.0F, -17.0F, 6.0F, 0.0F, 0.0F, -0.1309F ) );
+        throne.addOrReplaceChild( "cube_r2", CubeListBuilder.create().texOffs( 80, 85 ).addBox( 0.0F, -22.0F, -0.001F, 6.0F, 22.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -13.0F, -17.0F, 6.0F, 0.0F, 0.0F, 0.1309F ) );
         
-        PartDefinition cube_r1 = throne.addOrReplaceChild( "cube_r1", CubeListBuilder.create().texOffs( 52, 85 ).addBox( -6.0F, -22.0F, -0.001F, 6.0F, 22.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 13.0F, -17.0F, 6.0F, 0.0F, 0.0F, -0.1309F ) );
-        PartDefinition cube_r2 = throne.addOrReplaceChild( "cube_r2", CubeListBuilder.create().texOffs( 80, 85 ).addBox( 0.0F, -22.0F, -0.001F, 6.0F, 22.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -13.0F, -17.0F, 6.0F, 0.0F, 0.0F, 0.1309F ) );
-        
-        return LayerDefinition.create( meshdefinition, 256, 256 );
+        return LayerDefinition.create( meshDefinition, 256, 256 );
     }
     
     
@@ -59,31 +58,10 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
         Direction direction = state.getValue( BlockStateProperties.HORIZONTAL_FACING );
         float rotation = direction.toYRot();
         
+        poseStack.translate( 0.5D, 1.5F, 0.5D );
+        
         poseStack.mulPose( Axis.YP.rotationDegrees( -rotation ) );
         poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
-        
-        double x, z;
-        
-        switch( direction ) {
-            // NORTH & default
-            case SOUTH -> {
-                x = -0.5D;
-                z = 0.5D;
-            }
-            case WEST -> {
-                x = -0.5D;
-                z = -0.5D;
-            }
-            case EAST -> {
-                x = 0.5D;
-                z = 0.5D;
-            }
-            default -> {
-                x = 0.5D;
-                z = -0.5D;
-            }
-        }
-        poseStack.translate( x, -1.5D, z );
         
         ThroneType type = throne.getThroneType() == null ? ThroneType.THRONE : throne.getThroneType();
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( type.getTextureLocation() ) );

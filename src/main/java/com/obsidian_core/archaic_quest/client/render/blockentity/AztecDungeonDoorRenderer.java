@@ -33,7 +33,7 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         
-        PartDefinition door = partdefinition.addOrReplaceChild( "door", CubeListBuilder.create().texOffs( 108, 181 ).addBox( -17.0F, -39.0F, 0.0F, 32.0F, 39.0F, 4.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 1.0F, 24.0F, -2.0F ) );
+        partdefinition.addOrReplaceChild( "door", CubeListBuilder.create().texOffs( 108, 181 ).addBox( -17.0F, -39.0F, 0.0F, 32.0F, 39.0F, 4.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 1.0F, 24.0F, -2.0F ) );
         
         PartDefinition doorFrame = partdefinition.addOrReplaceChild( "door_frame", CubeListBuilder.create().texOffs( 48, 192 ).addBox( 16.0F, -48.0F, -8.0F, 8.0F, 48.0F, 16.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 0, 192 ).addBox( -24.0F, -48.0F, -8.0F, 8.0F, 48.0F, 16.0F, new CubeDeformation( 0.0F ) )
@@ -43,11 +43,9 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
                 .texOffs( 2, 211 ).addBox( -16.0F, -39.0F, -8.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 22, 211 ).addBox( -16.0F, -39.0F, 2.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 41, 211 ).addBox( 13.0F, -39.0F, 2.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 24.0F, 0.0F ) );
-        
-        PartDefinition cube12_r1 = doorFrame.addOrReplaceChild( "cube12_r1", CubeListBuilder.create().texOffs( 230, 0 ).addBox( 0.0F, -41.0F, -5.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) )
+        doorFrame.addOrReplaceChild( "cube12_r1", CubeListBuilder.create().texOffs( 230, 0 ).addBox( 0.0F, -41.0F, -5.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 230, 0 ).addBox( 0.0F, -41.0F, 7.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -21.0F, 0.0F, -5.0F, 0.0F, 0.0F, 0.1745F ) );
-        
-        PartDefinition cube10_r1 = doorFrame.addOrReplaceChild( "cube10_r1", CubeListBuilder.create().texOffs( 230, 0 ).addBox( -5.0F, -41.0F, -5.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) )
+        doorFrame.addOrReplaceChild( "cube10_r1", CubeListBuilder.create().texOffs( 230, 0 ).addBox( -5.0F, -41.0F, -5.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 230, 0 ).addBox( -5.0F, -41.0F, 7.0F, 5.0F, 41.0F, 8.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 21.0F, 0.0F, -5.0F, 0.0F, 0.0F, -0.1745F ) );
         
         PartDefinition frame = partdefinition.addOrReplaceChild( "frame", CubeListBuilder.create().texOffs( 48, 192 ).addBox( 15.0F, -48.0F, -6.0F, 8.0F, 48.0F, 16.0F, new CubeDeformation( 0.0F ) )
@@ -58,10 +56,8 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
                 .texOffs( 2, 211 ).addBox( -17.0F, -39.0F, -6.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 22, 211 ).addBox( -17.0F, -39.0F, 4.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 41, 211 ).addBox( 12.0F, -39.0F, 4.01F, 3.0F, 11.0F, 6.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 1.0F, 24.0F, -2.0F ) );
-        
-        PartDefinition cube10_fr1 = frame.addOrReplaceChild( "cube10_fr1", CubeListBuilder.create().texOffs( 206, 0 ).addBox( -5.0F, -41.0F, -5.0F, 5.0F, 41.0F, 20.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 20.0F, 0.0F, -3.0F, 0.0F, 0.0F, -0.1745F ) );
-        
-        PartDefinition cube12_fr1 = frame.addOrReplaceChild( "cube12_fr1", CubeListBuilder.create().texOffs( 206, 0 ).addBox( 0.0F, -41.0F, -5.0F, 5.0F, 41.0F, 20.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -22.0F, 0.0F, -3.0F, 0.0F, 0.0F, 0.1745F ) );
+        frame.addOrReplaceChild( "cube10_fr1", CubeListBuilder.create().texOffs( 206, 0 ).addBox( -5.0F, -41.0F, -5.0F, 5.0F, 41.0F, 20.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 20.0F, 0.0F, -3.0F, 0.0F, 0.0F, -0.1745F ) );
+        frame.addOrReplaceChild( "cube12_fr1", CubeListBuilder.create().texOffs( 206, 0 ).addBox( 0.0F, -41.0F, -5.0F, 5.0F, 41.0F, 20.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -22.0F, 0.0F, -3.0F, 0.0F, 0.0F, 0.1745F ) );
         
         return LayerDefinition.create( meshdefinition, 256, 256 );
     }
@@ -72,30 +68,11 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
         float rotation = direction.toYRot();
         
         poseStack.pushPose();
+        
+        poseStack.translate( 0.5D, 1.5F, 0.5D );
+        
         poseStack.mulPose( Axis.YP.rotationDegrees( -rotation ) );
         poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
-        
-        double x, z;
-        
-        switch( direction ) {
-            case SOUTH -> {
-                x = -0.5D;
-                z = 0.5D;
-            }
-            case WEST -> {
-                x = -0.5D;
-                z = -0.5D;
-            }
-            case EAST -> {
-                x = 0.5D;
-                z = 0.5D;
-            }
-            default -> {
-                x = 0.5D;
-                z = -0.5D;
-            }
-        }
-        poseStack.translate( x, -1.5D, z );
         
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( dungeonDoor.getDoorType().getTextureLocation() ) );
         
