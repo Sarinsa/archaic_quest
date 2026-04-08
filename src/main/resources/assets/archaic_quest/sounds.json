@@ -6,25 +6,37 @@
     ]
   },
   "vase_break": {
-    "subtitle": "sound_event.archaic_quest.block.vase_break",
+    "subtitle": "sound_event.archaic_quest.block.vase.break",
     "sounds": [
       "archaic_quest:block/vase_break"
     ]
   },
   "aztec_door_opening": {
-    "subtitle": "sound_event.archaic_quest.block.aztec_door_opening",
+    "subtitle": "sound_event.archaic_quest.block.aztec_door.opening",
     "sounds": [
       "archaic_quest:block/aztec_door_toggle"
     ]
   },
   "aztec_door_closing": {
-    "subtitle": "sound_event.archaic_quest.block.aztec_door_closing",
+    "subtitle": "sound_event.archaic_quest.block.aztec_door.closing",
     "sounds": [
       "archaic_quest:block/aztec_door_toggle"
     ]
   },
+  "aztec_dungeon_chest_open": {
+    "subtitle": "sound_event.archaic_quest.block.aztec_dungeon_chest.open",
+    "sounds": [
+      "archaic_quest:block/aztec_dungeon_chest_open"
+    ]
+  },
+  "aztec_dungeon_chest_close": {
+    "subtitle": "sound_event.archaic_quest.block.aztec_dungeon_chest.close",
+    "sounds": [
+      "archaic_quest:block/aztec_dungeon_chest_close"
+    ]
+  },
   "poison_trap_activate": {
-    "subtitle": "sound_event.archaic_quest.block.poison_trap_activate",
+    "subtitle": "sound_event.archaic_quest.block.poison_trap.activate",
     "sounds": [
       "archaic_quest:block/poison_trap_activate"
     ]

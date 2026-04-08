@@ -129,6 +129,6 @@ public class AztecDungeonChestBlock extends Block implements EntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker( Level level, BlockState blockState, BlockEntityType<T> type ) {
         return ( lvl, pos, state, blockEntity )
-                -> AztecDungeonChestBlockEntity.lidAnimateTick( lvl, pos, state, (AztecDungeonChestBlockEntity) blockEntity );
+                -> AztecDungeonChestBlockEntity.lidAnimateTick( (AztecDungeonChestBlockEntity) blockEntity );
     }
 }

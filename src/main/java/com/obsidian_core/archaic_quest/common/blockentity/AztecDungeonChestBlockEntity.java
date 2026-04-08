@@ -1,12 +1,13 @@
 package com.obsidian_core.archaic_quest.common.blockentity;
 
 import com.obsidian_core.archaic_quest.common.core.register.AQBlockEntities;
+import com.obsidian_core.archaic_quest.common.core.register.AQSoundEvents;
+import com.obsidian_core.archaic_quest.common.util.TranslationHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -35,11 +36,29 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     private final ChestLidController chestLidController = new ChestLidController();
     private final ContainerOpenersCounter openersCounter = new ContainerOpenersCounter() {
         protected void onOpen( Level level, BlockPos pos, BlockState state ) {
-            level.playSound( null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.CHEST_OPEN, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F );
+            level.playSound(
+                    null,
+                    (double) pos.getX() + 0.5D,
+                    (double) pos.getY() + 0.5D,
+                    (double) pos.getZ() + 0.5D,
+                    AQSoundEvents.AZTEC_DUNGEON_CHEST_OPEN.get(),
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F
+            );
         }
         
         protected void onClose( Level level, BlockPos pos, BlockState state ) {
-            level.playSound( null, (double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.CHEST_CLOSE, SoundSource.BLOCKS, 0.5F, level.random.nextFloat() * 0.1F + 0.9F );
+            level.playSound(
+                    null,
+                    (double) pos.getX() + 0.5D,
+                    (double) pos.getY() + 0.5D,
+                    (double) pos.getZ() + 0.5D,
+                    AQSoundEvents.AZTEC_DUNGEON_CHEST_CLOSE.get(),
+                    SoundSource.BLOCKS,
+                    1.0F,
+                    1.0F
+            );
         }
         
         protected void openerCountChanged( Level level, BlockPos pos, BlockState state, int openCount, int prevOpenCount ) {
@@ -68,7 +87,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
     
     @Override
     protected Component getDefaultName() {
-        return Component.translatable( "container.chest" );
+        return TranslationHelper.AZTEC_DUNGEON_CHEST_CONTAINER;
     }
     
     @Override
@@ -90,7 +109,7 @@ public class AztecDungeonChestBlockEntity extends RandomizableContainerBlockEnti
         }
     }
     
-    public static void lidAnimateTick( Level level, BlockPos pos, BlockState state, AztecDungeonChestBlockEntity chest ) {
+    public static void lidAnimateTick( AztecDungeonChestBlockEntity chest ) {
         chest.chestLidController.tickLid();
     }
     
