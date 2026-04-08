@@ -2,10 +2,9 @@ package com.obsidian_core.archaic_quest.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
+import com.obsidian_core.archaic_quest.client.render.RenderUtils;
 import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecThroneBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import net.minecraft.client.model.geom.ModelPart;
@@ -13,18 +12,16 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlockEntity> {
+public class AztecThroneRenderer extends BaseMultiblockEntityRenderer<AztecThroneBlockEntity> {
     
     private final ModelPart throneModel;
     
     
     public AztecThroneRenderer( BlockEntityRendererProvider.Context context ) {
+        super( 80 );
         ModelPart root = context.bakeLayer( AQModelLayers.AZTEC_THRONE );
         this.throneModel = root.getChild( "throne" );
     }
@@ -47,29 +44,14 @@ public class AztecThroneRenderer implements BlockEntityRenderer<AztecThroneBlock
         return LayerDefinition.create( meshDefinition, 256, 256 );
     }
     
-    
     @Override
-    public void render( AztecThroneBlockEntity throne, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
+    public void renderMaster( AztecThroneBlockEntity throne, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
         BlockState state = throne.getLevel() == null ? AQBlocks.AZTEC_THRONE.get().defaultBlockState() : throne.getBlockState();
         
-        // Cancel rendering for non-master block entities in the world.
-        if( throne.hasLevel() && !state.getValue( AQStateProperties.MASTER ) ) return;
-        
-        Direction direction = state.getValue( BlockStateProperties.HORIZONTAL_FACING );
-        float rotation = direction.toYRot();
-        
-        poseStack.translate( 0.5D, 1.5F, 0.5D );
-        
-        poseStack.mulPose( Axis.YP.rotationDegrees( -rotation ) );
-        poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
+        RenderUtils.defaultBETransforms( state, poseStack );
         
         ThroneType type = throne.getThroneType() == null ? ThroneType.THRONE : throne.getThroneType();
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( type.getTextureLocation() ) );
         throneModel.render( poseStack, vertexConsumer, packedLight, textureOverlay );
-    }
-    
-    @Override
-    public int getViewDistance() {
-        return 80;
     }
 }

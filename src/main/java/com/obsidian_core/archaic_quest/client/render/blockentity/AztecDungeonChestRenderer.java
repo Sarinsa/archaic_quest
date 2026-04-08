@@ -2,8 +2,8 @@ package com.obsidian_core.archaic_quest.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
+import com.obsidian_core.archaic_quest.client.render.RenderUtils;
 import com.obsidian_core.archaic_quest.common.block.AztecDungeonChestBlock;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonChestBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
@@ -56,10 +56,8 @@ public class AztecDungeonChestRenderer implements BlockEntityRenderer<AztecDunge
     @Override
     public void render( AztecDungeonChestBlockEntity dungeonChest, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
         float rot = 22.5F * (float) dungeonChest.getBlockState().getValue( AztecDungeonChestBlock.ROTATION );
-        poseStack.translate( 0.5D, 1.5F, 0.5D );
         
-        poseStack.mulPose( Axis.YP.rotationDegrees( -rot ) );
-        poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
+        RenderUtils.defaultBETransforms( poseStack, rot );
         
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( texture ) );
         chest.render( poseStack, vertexConsumer, packedLight, textureOverlay );

@@ -51,67 +51,54 @@ public class IchcahuipilliArmorModel<T extends LivingEntity> extends HumanoidMod
                 .texOffs( 14, 116 ).addBox( 4.0F, -5.5F, -2.5F, 1.0F, 4.0F, 4.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 14, 116 ).mirror().addBox( -5.0F, -5.5F, -2.5F, 1.0F, 4.0F, 4.0F, new CubeDeformation( 0.0F ) ).mirror( false )
                 .texOffs( 0, 118 ).addBox( -1.5F, -9.0F, -5.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r1 = armorHead.addOrReplaceChild( "cube_r1", CubeListBuilder.create().texOffs( 27, 119 ).addBox( -4.0F, -7.0F, -0.5F, 8.0F, 7.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, -7.0F, -4.0F, -0.1745F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r2 = armorHead.addOrReplaceChild( "cube_r2", CubeListBuilder.create().texOffs( 32, 96 ).mirror().addBox( 0.49F, -8.5F, -1.5F, 0.0F, 9.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false )
+        armorHead.addOrReplaceChild( "cube_r1", CubeListBuilder.create().texOffs( 27, 119 ).addBox( -4.0F, -7.0F, -0.5F, 8.0F, 7.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, -7.0F, -4.0F, -0.1745F, 0.0F, 0.0F ) );
+        armorHead.addOrReplaceChild( "cube_r2", CubeListBuilder.create().texOffs( 32, 96 ).mirror().addBox( 0.49F, -8.5F, -1.5F, 0.0F, 9.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false )
                 .texOffs( 32, 96 ).addBox( 9.51F, -8.5F, -1.5F, 0.0F, 9.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -5.0F, -7.0F, -2.0F, -0.4363F, 0.0F, 0.0F ) );
         
-        PartDefinition armorBody = body.addOrReplaceChild( "armorBody", CubeListBuilder.create().texOffs( 89, 0 ).addBox( -4.5F, -0.5F, -2.5F, 9.0F, 10.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
+        body.addOrReplaceChild( "armorBody", CubeListBuilder.create().texOffs( 89, 0 ).addBox( -4.5F, -0.5F, -2.5F, 9.0F, 10.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
         
-        PartDefinition armorRightArm = rightArm.addOrReplaceChild( "armorRightArm", CubeListBuilder.create().texOffs( 89, 29 ).mirror().addBox( -2.5F, -2.5F, -2.5F, 3.0F, 6.0F, 5.0F, new CubeDeformation( -0.02F ) ).mirror( false ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
+        rightArm.addOrReplaceChild( "armorRightArm", CubeListBuilder.create().texOffs( 89, 29 ).mirror().addBox( -2.5F, -2.5F, -2.5F, 3.0F, 6.0F, 5.0F, new CubeDeformation( -0.02F ) ).mirror( false ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
         
-        PartDefinition armorLeftArm = leftArm.addOrReplaceChild( "armorLeftArm", CubeListBuilder.create().texOffs( 89, 29 ).addBox( -0.5F, -2.5F, -2.5F, 3.0F, 6.0F, 5.0F, new CubeDeformation( -0.02F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
+        leftArm.addOrReplaceChild( "armorLeftArm", CubeListBuilder.create().texOffs( 89, 29 ).addBox( -0.5F, -2.5F, -2.5F, 3.0F, 6.0F, 5.0F, new CubeDeformation( -0.02F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
         
         PartDefinition armorLeftLeg = leftLeg.addOrReplaceChild( "armorLeftLeg", CubeListBuilder.create(), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
         
         PartDefinition lSkirtSide = armorLeftLeg.addOrReplaceChild( "lSkirtSide", CubeListBuilder.create(), PartPose.offset( 6.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r3 = lSkirtSide.addOrReplaceChild( "cube_r3", CubeListBuilder.create().texOffs( 95, 62 ).addBox( 6.25F, -1.0F, -2.5F, 0.0F, 5.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -6.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.0873F ) );
+        lSkirtSide.addOrReplaceChild( "cube_r3", CubeListBuilder.create().texOffs( 95, 62 ).addBox( 6.25F, -1.0F, -2.5F, 0.0F, 5.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -6.0F, 0.0F, 0.0F, 0.0F, 0.0F, -0.0873F ) );
         
         PartDefinition lSkirtBack = armorLeftLeg.addOrReplaceChild( "lSkirtBack", CubeListBuilder.create(), PartPose.offset( 4.0F, 0.0F, 2.0F ) );
-        
-        PartDefinition cube_r4 = lSkirtBack.addOrReplaceChild( "cube_r4", CubeListBuilder.create().texOffs( 118, 67 ).addBox( -2.25F, -1.5F, 0.25F, 5.0F, 5.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, 0.0436F, 0.0F, 0.0F ) );
+        lSkirtBack.addOrReplaceChild( "cube_r4", CubeListBuilder.create().texOffs( 118, 67 ).addBox( -2.25F, -1.5F, 0.25F, 5.0F, 5.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, 0.0436F, 0.0F, 0.0F ) );
         
         PartDefinition lSkirtFront = armorLeftLeg.addOrReplaceChild( "lSkirtFront", CubeListBuilder.create(), PartPose.offset( 4.0F, 0.0F, -2.0F ) );
-        
-        PartDefinition cube_r5 = lSkirtFront.addOrReplaceChild( "cube_r5", CubeListBuilder.create().texOffs( 107, 67 ).addBox( -2.25F, -1.5F, -0.25F, 5.0F, 4.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, -0.0436F, 0.0F, 0.0F ) );
+        lSkirtFront.addOrReplaceChild( "cube_r5", CubeListBuilder.create().texOffs( 107, 67 ).addBox( -2.25F, -1.5F, -0.25F, 5.0F, 4.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, -0.0436F, 0.0F, 0.0F ) );
         
         PartDefinition lLegband = armorLeftLeg.addOrReplaceChild( "lLegband", CubeListBuilder.create().texOffs( 90, 79 ).addBox( 1.5F, 5.0F, -2.5F, 5.0F, 2.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r6 = lLegband.addOrReplaceChild( "cube_r6", CubeListBuilder.create().texOffs( 63, 118 ).addBox( -1.75F, -3.0F, -3.0F, 2.0F, 2.0F, 7.0F, new CubeDeformation( -0.2F ) ), PartPose.offsetAndRotation( 6.25F, 8.0F, 0.0F, 0.0F, 0.0F, 0.7854F ) );
+        lLegband.addOrReplaceChild( "cube_r6", CubeListBuilder.create().texOffs( 63, 118 ).addBox( -1.75F, -3.0F, -3.0F, 2.0F, 2.0F, 7.0F, new CubeDeformation( -0.2F ) ), PartPose.offsetAndRotation( 6.25F, 8.0F, 0.0F, 0.0F, 0.0F, 0.7854F ) );
         
         PartDefinition armorLeftBoot = leftLeg.addOrReplaceChild( "armorLeftBoot", CubeListBuilder.create().texOffs( 76, 112 ).mirror().addBox( -3.5F, 10.5F, -2.5F, 5.0F, 2.0F, 5.0F, new CubeDeformation( -0.02F ) ).mirror( false )
                 .texOffs( 89, 120 ).mirror().addBox( -3.5F, 8.6F, 0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation( -0.04F ) ).mirror( false ), PartPose.offset( 5.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r7 = armorLeftBoot.addOrReplaceChild( "cube_r7", CubeListBuilder.create().texOffs( 77, 116 ).mirror().addBox( 1.5F, -2.5F, -1.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 11.0F, 1.0F, 0.3491F, 0.2182F, 0.0F ) );
+        armorLeftBoot.addOrReplaceChild( "cube_r7", CubeListBuilder.create().texOffs( 77, 116 ).mirror().addBox( 1.5F, -2.5F, -1.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 11.0F, 1.0F, 0.3491F, 0.2182F, 0.0F ) );
         
         PartDefinition armorRightLeg = rightLeg.addOrReplaceChild( "armorRightLeg", CubeListBuilder.create(), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
         
         PartDefinition rSkirtSide = armorRightLeg.addOrReplaceChild( "rSkirtSide", CubeListBuilder.create(), PartPose.offset( -6.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r8 = rSkirtSide.addOrReplaceChild( "cube_r8", CubeListBuilder.create().texOffs( 95, 62 ).mirror().addBox( -6.25F, -1.0F, -2.5F, 0.0F, 5.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 6.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0873F ) );
+        rSkirtSide.addOrReplaceChild( "cube_r8", CubeListBuilder.create().texOffs( 95, 62 ).mirror().addBox( -6.25F, -1.0F, -2.5F, 0.0F, 5.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 6.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0873F ) );
         
         PartDefinition rSkirtBack = armorRightLeg.addOrReplaceChild( "rSkirtBack", CubeListBuilder.create(), PartPose.offset( -4.0F, 0.0F, 2.0F ) );
-        
-        PartDefinition cube_r9 = rSkirtBack.addOrReplaceChild( "cube_r9", CubeListBuilder.create().texOffs( 118, 67 ).mirror().addBox( -2.75F, -1.5F, 0.25F, 5.0F, 5.0F, 0.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, 0.0436F, 0.0F, 0.0F ) );
+        rSkirtBack.addOrReplaceChild( "cube_r9", CubeListBuilder.create().texOffs( 118, 67 ).mirror().addBox( -2.75F, -1.5F, 0.25F, 5.0F, 5.0F, 0.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, 0.0436F, 0.0F, 0.0F ) );
         
         PartDefinition rSkirtFront = armorRightLeg.addOrReplaceChild( "rSkirtFront", CubeListBuilder.create(), PartPose.offset( -4.0F, 0.0F, -2.0F ) );
-        
-        PartDefinition cube_r10 = rSkirtFront.addOrReplaceChild( "cube_r10", CubeListBuilder.create().texOffs( 107, 67 ).mirror().addBox( -2.75F, -1.5F, -0.25F, 5.0F, 4.0F, 0.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, -0.0436F, 0.0F, 0.0F ) );
+        rSkirtFront.addOrReplaceChild( "cube_r10", CubeListBuilder.create().texOffs( 107, 67 ).mirror().addBox( -2.75F, -1.5F, -0.25F, 5.0F, 4.0F, 0.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offsetAndRotation( 0.0F, 0.0F, 0.0F, -0.0436F, 0.0F, 0.0F ) );
         
         PartDefinition rLegband = armorRightLeg.addOrReplaceChild( "rLegband", CubeListBuilder.create().texOffs( 90, 79 ).mirror().addBox( -6.5F, 5.0F, -2.5F, 5.0F, 2.0F, 5.0F, new CubeDeformation( 0.0F ) ).mirror( false ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r11 = rLegband.addOrReplaceChild( "cube_r11", CubeListBuilder.create().texOffs( 63, 118 ).mirror().addBox( -0.25F, -3.0F, -3.0F, 2.0F, 2.0F, 7.0F, new CubeDeformation( -0.2F ) ).mirror( false ), PartPose.offsetAndRotation( -6.25F, 8.0F, 0.0F, 0.0F, 0.0F, -0.7854F ) );
+        rLegband.addOrReplaceChild( "cube_r11", CubeListBuilder.create().texOffs( 63, 118 ).mirror().addBox( -0.25F, -3.0F, -3.0F, 2.0F, 2.0F, 7.0F, new CubeDeformation( -0.2F ) ).mirror( false ), PartPose.offsetAndRotation( -6.25F, 8.0F, 0.0F, 0.0F, 0.0F, -0.7854F ) );
         
         PartDefinition armorRightBoot = rightLeg.addOrReplaceChild( "armorRightBoot", CubeListBuilder.create().texOffs( 76, 112 ).addBox( -6.5F, 10.5F, -2.5F, 5.0F, 2.0F, 5.0F, new CubeDeformation( -0.02F ) )
                 .texOffs( 89, 120 ).addBox( -6.5F, 8.6F, 0.5F, 5.0F, 2.0F, 2.0F, new CubeDeformation( -0.04F ) ), PartPose.offset( 0.0F, 0.0F, 0.0F ) );
-        
-        PartDefinition cube_r12 = armorRightBoot.addOrReplaceChild( "cube_r12", CubeListBuilder.create().texOffs( 77, 116 ).addBox( -1.5F, -2.5F, -1.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -5.0F, 11.0F, 1.0F, 0.3491F, -0.2182F, 0.0F ) );
+        armorRightBoot.addOrReplaceChild( "cube_r12", CubeListBuilder.create().texOffs( 77, 116 ).addBox( -1.5F, -2.5F, -1.5F, 0.0F, 3.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( -5.0F, 11.0F, 1.0F, 0.3491F, -0.2182F, 0.0F ) );
         
         PartDefinition loincloth = root.addOrReplaceChild( "loincloth", CubeListBuilder.create().texOffs( 88, 19 ).addBox( -4.5F, -14.5F, -2.5F, 9.0F, 3.0F, 5.0F, new CubeDeformation( 0.0F ) ), PartPose.offset( 0.0F, 24.0F, 0.0F ) );
-        
-        PartDefinition loinclothFront = loincloth.addOrReplaceChild( "loinclothFront", CubeListBuilder.create().texOffs( 78, 103 ).addBox( -2.0F, 0.0F, -0.5F, 4.0F, 5.0F, 1.0F, new CubeDeformation( 0.0F ) )
+        loincloth.addOrReplaceChild( "loinclothFront", CubeListBuilder.create().texOffs( 78, 103 ).addBox( -2.0F, 0.0F, -0.5F, 4.0F, 5.0F, 1.0F, new CubeDeformation( 0.0F ) )
                 .texOffs( 91, 104 ).addBox( -2.0F, 5.0F, -0.4F, 4.0F, 3.0F, 0.0F, new CubeDeformation( 0.0F ) ), PartPose.offsetAndRotation( 0.0F, -11.75F, -2.0F, -0.0436F, 0.0F, 0.0F ) );
         
         return LayerDefinition.create( meshDef, 128, 128 );
@@ -124,7 +111,6 @@ public class IchcahuipilliArmorModel<T extends LivingEntity> extends HumanoidMod
         headgear.setRotation( head.xRot, head.yRot, head.zRot );
         armorLeftLeg.setRotation( leftLeg.xRot, leftLeg.yRot, leftLeg.zRot );
         armorRightLeg.setRotation( rightLeg.xRot, rightLeg.yRot, rightLeg.zRot );
-        
     }
     
     @Override

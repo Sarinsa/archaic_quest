@@ -96,8 +96,8 @@ public class SpikeTrapRenderer implements BlockEntityRenderer<SpikeTrapBlockEnti
             precision = spikeRise <= 0 ? 0.0F : -precision;
         }
         
-        double y = (double) (spikeRise + precision) / 2.0D;
-        poseStack.translate( 0.0D, -y, 0.0D );
+        double yOffset = (double) (spikeRise + precision) / 2.0D;
+        poseStack.translate( 0.0D, -yOffset, 0.0D );
         
         VertexConsumer vertexConsumer = buffer.getBuffer( RenderType.entityCutout( texture ) );
         spikes.render( poseStack, vertexConsumer, packedLight, overlayTexture );

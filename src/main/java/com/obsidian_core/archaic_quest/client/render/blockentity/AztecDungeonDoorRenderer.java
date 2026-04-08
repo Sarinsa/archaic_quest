@@ -2,8 +2,8 @@ package com.obsidian_core.archaic_quest.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
+import com.obsidian_core.archaic_quest.client.render.RenderUtils;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecDungeonDoorBlockEntity;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -12,8 +12,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.Direction;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeonDoorBlockEntity> {
     
@@ -64,16 +62,9 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
     
     @Override
     public void render( AztecDungeonDoorBlockEntity dungeonDoor, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
-        Direction direction = dungeonDoor.getBlockState().getValue( BlockStateProperties.HORIZONTAL_FACING );
-        float rotation = direction.toYRot();
-        
         poseStack.pushPose();
         
-        poseStack.translate( 0.5D, 1.5F, 0.5D );
-        
-        poseStack.mulPose( Axis.YP.rotationDegrees( -rotation ) );
-        poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
-        
+        RenderUtils.defaultBETransforms( dungeonDoor.getBlockState(), poseStack );
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( dungeonDoor.getDoorType().getTextureLocation() ) );
         
         if( dungeonDoor.getDoorType().isFrame() ) {
@@ -87,26 +78,24 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
     
     
     private void renderDoor( AztecDungeonDoorBlockEntity dungeonDoor, float partialTick, PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int textureOverlay ) {
+        // Render the static frame model first
         doorFrame.render( poseStack, vertexConsumer, packedLight, textureOverlay );
         
-        poseStack.pushPose();
-        
+        // Calculate the Y-offset of the moving door part
         int doorPos = dungeonDoor.getDoorPosition();
         float precision = doorPos >= 60 || doorPos <= 0 ? 0.0F : partialTick;
         
-        switch( dungeonDoor.getDoorState() ) {
-            case STAND_BY:
-                precision = 0.0F;
-                break;
-            case CLOSING:
-                precision = -precision;
-                break;
-            default:
-                break;
-        }
+        precision = switch( dungeonDoor.getDoorState() ) {
+            case STAND_BY -> 0.0F;
+            case CLOSING -> -precision;
+            default -> precision;
+        };
+        double yOffset = (double) (dungeonDoor.getDoorPosition() + precision) / 25.0D;
         
-        double y = (double) (dungeonDoor.getDoorPosition() + precision) / 25.0D;
-        poseStack.translate( 0.0D, y, 0.0D );
+        // Render the door part
+        poseStack.pushPose();
+        
+        poseStack.translate( 0.0D, yOffset, 0.0D );
         door.render( poseStack, vertexConsumer, packedLight, textureOverlay );
         
         poseStack.popPose();
@@ -124,11 +113,5 @@ public class AztecDungeonDoorRenderer implements BlockEntityRenderer<AztecDungeo
     @Override
     public int getViewDistance() {
         return 256;
-    }
-    
-    public void setRotationAngle( ModelPart modelRenderer, float x, float y, float z ) {
-        modelRenderer.xRot = x;
-        modelRenderer.yRot = y;
-        modelRenderer.zRot = z;
     }
 }

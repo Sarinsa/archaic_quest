@@ -2,9 +2,8 @@ package com.obsidian_core.archaic_quest.client.render.blockentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.obsidian_core.archaic_quest.client.AQModelLayers;
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
+import com.obsidian_core.archaic_quest.client.render.RenderUtils;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecWorktableBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
@@ -13,14 +12,11 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class AztecWorktableRenderer implements BlockEntityRenderer<AztecWorktableBlockEntity> {
+public class AztecWorktableRenderer extends BaseMultiblockEntityRenderer<AztecWorktableBlockEntity> {
     
     private static final ResourceLocation texture = ArchaicQuest.rl( "textures/tile/aztec_worktable.png" );
     
@@ -143,19 +139,10 @@ public class AztecWorktableRenderer implements BlockEntityRenderer<AztecWorktabl
     }
     
     @Override
-    public void render( AztecWorktableBlockEntity worktable, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
+    public void renderMaster( AztecWorktableBlockEntity worktable, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int textureOverlay ) {
         BlockState state = worktable.getLevel() == null ? AQBlocks.AZTEC_WORKTABLE.get().defaultBlockState() : worktable.getBlockState();
         
-        // Cancel rendering for non-master block entities in the world.
-        if( worktable.hasLevel() && !state.getValue( AQStateProperties.MASTER ) ) return;
-        
-        Direction direction = state.getValue( BlockStateProperties.HORIZONTAL_FACING );
-        float rotation = direction.toYRot();
-        
-        poseStack.translate( 0.5D, 1.5D, 0.5D );
-        
-        poseStack.mulPose( Axis.YP.rotationDegrees( -rotation ) );
-        poseStack.mulPose( Axis.ZP.rotationDegrees( 180.0F ) );
+        RenderUtils.defaultBETransforms( state, poseStack );
         
         VertexConsumer vertexConsumer = bufferSource.getBuffer( RenderType.entityCutout( texture ) );
         table.render( poseStack, vertexConsumer, packedLight, textureOverlay );

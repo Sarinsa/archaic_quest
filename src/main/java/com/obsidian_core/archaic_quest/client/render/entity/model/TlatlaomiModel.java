@@ -126,20 +126,16 @@ public class TlatlaomiModel extends EntityModel<Tlatlaomi> {
         
         head.yRot = netHeadYaw * ((float) Math.PI / 180F);
         
-        if( flag ) {
-            this.head.xRot = (-(float) Math.PI / 4F);
-        }
-        else {
-            this.head.xRot = headPitch * ((float) Math.PI / 180F);
-        }
+        if( flag ) head.xRot = (-(float) Math.PI / 4F);
+        else head.xRot = headPitch * ((float) Math.PI / 180F);
         
         float f = 1.0F;
+        
         if( flag ) {
             f = (float) tlatlaomi.getDeltaMovement().lengthSqr();
             f /= 0.2F;
             f *= f * f;
         }
-        
         if( f < 1.0F ) {
             f = 1.0F;
         }
