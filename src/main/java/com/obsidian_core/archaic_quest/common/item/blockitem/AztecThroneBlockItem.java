@@ -1,8 +1,8 @@
 package com.obsidian_core.archaic_quest.common.item.blockitem;
 
 import com.obsidian_core.archaic_quest.client.render.blockentity.bewlr.BEWLRS;
-import com.obsidian_core.archaic_quest.common.block.AztecThroneBlock;
 import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecThroneBlock;
 import com.obsidian_core.archaic_quest.common.util.PlaceableConstruct;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Direction;

@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.item.blockitem;
 
-import com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-import static com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock.BlockType;
+import static com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock.BlockType;
 
 public class AztecDungeonDoorBlockItem extends BlockItem {
     

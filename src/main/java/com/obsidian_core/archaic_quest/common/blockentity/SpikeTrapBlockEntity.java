@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.blockentity;
 
-import com.obsidian_core.archaic_quest.common.block.AztecDungeonDoorBlock;
 import com.obsidian_core.archaic_quest.common.block.SpikeTrapBlock;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlockEntities;
 import com.obsidian_core.archaic_quest.datagen.damage.AQDamageTypes;
 import net.minecraft.core.BlockPos;

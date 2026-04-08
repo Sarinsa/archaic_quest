@@ -1,7 +1,6 @@
-package com.obsidian_core.archaic_quest.common.block;
+package com.obsidian_core.archaic_quest.common.block.multiblock;
 
 import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
-import com.obsidian_core.archaic_quest.common.block.multiblock.BaseEntityMultiBlock;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecWorktableBlockEntity;
 import com.obsidian_core.archaic_quest.common.blockentity.multiblock.IMultiBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -78,13 +77,19 @@ public class AztecWorktableBlock extends BaseEntityMultiBlock {
     @Override
     @SuppressWarnings( "deprecation" )
     public InteractionResult use( BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult ) {
-        if( level.isClientSide ) {
-            return InteractionResult.SUCCESS;
+        Part part = state.getValue( PART );
+        
+        // Only allow opening the container when clicking one of the "base" parts
+        if( part != Part.PANEL ) {
+            if( level.isClientSide ) {
+                return InteractionResult.SUCCESS;
+            }
+            else {
+                openContainer( level, pos, player );
+                return InteractionResult.CONSUME;
+            }
         }
-        else {
-            openContainer( level, pos, player );
-            return InteractionResult.CONSUME;
-        }
+        return InteractionResult.PASS;
     }
     
     @Deprecated

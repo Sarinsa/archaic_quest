@@ -1,7 +1,13 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
-import com.obsidian_core.archaic_quest.common.block.*;
+import com.obsidian_core.archaic_quest.common.block.AztecDungeonChestBlock;
+import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
+import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
+import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecThroneBlock;
+import com.obsidian_core.archaic_quest.common.block.multiblock.AztecWorktableBlock;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
