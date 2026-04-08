@@ -63,6 +63,7 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlock( AQBlocks.AZTEC_DUNGEON_DOOR_FRAME_1, "Aztec Dungeon Door Frame 1" );
         addBlock( AQBlocks.AZTEC_THRONE, "Aztec Throne" );
         addBlock( AQBlocks.MOSSY_AZTEC_THRONE, "Mossy Aztec Throne" );
+        addBlock( AQBlocks.AZTEC_DUNGEON_CHEST, "Aztec Dungeon Chest" );
         
         addBlock( AQBlocks.BRONZE_SPEAR_TRAP, "Bronze Spear Trap" );
         addBlock( AQBlocks.GOLD_SPEAR_TRAP, "Gold Spear Trap" );
@@ -122,8 +123,9 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         
         addBiome( AQBiomes.AZTEC_JUNGLE, "Aztec Jungle" );
         
-        addTranslationComponent( TranslationHelper.KNAPPING_TABLE_CONTAINER_NAME, "Knapping Table" );
-        addTranslationComponent( TranslationHelper.AZTEC_WORKTABLE_CONTAINER_NAME, "Aztec Worktable" );
+        addTranslationComponent( TranslationHelper.AZTEC_DUNGEON_CHEST_CONTAINER, "Aztec Dungeon Chest" );
+        addTranslationComponent( TranslationHelper.AZTEC_WORKTABLE_CONTAINER, "Aztec Worktable" );
+        addTranslationComponent( TranslationHelper.KNAPPING_TABLE_CONTAINER, "Knapping Table" );
         
         addDamageType( AQDamageTypes.SPEAR_TRAP,
                 ARG_1 + " was impaled on a spear trap",
