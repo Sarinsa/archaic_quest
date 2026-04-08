@@ -20,7 +20,10 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
     
     @Override
     protected void registerStatesAndModels() {
+        // Simple full cube blocks
         SIMPLE_BLOCKS.forEach( ( block ) -> simpleBlockAndItem( block.get() ) );
+        
+        // Slab variants and stairs
         VERT_SLAB_VARIANTS.forEach( ( block, vertSlab ) -> simpleVerticalSlab( vertSlab.get(), block.get() ) );
         SLAB_VARIANTS.forEach( ( block, slab ) -> slab( slab.get(), block.get() ) );
         STAIRS_VARIANTS.forEach( ( block, stairs ) -> {
@@ -28,10 +31,10 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
             ModelFile model = models().withExistingParent( name( stairs.get() ), mcLoc( "block/stairs" ) );
             simpleBlockItem( stairs.get(), model );
         } );
-        
         // Wood sets
         WoodSet.WOOD_SETS.forEach( this::woodSet );
         
+        // Special blocks
         for( RegistryObject<Block> regObject : REGISTRY.getEntries() ) {
             Block block = regObject.get();
             

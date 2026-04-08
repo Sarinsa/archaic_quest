@@ -55,7 +55,7 @@ public class KnappingTableBlock extends Block {
     @SuppressWarnings( "deprecation" )
     public MenuProvider getMenuProvider( BlockState state, Level level, BlockPos pos ) {
         return new SimpleMenuProvider( ( id, inventory, player )
-                -> new KnappingTableMenu( id, inventory, pos ), TranslationHelper.KNAPPING_TABLE_CONTAINER_NAME );
+                -> new KnappingTableMenu( id, inventory, pos ), TranslationHelper.KNAPPING_TABLE_CONTAINER );
     }
     
     @Override

@@ -29,7 +29,7 @@ public class AztecWorktableBlockEntity extends BaseMultiBlockEntity<AztecWorktab
     
     @Override
     public Component getDisplayName() {
-        return TranslationHelper.AZTEC_WORKTABLE_CONTAINER_NAME;
+        return TranslationHelper.AZTEC_WORKTABLE_CONTAINER;
     }
     
     // TODO
