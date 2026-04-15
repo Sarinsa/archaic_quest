@@ -1,6 +1,5 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
 import com.obsidian_core.archaic_quest.common.item.misc.IMacheteCuttable;
 import net.minecraft.core.BlockPos;
@@ -61,7 +60,6 @@ public class CuttableVinesBlock extends Block implements IForgeShearable, IMache
     public VoxelShape getShape( BlockState state, BlockGetter world, BlockPos pos, CollisionContext context ) {
         Direction dir = state.getValue( FACING );
         return state.getValue( CUT ) ? CUT_SHAPE.getFor( dir ) : FULL_SHAPE.getFor( dir );
-        //return shapes[state.getValue( FACING ).get2DDataValue() + (state.getValue( CUT ) ? 4 : 0)];
     }
     
     public boolean isCut( BlockState state ) {
