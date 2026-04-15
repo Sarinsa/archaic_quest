@@ -12,3 +12,9 @@
     - Fixed custom sign blocks.
         - Added hanging signs.
         - Now actually renders correctly.
+    - Added a new multiblock system implementation, now utilized by:
+        - Aztec Worktable
+        - Aztec Throne
+    - Added some missing translations
+    - Added open/close sounds for Aztec Dungeon Chest
+    - Fixed missing states, models and translation for Skull Goblet
