@@ -47,6 +47,8 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlock( AQBlocks.GRANITE_QUARTZ_ORE, "Granite Quartz Ore" );
         addBlock( AQBlocks.ONYX, "Onyx" );
         
+        addBlock( AQBlocks.SKULL_GOBLET, "Skull Goblet" );
+        
         addBlockPair( AQBlocks.JAGUAR_SKULL, "Jaguar Skull" );
         addBlockPair( AQBlocks.OLD_SKULL, "Old Skull" );
         addBlockPair( AQBlocks.CRYSTAL_SKULL, "Crystal Skull" );

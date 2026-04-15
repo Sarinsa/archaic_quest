@@ -1,12 +1,8 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
-import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
-import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
-import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
-import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
-import com.obsidian_core.archaic_quest.common.block.skull.SkullGobletBlock;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.core.Direction;

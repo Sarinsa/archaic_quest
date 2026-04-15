@@ -1,9 +1,6 @@
 package com.obsidian_core.archaic_quest.datagen.blockstate;
 
-import com.obsidian_core.archaic_quest.common.block.AztecDungeonChestBlock;
-import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
-import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
-import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
+import com.obsidian_core.archaic_quest.common.block.*;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
 import com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock;
 import com.obsidian_core.archaic_quest.common.block.multiblock.AztecThroneBlock;
@@ -67,6 +64,9 @@ public class AQBlockStateProvider extends AbstractBlockStateProvider {
             }
             else if( block instanceof AztecWoodPillarBlock woodPillar ) {
                 woodPillar( woodPillar );
+            }
+            else if( block instanceof SkullGobletBlock skullGoblet ) {
+                skullGoblet( skullGoblet );
             }
         }
     }

@@ -2,14 +2,11 @@ package com.obsidian_core.archaic_quest.common.block.util;
 
 import com.obsidian_core.archaic_quest.common.block.SpikeTrapBlock;
 import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
-import net.minecraft.util.SegmentedAnglePrecision;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 public class AQStateProperties {
-    
-    public static final SegmentedAnglePrecision SEGMENTED_ANGLE_8 = new SegmentedAnglePrecision( 2 );
     
     public static final BooleanProperty MASTER = BooleanProperty.create( "master" );
     public static final BooleanProperty EXTENDED = BooleanProperty.create( "extended" );

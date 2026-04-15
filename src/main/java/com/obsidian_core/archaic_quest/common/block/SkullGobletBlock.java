@@ -1,6 +1,6 @@
-package com.obsidian_core.archaic_quest.common.block.skull;
+package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings( "deprecation" )
@@ -23,7 +23,7 @@ public class SkullGobletBlock extends Block {
     public static final BooleanProperty FILLED = AQStateProperties.FILLED;
     public static final IntegerProperty ROTATION = AQStateProperties.ROTATION_8;
     
-    protected static final VoxelShape shape = Block.box( 4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D );
+    protected static final VoxelShape SHAPE = Block.box( 4.0D, 0.0D, 4.0D, 12.0D, 12.0D, 12.0D );
     
     
     public SkullGobletBlock() {
@@ -39,30 +39,22 @@ public class SkullGobletBlock extends Block {
     
     @Override
     public VoxelShape getShape( BlockState state, BlockGetter level, BlockPos pos, CollisionContext context ) {
-        return shape;
-    }
-    
-    @Override
-    public VoxelShape getOcclusionShape( BlockState state, BlockGetter level, BlockPos pos ) {
-        return Shapes.empty();
+        return SHAPE;
     }
     
     @Override
     public BlockState getStateForPlacement( BlockPlaceContext context ) {
-        return defaultBlockState().setValue( ROTATION, AQStateProperties.SEGMENTED_ANGLE_8.fromDegrees( context.getRotation() ) );
+        return defaultBlockState().setValue( ROTATION, (RotationSegment.convertToSegment( context.getRotation() )) / 2 );
     }
     
     @Override
     public BlockState rotate( BlockState state, Rotation rotation ) {
-        return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), AQStateProperties.SEGMENTED_ANGLE_8.getMask() + 1 ) );
-        //return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), 7 ) );
+        return state.setValue( ROTATION, rotation.rotate( state.getValue( ROTATION ), 8 ) );
     }
     
     @Override
     public BlockState mirror( BlockState state, Mirror mirror ) {
-        return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), AQStateProperties.SEGMENTED_ANGLE_8.getMask() + 1 ) );
-        
-        //return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), 7 ) );
+        return state.setValue( ROTATION, mirror.mirror( state.getValue( ROTATION ), 8 ) );
     }
     
     @Override
