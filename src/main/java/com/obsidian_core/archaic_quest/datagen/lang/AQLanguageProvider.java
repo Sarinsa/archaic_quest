@@ -46,7 +46,6 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlock( AQBlocks.ANDESITE_TURQUOISE_ORE, "Andesite Turquoise Ore" );
         addBlock( AQBlocks.GRANITE_QUARTZ_ORE, "Granite Quartz Ore" );
         addBlock( AQBlocks.ONYX, "Onyx" );
-        
         addBlock( AQBlocks.SKULL_GOBLET, "Skull Goblet" );
         
         addBlockPair( AQBlocks.JAGUAR_SKULL, "Jaguar Skull" );
@@ -54,6 +53,7 @@ public class AQLanguageProvider extends AbstractLanguageProvider {
         addBlockPair( AQBlocks.CRYSTAL_SKULL, "Crystal Skull" );
         addBlockPair( AQBlocks.STONE_SKULL, "Stone Skull" );
         
+        addBlock( AQBlocks.GOLDEN_IDOL, "Golden Idol" );
         addBlock( AQBlocks.AZTEC_VASE, "Aztec Vase" );
         addBlock( AQBlocks.INFESTED_VASE, "Infested Aztec Vase" );
         addBlock( AQBlocks.AZTEC_PILLAR, "Aztec Pillar" );
