@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block.base;
+package com.obsidian_core.archaic_quest.common.block;
 
 
 import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;

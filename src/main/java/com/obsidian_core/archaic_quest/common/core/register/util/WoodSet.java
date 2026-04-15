@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.core.register.util;
 
-import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.block.sign.CustomCeilingHangingSignBlock;
 import com.obsidian_core.archaic_quest.common.block.sign.CustomStandingSignBlock;
 import com.obsidian_core.archaic_quest.common.block.sign.CustomWallHangingSignBlock;

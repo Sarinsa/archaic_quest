@@ -3,8 +3,10 @@ package com.obsidian_core.archaic_quest.datagen.blockstate;
 import com.obsidian_core.archaic_quest.common.block.AztecWoodPillarBlock;
 import com.obsidian_core.archaic_quest.common.block.CuttableVinesBlock;
 import com.obsidian_core.archaic_quest.common.block.SpearTrapBlock;
+import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
-import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
+import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.skull.SkullGobletBlock;
 import com.obsidian_core.archaic_quest.common.core.ArchaicQuest;
 import com.obsidian_core.archaic_quest.common.core.register.util.WoodSet;
 import net.minecraft.core.Direction;
@@ -35,7 +37,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
      * Intended for blocks with block entity renderers;
      * no model but with break particles.
      */
-    public void blockNoModel( Block block, ResourceLocation blockForParticle ) {
+    protected void blockNoModel( Block block, ResourceLocation blockForParticle ) {
         ModelFile model = models().getBuilder( name( block ) ).texture( "particle", blockForParticle );
         
         getVariantBuilder( block )
@@ -43,12 +45,12 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                 .setModels( new ConfiguredModel( model ) );
     }
     
-    public void simpleBlockAndItem( Block block ) {
+    protected void simpleBlockAndItem( Block block ) {
         this.simpleBlock( block );
         this.simpleBlockItem( block, cubeAll( block ) );
     }
     
-    public void topBottomCube( Block block, ResourceLocation sides, ResourceLocation topBottom ) {
+    protected void topBottomCube( Block block, ResourceLocation sides, ResourceLocation topBottom ) {
         ModelFile model = models().cubeBottomTop( rl( ":block/" + name( block ) ).toString(), sides, topBottom, topBottom );
         
         getVariantBuilder( block ).forAllStates( state -> ConfiguredModel.builder()
@@ -58,15 +60,15 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         simpleBlockItem( block, model );
     }
     
-    public void slab( SlabBlock block, Block doubleBlock ) {
+    protected void slab( SlabBlock block, Block doubleBlock ) {
         slab( block, doubleBlock, blockTexture( doubleBlock ) );
     }
     
-    public void slab( SlabBlock block, Block doubleBlock, ResourceLocation texture ) {
+    protected void slab( SlabBlock block, Block doubleBlock, ResourceLocation texture ) {
         slab( block, doubleBlock, texture, texture, texture );
     }
     
-    public void slab( SlabBlock block, Block doubleBlock, ResourceLocation side, ResourceLocation bottom, ResourceLocation top ) {
+    protected void slab( SlabBlock block, Block doubleBlock, ResourceLocation side, ResourceLocation bottom, ResourceLocation top ) {
         ModelFile topModel = models().withExistingParent( name( block ) + "_top", mcLoc( "block/slab_top" ) )
                 .texture( "side", side )
                 .texture( "bottom", bottom )
@@ -81,18 +83,18 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         simpleBlockItem( block, bottomModel );
     }
     
-    public void slab( SlabBlock block, ModelFile topModel, ModelFile bottomModel, ModelFile doubleModel ) {
+    protected void slab( SlabBlock block, ModelFile topModel, ModelFile bottomModel, ModelFile doubleModel ) {
         getVariantBuilder( block )
                 .partialState().with( SlabBlock.TYPE, SlabType.BOTTOM ).addModels( new ConfiguredModel( bottomModel ) )
                 .partialState().with( SlabBlock.TYPE, SlabType.TOP ).addModels( new ConfiguredModel( topModel ) )
                 .partialState().with( SlabBlock.TYPE, SlabType.DOUBLE ).addModels( new ConfiguredModel( doubleModel ) );
     }
     
-    public void simpleVerticalSlab( VerticalSlabBlock block, Block doubleBlock ) {
+    protected void simpleVerticalSlab( VerticalSlabBlock block, Block doubleBlock ) {
         verticalSlab( block, doubleBlock, blockTexture( doubleBlock ), blockTexture( doubleBlock ), blockTexture( doubleBlock ) );
     }
     
-    public void verticalSlab( VerticalSlabBlock block, Block doubleBlock, ResourceLocation side, ResourceLocation bottom, ResourceLocation top ) {
+    protected void verticalSlab( VerticalSlabBlock block, Block doubleBlock, ResourceLocation side, ResourceLocation bottom, ResourceLocation top ) {
         ModelFile model = models().withExistingParent( name( block ), rl( "block/vertical_slab" ) )
                 .texture( "side", side )
                 .texture( "bottom", bottom )
@@ -103,7 +105,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
     }
     
     
-    public void verticalSlab( VerticalSlabBlock block, ModelFile model, ModelFile doubleSlab ) {
+    protected void verticalSlab( VerticalSlabBlock block, ModelFile model, ModelFile doubleSlab ) {
         getVariantBuilder( block ).forAllStatesExcept( state -> {
             VerticalSlabBlock.SlabState slabState = state.getValue( VerticalSlabBlock.SLAB_STATE );
             
@@ -123,7 +125,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         }, VerticalSlabBlock.WATERLOGGED );
     }
     
-    public void woodSet( WoodSet woodSet ) {
+    protected void woodSet( WoodSet woodSet ) {
         Block planks = woodSet.getPlanks().get();
         
         sapling( woodSet.getSapling().get() );
@@ -149,14 +151,14 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         blockNoModel( woodSet.getWallHangingSign().get(), blockTexture( woodSet.getPlanks().get() ) );
     }
     
-    public void leaves( Block block ) {
+    protected void leaves( Block block ) {
         ModelFile model = models().withExistingParent( name( block ), ResourceLocation.withDefaultNamespace( "block/leaves" ) )
                 .texture( "all", blockTexture( block ) );
         
         getVariantBuilder( block ).partialState().setModels( new ConfiguredModel( model ) );
     }
     
-    public void wood( RotatedPillarBlock block, RotatedPillarBlock log ) {
+    protected void wood( RotatedPillarBlock block, RotatedPillarBlock log ) {
         ResourceLocation texture = blockTexture( log );
         
         axisBlock( block,
@@ -164,7 +166,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                 models().cubeColumnHorizontal( name( block ) + "_horizontal", texture, texture ) );
     }
     
-    public void sapling( Block block ) {
+    protected void sapling( Block block ) {
         ModelFile model = models().withExistingParent( name( block ), ResourceLocation.withDefaultNamespace( "block/cross" ) )
                 .renderType( "cutout" )
                 .texture( "cross", blockTexture( block ) );
@@ -172,7 +174,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         getVariantBuilder( block ).partialState().setModels( new ConfiguredModel( model ) );
     }
     
-    public void door( DoorBlock doorBlock, boolean cutout ) {
+    protected void door( DoorBlock doorBlock, boolean cutout ) {
         ResourceLocation bottom = blockTextureWith( doorBlock, "bottom" );
         ResourceLocation top = blockTextureWith( doorBlock, "top" );
         
@@ -184,7 +186,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         }
     }
     
-    public void trapDoor( TrapDoorBlock trapDoorBlock, boolean orientable, boolean cutout ) {
+    protected void trapDoor( TrapDoorBlock trapDoorBlock, boolean orientable, boolean cutout ) {
         ResourceLocation texture = blockTexture( trapDoorBlock );
         
         if( cutout ) {
@@ -195,7 +197,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         }
     }
     
-    public void doubleCrop( BaseDoubleCropBlock block ) {
+    protected void doubleCrop( BaseDoubleCropBlock block ) {
         ResourceLocation crossModel = mcLoc( "block/cross" );
         
         getVariantBuilder( block ).forAllStates( ( state ) -> {
@@ -211,7 +213,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         } );
     }
     
-    public void cuttableVine( CuttableVinesBlock vineBlock ) {
+    protected void cuttableVine( CuttableVinesBlock vineBlock ) {
         getVariantBuilder( vineBlock ).forAllStatesExcept( ( state ) -> {
             Direction face = state.getValue( CuttableVinesBlock.FACING );
             boolean cut = state.getValue( CuttableVinesBlock.CUT );
@@ -229,7 +231,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         generatedItem( vineBlock );
     }
     
-    public void spearTrap( SpearTrapBlock trapBlock ) {
+    protected void spearTrap( SpearTrapBlock trapBlock ) {
         getVariantBuilder( trapBlock ).forAllStatesExcept( ( state ) -> {
             boolean extended = state.getValue( SpearTrapBlock.EXTENDED );
             ResourceLocation parentModel = rl( "block/spear_trap" );
@@ -242,7 +244,7 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
         generateItemBlockTexture( trapBlock );
     }
     
-    public void woodPillar( AztecWoodPillarBlock woodPillarBlock ) {
+    protected void woodPillar( AztecWoodPillarBlock woodPillarBlock ) {
         final String[] extendedModels = new String[] {
                 "_extended",
                 "_connect_x_extended",
@@ -303,6 +305,43 @@ public abstract class AbstractBlockStateProvider extends BlockStateProvider {
                     .build();
         }, AztecWoodPillarBlock.WATERLOGGED );
         simpleBlockItem( woodPillarBlock, models().withExistingParent( name( woodPillarBlock ), rl( "block/wood_pillar" ) ) );
+    }
+    
+    protected void skullGoblet( SkullGobletBlock skullGoblet ) {
+        final ResourceLocation filledModel = rl( "block/template/skull_goblet_full" );
+        final ResourceLocation filledDiagModel = rl( "block/template/skull_goblet_full_diagonal" );
+        final ResourceLocation emptyModel = rl( "block/template/skull_goblet_empty" );
+        final ResourceLocation emptyDiagModel = rl( "block/template/skull_goblet_empty_diagonal" );
+        
+        getVariantBuilder( skullGoblet ).forAllStates( ( state ) -> {
+            final boolean filled = state.getValue( AQStateProperties.FILLED );
+            final int rotation = state.getValue( SkullGobletBlock.ROTATION );
+            final boolean isDiagonal = rotation % 2 == 0;
+            
+            
+            if( filled ) {
+                return ConfiguredModel.builder()
+                        .modelFile( models().withExistingParent( name( skullGoblet ) + (isDiagonal ? "_full" : "_full_diagonal"),
+                                        isDiagonal ? filledModel : filledDiagModel )
+                                .texture( "base", texture( name( skullGoblet ) + "_base" ) )
+                                .texture( "skull", texture( name( skullGoblet ) + "_skull" ) )
+                                .texture( "fluid", texture( name( skullGoblet ) + "_fluid" ) )
+                        )
+                        .rotationY( (int) Math.floor( (double) rotation / 2 ) * 90 )
+                        .build();
+            }
+            else {
+                return ConfiguredModel.builder()
+                        .modelFile( models().withExistingParent( name( skullGoblet ) + (isDiagonal ? "_empty" : "_empty_diagonal"),
+                                        isDiagonal ? emptyModel : emptyDiagModel )
+                                .texture( "base", texture( name( skullGoblet ) + "_base" ) )
+                                .texture( "skull", texture( name( skullGoblet ) + "_skull" ) )
+                        )
+                        .rotationY( (int) Math.floor( (double) rotation / 2 ) * 90 )
+                        .build();
+            }
+        } );
+        simpleBlockItem( skullGoblet, models().withExistingParent( name( skullGoblet ) + "_empty", emptyModel ) );
     }
     
     private void generatedItem( Block block ) {

@@ -1,8 +1,8 @@
 package com.obsidian_core.archaic_quest.datagen.loot_table;
 
 import com.mojang.math.MethodsReturnNonnullByDefault;
+import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.block.base.BaseDoubleCropBlock;
-import com.obsidian_core.archaic_quest.common.block.base.VerticalSlabBlock;
 import com.obsidian_core.archaic_quest.common.block.multiblock.AztecDungeonDoorBlock;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;
 import com.obsidian_core.archaic_quest.common.core.register.AQItems;
