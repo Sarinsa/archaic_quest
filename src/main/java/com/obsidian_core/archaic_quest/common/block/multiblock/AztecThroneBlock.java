@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.block.multiblock;
 
 import com.obsidian_core.archaic_quest.common.block.base.ThroneType;
-import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
+import com.obsidian_core.archaic_quest.common.block.util.DirectionalShape;
 import com.obsidian_core.archaic_quest.common.blockentity.AztecThroneBlockEntity;
 import com.obsidian_core.archaic_quest.common.blockentity.multiblock.IMultiBlockEntity;
 import com.obsidian_core.archaic_quest.common.core.register.AQBlocks;

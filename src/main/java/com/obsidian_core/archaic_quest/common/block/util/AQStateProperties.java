@@ -1,4 +1,4 @@
-package com.obsidian_core.archaic_quest.common.block.misc;
+package com.obsidian_core.archaic_quest.common.block.util;
 
 import com.obsidian_core.archaic_quest.common.block.SpikeTrapBlock;
 import com.obsidian_core.archaic_quest.common.block.VerticalSlabBlock;

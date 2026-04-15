@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block.multiblock;
 
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.blockentity.multiblock.IMultiBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

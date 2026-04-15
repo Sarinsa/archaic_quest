@@ -1,7 +1,7 @@
 package com.obsidian_core.archaic_quest.common.util;
 
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.block.multiblock.IMultiBlockEntityProvider;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.blockentity.multiblock.IMultiBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

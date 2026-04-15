@@ -1,6 +1,6 @@
 package com.obsidian_core.archaic_quest.common.block;
 
-import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
+import com.obsidian_core.archaic_quest.common.block.util.DirectionalShape;
 import com.obsidian_core.archaic_quest.common.item.misc.IMacheteCuttable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

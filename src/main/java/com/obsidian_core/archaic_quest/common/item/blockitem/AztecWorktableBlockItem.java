@@ -1,8 +1,8 @@
 package com.obsidian_core.archaic_quest.common.item.blockitem;
 
 import com.obsidian_core.archaic_quest.client.render.blockentity.bewlr.BEWLRS;
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.block.multiblock.AztecWorktableBlock;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
 import com.obsidian_core.archaic_quest.common.util.PlaceableConstruct;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.core.Vec3i;

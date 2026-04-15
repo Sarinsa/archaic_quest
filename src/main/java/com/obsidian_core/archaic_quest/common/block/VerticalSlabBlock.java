@@ -1,8 +1,8 @@
 package com.obsidian_core.archaic_quest.common.block;
 
 
-import com.obsidian_core.archaic_quest.common.block.misc.AQStateProperties;
-import com.obsidian_core.archaic_quest.common.block.misc.DirectionalShape;
+import com.obsidian_core.archaic_quest.common.block.util.AQStateProperties;
+import com.obsidian_core.archaic_quest.common.block.util.DirectionalShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
